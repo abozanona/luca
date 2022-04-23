@@ -4,7 +4,7 @@ document.body.appendChild(div);
 
 let allowedActions = {
 	pause: 0,
-	paly: 0,
+	play: 0,
 	seek: 0,
 };
 
@@ -185,10 +185,10 @@ function gotMessage(message, sender, sendResponse) {
 		let video = allVideosList[selectedVideoId];
 		createRoom();
 		video.addEventListener('play', (event) => {
-			if (allowedActions.paly < 0) {
-				allowedActions.paly = 0;
+			if (allowedActions.play < 0) {
+				allowedActions.play = 0;
 			}
-			if (allowedActions.paly == 0) {
+			if (allowedActions.play == 0) {
 				sendPlayerorder("play", {
 					time: video.currentTime,
 				})
