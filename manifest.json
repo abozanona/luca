@@ -1,0 +1,49 @@
+{
+    "name": "LUCA.",
+    "short_name": "LUCA",
+    "description": "A chrome extension to watch movies together!",
+    "version": "1.0.0",
+    "action": {
+        "default_icon": "icon128.png",
+        "default_popup": "popup.html",
+        "default_title": "Luca ...."
+    },
+    "icons": {
+        "128": "icon128.png"
+    },
+    "background": {
+        "service_worker": "js/background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*/*"
+            ],
+            "js": [
+                "js/socket.io.js",
+                "js/jquery.min.js",
+                "js/content.js"
+            ],
+            "run_at": "document_idle"
+        }
+    ],
+    "host_permissions": [
+        "*://*/*"
+    ],
+    "permissions": [
+        "tabs",
+        "storage"
+    ],
+    "manifest_version": 3,
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "js/*",
+                "css/page-style.css"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ]
+}

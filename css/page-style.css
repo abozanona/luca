@@ -1,0 +1,9 @@
+.luca-selected-video {
+  background-color: red;
+}
+
+#luca-selected-video-frame {
+  border: solid 5px blue;
+  position: absolute;
+  z-index: 999999;
+}
