@@ -4,9 +4,15 @@ document.body.appendChild(div);
 
 let allowedActions = {
 	pause: 0,
-	paly: 0,
+	play: 0,
 	seek: 0,
 };
+
+Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
+    get: function(){
+        return !!(this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2);
+    }
+})
 
 const linkStyle = document.createElement("link");
 linkStyle.href = chrome.runtime.getURL("css/page-style.css");
@@ -77,32 +83,47 @@ function executeUnderDifferentTabId(messagePageId, cb) {
 
 socket.on("play", function (message) {
 	executeUnderDifferentTabId(message.pageId, function () {
-		if (Math.abs(allVideosList[selectedVideoId].currentTime - message.time) > 10) {
-			allowedActions.seek++;
-			allVideosList[selectedVideoId].currentTime = message.time;
-		}
-		allowedActions.paly++;
-		allVideosList[selectedVideoId].play();
+		seek(message.time);
+		play();
 	})
 });
+
 socket.on("pause", function (message) {
 	executeUnderDifferentTabId(message.pageId, function () {
-		if (Math.abs(allVideosList[selectedVideoId].currentTime - message.time) > 10) {
-			allowedActions.seek++;
-			allVideosList[selectedVideoId].currentTime = message.time;
-		}
-		allowedActions.paly++;
-		allVideosList[selectedVideoId].pause();
+		seek(message.time);
+		pause();
 	});
 });
+
 socket.on("seek", function (message) {
 	executeUnderDifferentTabId(message.pageId, function () {
-		if (Math.abs(allVideosList[selectedVideoId].currentTime - message.time) > 10) {
-			allowedActions.seek++;
-			allVideosList[selectedVideoId].currentTime = message.time;
-		}
+		seek(message.time);
 	});
 });
+
+function play() {
+	if (allVideosList[selectedVideoId].playing) {
+		return;
+	}
+	allowedActions.play++;
+	allVideosList[selectedVideoId].play();
+}
+
+function pause() {
+	if (allVideosList[selectedVideoId].paused) {
+		return;
+	}
+	allowedActions.pause++;
+	allVideosList[selectedVideoId].pause();
+}
+
+function seek(time) {
+	if (allVideosList[selectedVideoId].currentTime == time) {
+		return ;
+	}
+	allowedActions.seek++;
+	allVideosList[selectedVideoId].currentTime = time;
+}
 
 function uuidv4() {
 	return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
@@ -154,19 +175,6 @@ function gotMessage(message, sender, sendResponse) {
 		document.getElementById('luca-selected-video-frame').style.height = (coordinates.height - 10) + 'px';
 
 		allVideosList[message.body.videoId].classList.add("luca-selected-video");
-		getTabId(function (tabId) {
-			allVideosList = document.getElementsByTagName('video');
-			let videosCount = allVideosList.length;
-			let message = {
-				code: "A_VIDEOS_COUNT",
-				tabId: tabId,
-				body: {
-					videosCount: videosCount
-				}
-			};
-
-			chrome.runtime.sendMessage(message);
-		});
 	}
 	if (message.code == "Q_CLOSE_POPUP") {
 		document.querySelectorAll('.luca-selected-video').forEach(el => {
@@ -177,42 +185,42 @@ function gotMessage(message, sender, sendResponse) {
 		let video = allVideosList[selectedVideoId];
 		createRoom();
 		video.addEventListener('play', (event) => {
-			if (allowedActions.paly < 0) {
-				allowedActions.paly = 0;
+			if (allowedActions.play < 0) {
+				allowedActions.play = 0;
 			}
-			if (allowedActions.play > 0) {
-				allowedActions.play--;
-			}
-			if (allowedActions.paly == 0) {
+			if (allowedActions.play == 0) {
 				sendPlayerorder("play", {
 					time: video.currentTime,
 				})
+			}
+			if (allowedActions.play > 0) {
+				allowedActions.play--;
 			}
 		});
 		video.addEventListener('pause', (event) => {
 			if (allowedActions.pause < 0) {
 				allowedActions.pause = 0;
 			}
-			if (allowedActions.pause > 0) {
-				allowedActions.pause--;
-			}
 			if (allowedActions.pause == 0) {
 				sendPlayerorder("pause", {
 					time: video.currentTime,
 				})
+			}
+			if (allowedActions.pause > 0) {
+				allowedActions.pause--;
 			}
 		});
 		video.addEventListener('seeked', (event) => {
 			if (allowedActions.seek < 0) {
 				allowedActions.seek = 0;
 			}
-			if (allowedActions.seek > 0) {
-				allowedActions.seek--;
-			}
 			if (allowedActions.seek == 0) {
 				sendPlayerorder("seek", {
 					time: video.currentTime,
 				})
+			}
+			if (allowedActions.seek > 0) {
+				allowedActions.seek--;
 			}
 		});
 	}
