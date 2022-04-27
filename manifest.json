@@ -6,7 +6,7 @@
     "action": {
         "default_icon": "icon128.png",
         "default_popup": "popup.html",
-        "default_title": "Luca ...."
+        "default_title": "Luca - Watch movies with friends"
     },
     "icons": {
         "128": "icon128.png"
@@ -24,7 +24,8 @@
                 "js/jquery.min.js",
                 "js/content.js"
             ],
-            "run_at": "document_idle"
+            "run_at": "document_idle",
+            "all_frames": true
         }
     ],
     "host_permissions": [
@@ -39,7 +40,8 @@
         {
             "resources": [
                 "js/*",
-                "css/page-style.css"
+                "css/page-style.css",
+                "img/reactions/*"
             ],
             "matches": [
                 "<all_urls>"
