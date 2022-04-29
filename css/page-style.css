@@ -103,8 +103,8 @@
   left: 50%;
   transform: translateX(-50%);
   top: 0px;
-  height: 100%;
-  max-width: 200px;
+  height: 50px;
+  max-width: 300px;
   cursor: pointer;
 }
 

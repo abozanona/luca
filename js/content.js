@@ -21,7 +21,8 @@ function initLuca() {
 		get: function () {
 			return !!(this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2);
 		}
-	})
+	});
+
 	//Add Luca style
 	const linkStyle = document.createElement("link");
 	linkStyle.href = chrome.runtime.getURL("css/page-style.css");
@@ -89,6 +90,36 @@ function initLuca() {
 			}
 		}
 	});
+
+	var fullScreenElement = document.body;
+
+	//Show elements in full screne mode
+	Array.from(document.querySelectorAll("*")).forEach(element => {
+		['fullscreenchange', 'mozfullscreenchange', 'webkitfullscreenchange', 'msfullscreenchange'].forEach(ev => {
+			element.addEventListener(ev, function () {
+				if (fullScreenElement == null) {
+					fullScreenElement = element;
+				}
+				else {
+					if (fullScreenElement.contains(element)) {
+						fullScreenElement = element;
+					}
+					else if (element.contains(fullScreenElement)) {
+						;
+					}
+					else {
+						fullScreenElement = element;
+					}
+				}
+				let messageDiv = document.getElementById("luca-chat-new-message");
+				let allMessagesDiv = document.getElementById("luca-chat-container");
+				let reactionsDiv = document.getElementById("luca-reactions-container");
+				fullScreenElement.appendChild(messageDiv);
+				fullScreenElement.appendChild(allMessagesDiv);
+				fullScreenElement.appendChild(reactionsDiv);
+			});
+		});
+	})
 }
 
 function getTabId(cb) {
@@ -277,8 +308,8 @@ function showReactionOnScreen(reactionName) {
 		imgReactionParticle.dataset.reactionName = reactionName;
 
 
-		document.body.appendChild(imgReactionParticle);
-		var bounds = getRandomInteger(document.documentElement.clientWidth * startScreenPercentage, document.documentElement.clientWidth * endScreenPercentage)
+		fullScreenElement.appendChild(imgReactionParticle);
+		var bounds = getRandomInteger(fullScreenElement.clientWidth * startScreenPercentage, fullScreenElement.clientWidth * endScreenPercentage)
 		$(imgReactionParticle).animate({ left: bounds, right: bounds }, delay, function () {
 			$(imgReactionParticle).animate({ top: '-100%', opacity: 0 }, randomSpeeds(), function () {
 				$(imgReactionParticle).remove()
