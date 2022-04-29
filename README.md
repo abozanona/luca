@@ -140,7 +140,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Abozanona - [vim abozanona](https://abozanona.com) - abozanona@gmail.com
+Abozanona - [vim abozanona](https://abozanona.me) - abozanona@gmail.com
 
 Project Link: [https://github.com/abozanona/luca](https://github.com/abozanona/luca)
 
