@@ -9,3 +9,11 @@
 .img-avatar-selected {
   border-color: brown;
 }
+
+.luca-page {
+  display: none;
+}
+
+.luca-current-page {
+  display: block;
+}

@@ -1,11 +1,12 @@
 import { ChatEngine } from "./chat-engine";
 import { SocketEnging } from "./socket-engine";
+import { VideoEngine } from "./video-engine";
 
 export class LucaEngine {
     static isLucaInitted = false;
     static fullScreenElement: HTMLElement = document.body
 
-    constructor(private chatEngine: ChatEngine, private socketEnging: SocketEnging) { }
+    constructor(private chatEngine: ChatEngine, private socketEnging: SocketEnging, private videoEngine: VideoEngine) { }
 
     initLuca() {
         if (LucaEngine.isLucaInitted) {
@@ -127,5 +128,15 @@ export class LucaEngine {
                 });
             });
         })
+    }
+
+    getCurrentPageStatus() {
+        if (!this.socketEnging.isSocketStarted) {
+            return "WAITING_CREATE_ROOM";
+        }
+        if (!this.videoEngine.isVideoSelected) {
+            return "WAITING_SELECT_VIDEO";
+        }
+        return "ROOM_SETUP_COMPLETED";
     }
 }

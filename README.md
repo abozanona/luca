@@ -88,6 +88,39 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+<!-- GETTING STARTED -->
+## Getting Started
+
+To setting up Luca locally, clone the repo and follow the follwoing steps.
+
+### Prerequisites
+
+The extension requires npm and nodejs to be installed on your device.
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
+
+### Installation
+
+_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/abozanona/luca.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Run the `watch` command to keep tracking the changed files
+   ```sh
+   npm run watch
+   ```
+4. Load the `dist` folder in your browser.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 
 <!-- USAGE EXAMPLES -->
 ## Usage

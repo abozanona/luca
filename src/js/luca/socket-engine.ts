@@ -3,18 +3,18 @@ import { UtilsEngine } from "./utils-engine";
 import { VideoEngine } from "./video-engine";
 
 export class SocketEnging {
-    static isSocketStarted = false;
+    isSocketStarted = false;
     socket: any = null;
     roomId: string = null;
 
     constructor(private chatEngine: ChatEngine) { }
 
     initSocket(videoEngine: VideoEngine): void {
-        if (SocketEnging.isSocketStarted) {
+        if (this.isSocketStarted) {
             alert("Cannot create or join a room here. A room is already running. Refresh the page or create a room in another page.")
             return;
         }
-        SocketEnging.isSocketStarted = true;
+        this.isSocketStarted = true;
         let _this = this;
 
         _this.socket = (<any>window).io('https://abozanona-luca.herokuapp.com/', {
@@ -56,11 +56,15 @@ export class SocketEnging {
         });
     }
 
-    createRoom() {
+    createRoom(videoEngine: VideoEngine, roomId: string) {
+        this.roomId = roomId;
+        this.initSocket(videoEngine);
         this.socket.emit("join", this.roomId);
     }
 
-    joinRoom() {
+    joinRoom(videoEngine: VideoEngine, roomId: string) {
+        this.roomId = roomId;
+        this.initSocket(videoEngine);
         this.socket.emit("join", this.roomId);
     }
 
