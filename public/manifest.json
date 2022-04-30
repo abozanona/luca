@@ -1,8 +1,8 @@
 {
-    "name": "LUCA.",
+    "name": "LUCA - Movies and videos party",
     "short_name": "LUCA",
-    "description": "A chrome extension to watch movies together!",
-    "version": "1.0.0",
+    "description": "This extension gives you the ability to create rooms and watch online videos with your friends.",
+    "version": "1.0.1",
     "action": {
         "default_icon": "icon128.png",
         "default_popup": "popup.html",
