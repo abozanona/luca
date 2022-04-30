@@ -75,7 +75,16 @@ chrome.storage.sync.get('userName', function (items) {
 	(document.getElementById("txt-user-name") as HTMLInputElement).value = userName;
 });
 
+var actionsOrder = [
+	'NOTHING',
+	'WAITING_CREATE_ROOM',
+	'WAITING_SELECT_VIDEO',
+	'ROOM_SETUP_COMPLETED',
+];
+var currentAction = 'NOTHING';
 function getCurrentPageStatus() {
+	currentAction = 'NOTHING';
+	renderPopupScreen(currentAction);
 	getCurrentTabId(function (tabId: any) {
 		const message = {
 			code: 'Q_GET_PAGE_STATUS'
@@ -84,11 +93,28 @@ function getCurrentPageStatus() {
 	});
 }
 
+function renderPopupScreen(state: string) {
+	let pagesMap = {
+		'NOTHING': 'page-invalid-page',
+		'WAITING_CREATE_ROOM': 'page-create-room',
+		'WAITING_SELECT_VIDEO': 'page-select-video',
+		'ROOM_SETUP_COMPLETED': 'page-room-details',
+	}
+	for (const [key, value] of Object.entries(pagesMap)) {
+		document.getElementById(value).classList.remove('luca-current-page');
+	}
+	document.getElementById((<any>pagesMap)[state]).classList.add('luca-current-page');
+}
+
 chrome.runtime.onMessage.addListener(
 	function (request, sender, sendResponse) {
-		if (request.code == "A_GET_PAGE_STATUS") {
-			let status = request.body.status;
-			console.log(status);
+		switch (request.code) {
+			case "A_GET_PAGE_STATUS":
+				let status = request.body.status;
+				currentAction = [status, currentAction].sort((a, b) => actionsOrder.indexOf(b) - actionsOrder.indexOf(a))[0];
+				renderPopupScreen(currentAction);
+				break;
 		}
 	}
 );
+getCurrentPageStatus();

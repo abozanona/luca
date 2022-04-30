@@ -1,7 +1,7 @@
 import { SocketEnging } from "./socket-engine";
 
 export class VideoEngine {
-	static isVideoSelected: boolean = false;
+	isVideoSelected: boolean = false;
 	selectedVideo: HTMLVideoElement = null;
 	allowedActions = {
 		pause: 0,
@@ -42,13 +42,11 @@ export class VideoEngine {
 			alert("Cannot create or join a room here. A room is already running. Refresh the page or create a room in another page.")
 			return;
 		}
-		VideoEngine.isVideoSelected = true;
+		this.isVideoSelected = true;
 		this.selectedVideo = video;
 		document.querySelectorAll(".luca-video-highlight").forEach(el => {
 			el.remove();
 		});
-		this.socketEngine.initSocket(this);
-		this.socketEngine.createRoom();
 
 		video.addEventListener('play', (event) => {
 			if (this.allowedActions.play < 0) {

@@ -1,7 +1,3 @@
-import { LucaEngine } from "./luca-engine";
-import { SocketEnging } from "./socket-engine";
-import { VideoEngine } from "./video-engine";
-
 export class UtilsEngine {
     static getTabId(cb: (a: string) => void) {
         chrome.runtime.sendMessage({ code: "Q_TAB_ID" }, res => {
@@ -55,17 +51,4 @@ export class UtilsEngine {
             (parseInt(c) ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> parseInt(c) / 4).toString(16)
         );
     }
-
-    static getCurrentPageStatus() {
-        if (!LucaEngine.isLucaInitted) {
-            return "NOT_INIT";
-        }
-        if (!VideoEngine.isVideoSelected) {
-            return "VIDEO_NOT_SELECTED";
-        }
-        if (SocketEnging.isSocketStarted) {
-            return "STREAm_STARTED";
-        }
-    }
-
 }
