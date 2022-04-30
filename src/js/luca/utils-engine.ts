@@ -1,4 +1,8 @@
-class UtilsEngine {
+import { LucaEngine } from "./luca-engine";
+import { SocketEnging } from "./socket-engine";
+import { VideoEngine } from "./video-engine";
+
+export class UtilsEngine {
     static getTabId(cb: (a: string) => void) {
         chrome.runtime.sendMessage({ code: "Q_TAB_ID" }, res => {
             cb(res.body.tabId);
@@ -56,7 +60,7 @@ class UtilsEngine {
         if (!LucaEngine.isLucaInitted) {
             return "NOT_INIT";
         }
-        if (!videoEngine.selectedVideo) {
+        if (!VideoEngine.isVideoSelected) {
             return "VIDEO_NOT_SELECTED";
         }
         if (SocketEnging.isSocketStarted) {

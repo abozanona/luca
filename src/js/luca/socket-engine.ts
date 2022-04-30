@@ -1,11 +1,15 @@
-class SocketEnging {
+import { ChatEngine } from "./chat-engine";
+import { UtilsEngine } from "./utils-engine";
+import { VideoEngine } from "./video-engine";
+
+export class SocketEnging {
     static isSocketStarted = false;
     socket: any = null;
     roomId: string = null;
 
     constructor(private chatEngine: ChatEngine) { }
 
-    initSocket(): void {
+    initSocket(videoEngine: VideoEngine): void {
         if (SocketEnging.isSocketStarted) {
             alert("Cannot create or join a room here. A room is already running. Refresh the page or create a room in another page.")
             return;
@@ -47,20 +51,21 @@ class SocketEnging {
 
         _this.socket.on("reaction", function (message: any) {
             UtilsEngine.executeUnderDifferentTabId(message.pageId, function () {
-                lucaEngine.showReactionOnScreen(message.name);
+                _this.chatEngine.showReactionOnScreen(message.name);
             });
         });
     }
 
     createRoom() {
-        _this.socket.emit("join", SocketEnging.roomId);
+        this.socket.emit("join", this.roomId);
     }
 
     joinRoom() {
-        _this.socket.emit("join", SocketEnging.roomId);
+        this.socket.emit("join", this.roomId);
     }
 
     sendPlayerOrder(order: string, data: any, cb: () => void) {
+        let _this = this;
         UtilsEngine.getCurrentPageId(function (pageId: string) {
             data.pageId = pageId;
             _this.socket.emit(order, data);

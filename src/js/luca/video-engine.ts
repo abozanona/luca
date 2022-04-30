@@ -1,10 +1,17 @@
-class VideoEngine {
+import { SocketEnging } from "./socket-engine";
+
+export class VideoEngine {
+	static isVideoSelected: boolean = false;
 	selectedVideo: HTMLVideoElement = null;
 	allowedActions = {
 		pause: 0,
 		play: 0,
 		seek: 0,
 	};
+
+	constructor(private socketEngine: SocketEnging) {
+
+	}
 
 	play() {
 		if ((<any>this.selectedVideo).playing) {
@@ -35,19 +42,20 @@ class VideoEngine {
 			alert("Cannot create or join a room here. A room is already running. Refresh the page or create a room in another page.")
 			return;
 		}
+		VideoEngine.isVideoSelected = true;
 		this.selectedVideo = video;
 		document.querySelectorAll(".luca-video-highlight").forEach(el => {
 			el.remove();
 		});
-		socketEnging.initSocket();
-		socketEnging.createRoom();
+		this.socketEngine.initSocket(this);
+		this.socketEngine.createRoom();
 
 		video.addEventListener('play', (event) => {
 			if (this.allowedActions.play < 0) {
 				this.allowedActions.play = 0;
 			}
 			if (this.allowedActions.play == 0) {
-				socketEnging.sendPlayerOrder("play", {
+				this.socketEngine.sendPlayerOrder("play", {
 					time: video.currentTime,
 				}, null)
 			}
@@ -60,7 +68,7 @@ class VideoEngine {
 				this.allowedActions.pause = 0;
 			}
 			if (this.allowedActions.pause == 0) {
-				socketEnging.sendPlayerOrder("pause", {
+				this.socketEngine.sendPlayerOrder("pause", {
 					time: video.currentTime,
 				}, null)
 			}
@@ -73,7 +81,7 @@ class VideoEngine {
 				this.allowedActions.seek = 0;
 			}
 			if (this.allowedActions.seek == 0) {
-				socketEnging.sendPlayerOrder("seek", {
+				this.socketEngine.sendPlayerOrder("seek", {
 					time: video.currentTime,
 				}, null)
 			}

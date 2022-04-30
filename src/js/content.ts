@@ -1,12 +1,13 @@
-import './luca/chat-engine';
-import './luca/luca-engine';
-import './luca/socket-engine';
-import './luca/video-engine';
+import { ChatEngine } from './luca/chat-engine';
+import { LucaEngine } from './luca/luca-engine';
+import { SocketEnging } from './luca/socket-engine';
+import { UtilsEngine } from './luca/utils-engine';
+import { VideoEngine } from './luca/video-engine';
 
 let chatEngine = new ChatEngine();
-let lucaEngine = new LucaEngine(chatEngine);
-let videoEngine = new VideoEngine();
 let socketEnging = new SocketEnging(chatEngine);
+let lucaEngine = new LucaEngine(chatEngine, socketEnging);
+let videoEngine = new VideoEngine(socketEnging);
 
 chrome.runtime.onMessage.addListener(gotMessage)
 function gotMessage(message: any, sender: any, sendResponse: any) {
