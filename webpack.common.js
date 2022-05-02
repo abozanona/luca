@@ -1,19 +1,22 @@
 const path = require('path');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: {
         main: path.resolve('./src/index.jsx'),
         backgound: path.resolve('./src/js/background.ts'),
+        content: path.resolve('./src/js/content.ts'),
+        socket: path.resolve('./src/vendor/socket.io.js'),
     },
     output: {
-        filename: "[name].[hash].bundle.js",
-        path: path.resolve(__dirname, "dist"),
-        clean: true
+        filename: 'js/[name].bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+        pathinfo: false,
+        clean: true,
+    },
+    resolve: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
     module: {
         rules: [
@@ -23,60 +26,50 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react']
-                    }
-                }
+                        presets: ['@babel/preset-env', '@babel/preset-react'],
+                    },
+                },
             },
             {
                 test: /\.tsx?$/,
-                loader: "ts-loader",
+                loader: 'ts-loader',
                 exclude: /node_modules/,
+                options: {
+                    transpileOnly: true,
+                },
             },
             {
                 test: /\.scss$/,
                 use: [
                     MiniCssExtractPlugin.loader, //3. Extract css into files
-                    "css-loader", //2. Turns css into commonjs
-                    "sass-loader" //1. Turns sass into css
-                ]
-            }, {
-                test: /\.html$/,
-                use: ["html-loader"]
+                    'css-loader', //2. Turns css into commonjs
+                    'sass-loader', //1. Turns sass into css
+                ],
             },
             {
-                test: /\.(svg|png|jpg|gif)$/,
-                use: {
-                    loader: "file-loader",
-                    options: {
-                        name: "[name].[hash].[ext]",
-                        outputPath: "imgs"
-                    }
-                }
-            }
-        ]
-    },
-    optimization: {
-        minimizer: [
-            new CssMinimizerPlugin(),
-            new TerserPlugin(),
-            new HtmlWebpackPlugin({
-                template: "./src/template.html",
-                filename: "index.html",
-                inject: 'body',
-                title: 'Development',
-                minify: {
-                    removeAttributeQuotes: true,
-                    collapseWhitespace: true,
-                    removeComments: true
-                }
-            })
-        ]
+                test: /\.html$/,
+                use: ['html-loader'],
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/imgs/[hash][ext][query]',
+                },
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/fonts/[name][ext][query]',
+                },
+            },
+        ],
     },
     plugins: [
         new CopyPlugin({
-            patterns: [{ from: "public" }]
+            patterns: [{ from: '.', to: '.', context: 'public' }],
         }),
-        new MiniCssExtractPlugin({ filename: "[name].[hash].css" }),
+        new MiniCssExtractPlugin({ filename: 'style/[name].css' }),
     ],
-
-}
+};

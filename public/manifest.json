@@ -5,15 +5,30 @@
     "version": "1.0.1",
     "action": {
         "default_popup": "index.html",
-        "default_title": "Luca - Watch movies with friends"
+        "default_title": "Luca - Watch movies with friends",
+        "default_icon": "assets/imgs/icon-128.png"
     },
-
-    "host_permissions": [
-        "*://*/*"
+    "icons": {
+        "128": "assets/imgs/icon-128.png"
+    },
+    "background": {
+        "service_worker": "js/backgound.bundle.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://*/*"],
+            "js": ["js/socket.bundle.js", "js/content.bundle.js"],
+            "run_at": "document_idle",
+            "all_frames": true
+        }
     ],
-    "permissions": [
-        "tabs",
-        "storage"
-    ],
-    "manifest_version": 3
+    "host_permissions": ["*://*/*"],
+    "permissions": ["tabs", "storage"],
+    "manifest_version": 3,
+    "web_accessible_resources": [
+        {
+            "resources": ["js/*", "style/main.css", "assets/imgs/*"],
+            "matches": ["<all_urls>"]
+        }
+    ]
 }

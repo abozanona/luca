@@ -1,10 +1,10 @@
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-    if (msg.code == "Q_TAB_ID") {
+    if (msg.code == 'Q_TAB_ID') {
         sendResponse({
             code: 'A_TAB_ID',
             body: {
-                tabId: sender.tab.id
-            }
+                tabId: sender.tab.id,
+            },
         });
     }
 });

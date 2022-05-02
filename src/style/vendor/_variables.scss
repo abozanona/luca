@@ -1,0 +1,77 @@
+/*---- FONTs ----*/
+@font-face {
+    font-family: 'FilsonPro';
+    src: url('../assets/fonts/FilsonProThin.otf') format('truetype');
+    font-weight: 100;
+}
+@font-face {
+    font-family: 'FilsonPro';
+    src: url('../assets/fonts/FilsonProLight.otf') format('truetype');
+    font-weight: 200;
+}
+@font-face {
+    font-family: 'FilsonPro';
+    src: url('../assets/fonts/FilsonProBook.otf') format('truetype');
+    font-weight: 300;
+}
+@font-face {
+    font-family: 'FilsonPro';
+    src: url('../assets/fonts/FilsonProRegular.otf') format('truetype');
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'FilsonPro';
+    src: url('../assets/fonts/FilsonProMedium.otf') format('truetype');
+    font-weight: 500;
+}
+@font-face {
+    font-family: 'FilsonPro';
+    src: url('../assets/fonts/FilsonProBold.otf') format('truetype');
+    font-weight: 600;
+}
+@font-face {
+    font-family: 'FilsonPro';
+    src: url('../assets/fonts/FilsonProHeavy.otf') format('truetype');
+    font-weight: 700;
+}
+@font-face {
+    font-family: 'FilsonPro';
+    src: url('../assets/fonts/FilsonProBlack.otf') format('truetype');
+    font-weight: 800;
+}
+
+$font-family: 'FilsonPro', sans-serif;
+
+/*---- Colors ----*/
+
+$primary-clr: #5b47fb !default;
+$secondary-clr: #15153a !default;
+$text-clr: #a4a4a4 !default;
+$bg-color: #f7f7f7 !default;
+$radius: 0.3rem !default;
+$transition-300: all 0.3s ease-in-out !default;
+$white: #fff !default;
+$black: #000 !default;
+$gray-100: #efefef !default;
+$gray-200: #b2b2b2 !default;
+$gray-300: #929292 !default;
+$gray-400: #898989 !default;
+$gray-500: #7b7b7b !default;
+$gray-600: #636363 !default;
+$gray-700: #282828 !default;
+
+$blue: #007fff !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: #e74a3b !default;
+$orange: #fd7e14 !default;
+$yellow: #f6c23e !default;
+$green: #1cc88a !default;
+$teal: #20c9a6 !default;
+$cyan: #36b9cc !default;
+
+$error: #ed2121 !default;
+$info: #2ca9e1 !default;
+$success: #38b48b !default;
+$warning: #ffc539 !default;
