@@ -40,7 +40,6 @@ Array.from(document.getElementsByClassName("img-avatar")).forEach(element => {
 		(el.target as HTMLElement).classList.add('img-avatar-selected');
 		let avatarName = (el.target as HTMLElement).dataset.name;
 		chrome.storage.sync.set({ userAvatar: avatarName }, function () {
-
 		});
 	});
 });
@@ -50,7 +49,6 @@ chrome.storage.sync.get('userAvatar', function (items) {
 	if (!userAvatar) {
 		userAvatar = 'avatar-1';
 		chrome.storage.sync.set({ userAvatar: userAvatar }, function () {
-
 		});
 	}
 	document.querySelector("[data-name=\"" + userAvatar + "\"]").classList.add("img-avatar-selected");
@@ -66,10 +64,8 @@ chrome.storage.sync.get('userName', function (items) {
 	let userName = items.userName;
 	if (!userName) {
 		var randomNames = ['Luca Paguro', 'Alberto Scorfano', 'Giulia Marcovaldo', 'Ercole Visconti', 'Daniela Paguro', 'Massimo Marcovaldo', 'Lorenzo Paguro', 'Ciccio', 'Guido', 'Signora Marsigliese', 'Tommaso', 'Grandma Paguro', 'Giacomo', 'Concetta Aragosta', 'Pinuccia Aragosta', 'Uncle Ugo', 'Maggiore'];
-
 		userName = randomNames[Math.floor(Math.random() * randomNames.length)];
 		chrome.storage.sync.set({ userName: userName }, function () {
-
 		});
 	}
 	(document.getElementById("txt-user-name") as HTMLInputElement).value = userName;
@@ -82,6 +78,7 @@ var actionsOrder = [
 	'ROOM_SETUP_COMPLETED',
 ];
 var currentAction = 'NOTHING';
+
 function getCurrentPageStatus() {
 	currentAction = 'NOTHING';
 	renderPopupScreen(currentAction);
