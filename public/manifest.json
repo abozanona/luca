@@ -4,30 +4,10 @@
     "description": "This extension gives you the ability to create rooms and watch online videos with your friends.",
     "version": "1.0.1",
     "action": {
-        "default_icon": "icon128.png",
-        "default_popup": "popup.html",
+        "default_popup": "index.html",
         "default_title": "Luca - Watch movies with friends"
     },
-    "icons": {
-        "128": "icon128.png"
-    },
-    "background": {
-        "service_worker": "js/background.js"
-    },
-    "content_scripts": [
-        {
-            "matches": [
-                "*://*/*"
-            ],
-            "js": [
-                "js/socket.io.js",
-                "js/jquery.min.js",
-                "js/content.js"
-            ],
-            "run_at": "document_idle",
-            "all_frames": true
-        }
-    ],
+
     "host_permissions": [
         "*://*/*"
     ],
@@ -35,17 +15,5 @@
         "tabs",
         "storage"
     ],
-    "manifest_version": 3,
-    "web_accessible_resources": [
-        {
-            "resources": [
-                "js/*",
-                "css/page-style.css",
-                "img/reactions/*"
-            ],
-            "matches": [
-                "<all_urls>"
-            ]
-        }
-    ]
+    "manifest_version": 3
 }
