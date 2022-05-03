@@ -44,11 +44,11 @@ $font-family: 'FilsonPro', sans-serif;
 
 /*---- Colors ----*/
 
-$primary-clr: #5b47fb !default;
+$primary-clr: #007fff !default;
 $secondary-clr: #15153a !default;
 $text-clr: #a4a4a4 !default;
-$bg-color: #f7f7f7 !default;
-$radius: 0.3rem !default;
+$bg-clr: #f7f7f7 !default;
+$radius: 0.25rem !default;
 $transition-300: all 0.3s ease-in-out !default;
 $white: #fff !default;
 $black: #000 !default;
@@ -75,3 +75,7 @@ $error: #ed2121 !default;
 $info: #2ca9e1 !default;
 $success: #38b48b !default;
 $warning: #ffc539 !default;
+
+$shadow-z100: 0px 0px 10px 0px rgba(132, 132, 132, 0.15);
+$shadow-z200: 0px 0px 20px 0px rgba(132, 132, 132, 0.2);
+$shadow-z300: 0px 0px 30px 0px rgba(132, 132, 132, 0.3);

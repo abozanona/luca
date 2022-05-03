@@ -14,14 +14,14 @@ module.exports = merge(common, {
         }),
     ],
     optimization: {
-        runtimeChunk: true,
+        // runtimeChunk: true,
     },
-    watch: true,
     performance: {
         hints: false,
         maxEntrypointSize: 512000,
         maxAssetSize: 512000,
     },
+    watch: true,
     stats: {
         colors: true,
         hash: false,
@@ -33,7 +33,7 @@ module.exports = merge(common, {
         reasons: false,
         children: false,
         source: false,
-        errors: false,
+        errors: true,
         errorDetails: false,
         warnings: false,
         publicPath: false,
