@@ -20,7 +20,7 @@ class PartyPage extends Component {
                             </div>
                         </div>
                         <div className="party__members-container">
-                            <div className="page__memebers  g-1">
+                            <div className="page__memebers">
                                 <div className="party__member">
                                     <Avatar username="MaD Ps" />
                                     <GeneralList />
