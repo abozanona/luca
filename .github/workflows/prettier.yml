@@ -17,5 +17,6 @@ jobs:
         key: ${{ runner.os }}-npm-${{ hashFiles('**/workflows/prettier.yml') }}
         restore-keys: |
           ${{ runner.os }}-npm-
+    - run: npm ci
     - name: Run prettier
       run: npm run pretty
