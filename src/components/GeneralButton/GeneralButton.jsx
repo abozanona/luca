@@ -5,7 +5,7 @@ class GeneralButton extends Component {
     render() {
         return (
             <React.Fragment>
-                <button className={'btn ' + this.props.class} onClick={this.props.click}>
+                <button className={'btn ' + (this.props.class ?? 'btn--primary')} onClick={this.props.click}>
                     <span>{this.props.name}</span>
                     {this.props.icon && <img src={this.props.icon} alt="" />}
                 </button>

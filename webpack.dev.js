@@ -3,8 +3,9 @@ const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(common, {
-    mode: 'production',
-    devtool: 'inline-source-map',
+    mode: 'development',
+    // devtool: 'inline-source-map',
+    devtool: 'source-map',
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/template.html',
@@ -14,7 +15,7 @@ module.exports = merge(common, {
         }),
     ],
     optimization: {
-        // runtimeChunk: true,
+        minimize: false,
     },
     performance: {
         hints: false,

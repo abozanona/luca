@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Avatar from './Avatar';
 import navConfig from '../constant/nav.config';
+import { Outlet, Link } from 'react-router-dom';
+
 class Navbar extends Component {
     render() {
         return (
@@ -32,7 +34,9 @@ class Navbar extends Component {
                     {navConfig.map((item, index) => {
                         return (
                             <div className="element" key={index}>
-                                <img src={item.icon} alt={item.name} />
+                                <Link to="/home">
+                                    <img src={item.icon} alt={item.name} />
+                                </Link>
                             </div>
                         );
                     })}
