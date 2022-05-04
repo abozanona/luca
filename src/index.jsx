@@ -1,10 +1,13 @@
 import React from 'react';
-import { MemoryRouter as Router, Routes, Route, Switch } from 'react-router';
+import { MemoryRouter as Router, Routes, Route, Switch } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import './style/index.scss';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
+import DashboardPage from './pages/DashboardPage/DashboardPage'
+import FriendsPage from './pages/FriendsPage/FriendsPage';
 import SettingsPage from './pages/SettingsPage/SettingsPage';
+import PartyPage from './pages/PartyPage/PartyPage'
 class Popup extends React.Component {
     handleClick() {
         console.log('this is:', this);
@@ -16,32 +19,18 @@ class Popup extends React.Component {
                     <div className="container">
                         <Navbar />
                         <div className="inner__container">
-                            {/* <DashboardPage /> */}
-                            <SettingsPage />
-                            {/* <FriendsPage /> */}
-                            {/* <Routes>
+                            <Routes>
                                 <Route path="/" element={<DashboardPage />} />
-                                <Route path="/home" element={<LoginPage />} />
-                            </Routes> */}
+                                <Route path="/friends" element={<FriendsPage />} />
+                                <Route path="/settings" element={<SettingsPage />} />
+                                <Route path="/party" element={<PartyPage />} />
+                            </Routes>
                         </div>
                         <Footer />
-                        {/* <LoginPage /> */}
                     </div>
                 </Router>
             </React.Fragment>
 
-            // <div className="container">
-            //     <div className="luca__container">
-            //         <Navbar />
-            //         {/* <button onClick={() => ModalService.openModal('modal-id')}>Click me! </button> */}
-            //         <GeneralButton class="btn--primary" name="Login" icon={google} click={() => this.handleClick()} />
-            //         <Modal />
-            //         <Footer />
-            //     </div>
-
-            //     {/* <Avatar /> */}
-            //     <div className="modal--fade" onClick={() => ModalService.closeModal('modal-id')}></div>
-            // </div>
         );
     }
 }

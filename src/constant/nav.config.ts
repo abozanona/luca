@@ -5,19 +5,19 @@ const options = require('../assets/imgs/options.svg');
 const data = [
     {
         id: 1,
-        to: '',
+        to: '/',
         icon: home,
         name: 'home',
     },
     {
         id: 2,
-        to: '',
+        to: '/friends',
         icon: friends,
         name: 'friends',
     },
     {
         id: 3,
-        to: '',
+        to: '/settings',
         icon: settings,
         name: 'settings',
     },
