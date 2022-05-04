@@ -11,6 +11,7 @@ import DashboardPage from './pages/DashboardPage/DashboardPage';
 import PartyPage from './pages/PartyPage/PartyPage';
 import { MemoryRouter as Router, Routes, Route, Switch } from 'react-router';
 import { createRoot } from 'react-dom/client';
+import FriendsPage from './pages/FriendsPage/FriendsPage';
 const google = require('./assets/imgs/google.svg');
 class Popup extends React.Component {
     handleClick() {
@@ -24,7 +25,8 @@ class Popup extends React.Component {
                         <Navbar />
                         <div className="inner__container">
                             {/* <DashboardPage /> */}
-                            <PartyPage />
+                            {/* <PartyPage /> */}
+                            <FriendsPage />
                             {/* <Routes>
                                 <Route path="/" element={<DashboardPage />} />
                                 <Route path="/home" element={<LoginPage />} />
