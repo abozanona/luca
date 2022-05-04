@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Avatar from '../../components/Avatar';
+import Avatar from '../../components/Avatar/Avatar';
 import GeneralButton from '../../components/GeneralButton/GeneralButton';
 import GeneralList from '../../components/GeneralList/GeneralList';
 const Copy = require('../../assets/imgs/copy.svg');

@@ -12,9 +12,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: $bg-clr;
-    // width: 31.25rem;
-    // height: 22.5rem;
-    width: 500px;
+    width: 600px;
     height: 360px;
     position: relative;
 }
@@ -24,131 +22,7 @@ body {
     flex: 1;
     margin: 0rem 2rem;
 }
-.navbar__container {
-    display: flex;
-    justify-content: space-between;
-    background-color: $white;
-    padding: 0.225rem 1.438rem;
-    border-radius: $radius;
-    .navbar__avatar {
-        display: flex;
-        align-items: space-between;
-    }
-    .avatar__information {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 0.5rem;
-        margin-inline-start: 0.5rem;
-        h5 {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: $secondary-clr;
-        }
-        p {
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: $text-clr;
-            display: flex;
-            gap: 0.5rem;
-        }
-    }
-    .navbar__elements {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 2.5rem;
-        .element {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0.4rem;
-            border-radius: 0.3rem;
-            background-color: transparent;
-            transition: $transition-300;
-            cursor: pointer;
-            &:hover {
-                @extend .element--active;
-            }
-            img {
-                width: 1.688rem;
-                height: 1.688rem;
-            }
-        }
-        .element--active {
-            background-color: $bg-clr;
-            img {
-                filter: invert(13%) sepia(8%) saturate(100%) hue-rotate(202deg) brightness(0%) contrast(105%);
-            }
-        }
-    }
-}
-.avatar_container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.2rem;
-    position: relative;
-    .avatar__image {
-        position: relative;
-        padding: 0.2rem;
-        background-color: white;
-        border-radius: $radius;
-        cursor: pointer;
-        img {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 0.25rem;
-            object-fit: cover;
-            object-position: top;
-        }
-        .avatar__status {
-            content: '';
-            position: absolute;
-            width: 0.8rem;
-            height: 0.8rem;
-            background-color: $success;
-            border-radius: $radius * 100;
-            bottom: 0rem;
-            right: 0rem;
-        }
-        .avatar__crown {
-            content: '';
-            position: absolute;
-            transform: rotate(45deg);
-            top: -6px;
-            right: -6px;
-        }
-    }
 
-    .avatar__name {
-        color: $secondary-clr;
-        font-size: 0.7rem;
-        font-weight: 500;
-        text-align: center;
-    }
-}
-.footer__containter {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    padding: 0.3rem;
-    background-color: $white;
-    text-align: center;
-    p {
-        font-size: 0.563rem;
-        font-weight: 400;
-        color: $secondary-clr;
-    }
-}
-
-.luca__container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-}
 .popup__container {
     position: absolute;
     background-color: $white;
@@ -184,7 +58,7 @@ body {
 .input__container {
     display: flex;
     flex-direction: column;
-    width: 65%;
+    width: 70%;
     input {
         background-color: $white;
         color: $secondary-clr;
@@ -216,30 +90,13 @@ body {
     }
 }
 
-.dashboard__info {
-    gap: 0.5rem;
-    h1 {
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: $secondary-clr;
-    }
-    p {
-        font-size: 0.6rem;
-        font-weight: 400;
-        color: $text-clr;
-    }
-}
-.dashboard__container {
-    height: fit-content;
-    gap: 2rem;
-}
 .page__container {
     flex: 1;
     height: fit-content;
     margin-top: 1rem;
 }
 .page__header {
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-weight: 500;
     color: $secondary-clr;
 }
