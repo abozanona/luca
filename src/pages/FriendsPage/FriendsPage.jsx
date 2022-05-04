@@ -11,7 +11,7 @@ class FriendsPage extends Component {
                         <div className="d-jcb d-aic">
                             <h1 className="page__header">Friends (4)</h1>
                         </div>
-                        <div className="page__memebers g-1">
+                        <div className="page__memebers">
                             <div className="friend__memebr">
                                 <Avatar username="Mahmoud" />
                             </div>

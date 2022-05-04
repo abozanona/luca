@@ -1,18 +1,10 @@
 import React from 'react';
-import './style/index.scss';
-import Navbar from './components/Navbar';
-import Avatar from './components/Avatar';
-import Footer from './components/Footer';
-import Modal from './components/Modal';
-import ModalService from './core/services/ModalService';
-import GeneralButton from './components/GeneralButton/GeneralButton';
-import LoginPage from './pages/LoginPage/LoginPage';
-import DashboardPage from './pages/DashboardPage/DashboardPage';
-import PartyPage from './pages/PartyPage/PartyPage';
 import { MemoryRouter as Router, Routes, Route, Switch } from 'react-router';
 import { createRoot } from 'react-dom/client';
-import FriendsPage from './pages/FriendsPage/FriendsPage';
-const google = require('./assets/imgs/google.svg');
+import './style/index.scss';
+import Navbar from './components/Navbar/Navbar';
+import Footer from './components/Footer/Footer';
+import SettingsPage from './pages/SettingsPage/SettingsPage';
 class Popup extends React.Component {
     handleClick() {
         console.log('this is:', this);
@@ -25,8 +17,8 @@ class Popup extends React.Component {
                         <Navbar />
                         <div className="inner__container">
                             {/* <DashboardPage /> */}
-                            {/* <PartyPage /> */}
-                            <FriendsPage />
+                            <SettingsPage />
+                            {/* <FriendsPage /> */}
                             {/* <Routes>
                                 <Route path="/" element={<DashboardPage />} />
                                 <Route path="/home" element={<LoginPage />} />

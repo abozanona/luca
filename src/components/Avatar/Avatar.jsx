@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-
-const Cronw = require('../assets/imgs/crown.svg');
-const DefaultAvatar = require('../assets/imgs/default-avatar.svg');
+const Cronw = require('../../assets/imgs/crown.svg');
+const DefaultAvatar = require('../../assets/imgs/default-avatar.svg');
 class Avatar extends Component {
     render() {
         return (

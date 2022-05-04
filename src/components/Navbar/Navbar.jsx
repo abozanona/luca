@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Avatar from './Avatar';
-import navConfig from '../constant/nav.config';
+import navConfig from '../../constant/nav.config';
 import { Outlet, Link } from 'react-router-dom';
+import Avatar from '../Avatar/Avatar';
 
 class Navbar extends Component {
     render() {

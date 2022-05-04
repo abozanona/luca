@@ -1,0 +1,22 @@
+.settings {
+    margin-top: 1rem;
+    gap: 1.5rem;
+    .setting {
+        .setting__info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            h1 {
+                font-size: 0.875rem;
+                font-weight: 500;
+                color: $secondary-clr;
+            }
+            p {
+                font-size: 0.6rem;
+                font-weight: 400;
+                color: $text-clr;
+                width: 17rem;
+            }
+        }
+    }
+}

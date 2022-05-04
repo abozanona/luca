@@ -252,9 +252,74 @@ body {
     margin-top: 1rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(3.2rem, 1fr));
+    gap: 1rem;
     max-height: 10rem;
     min-height: 10rem;
     min-width: 100%;
     max-width: 100%;
     overflow-y: scroll;
+}
+.inactiveMixin {
+    content: '';
+    position: absolute;
+    display: block;
+}
+
+.beforeAnimation {
+    transition: 0.2s cubic-bezier(0.24, 0, 0.5, 1);
+}
+
+.afterAnimation {
+    transition: 0.35s cubic-bezier(0.54, 1.6, 0.5, 1);
+}
+
+// Mobile Toggle Switch
+.toggleWrapper {
+    input {
+        &.mobileToggle {
+            opacity: 0; // hides checkbox
+            position: absolute;
+            & + label {
+                position: relative;
+                display: inline-block;
+                user-select: none;
+                transition: $transition-300;
+                height: 23px;
+                width: 50px;
+                background-color: $white;
+                border-radius: $radius * 100;
+                &:before {
+                    @extend .inactiveMixin;
+                    @extend .beforeAnimation;
+                    height: 23px;
+                    width: 50px;
+                    top: 0;
+                    left: 0;
+                    border-radius: $radius * 100;
+                }
+                &:after {
+                    @extend .inactiveMixin;
+                    @extend .afterAnimation;
+                    background-color: $text-clr;
+                    height: 18px;
+                    width: 18px;
+                    top: 2px;
+                    left: 4px;
+                    border-radius: $radius * 100;
+                }
+            }
+            // When Active
+            &:checked {
+                & + label:before {
+                    background: $primary-clr; // Active Color
+                    opacity: 0.2;
+                    transition: width 0.2s cubic-bezier(0, 0, 0, 0.1);
+                }
+                & + label:after {
+                    left: 54px - 25px;
+                    background-color: $primary-clr;
+                }
+            }
+        }
+    }
 }
