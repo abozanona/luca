@@ -14,8 +14,8 @@ class LoginPage extends Component {
                         <p>Watch movies with friends!</p>
                     </div>
                     <div className="login__actions">
-                        <GeneralButton class="btn--secondary" name="Continue as a guest" />
-                        <GeneralButton class="btn--primary" name="Login/ Register" icon={google} />
+                        <GeneralButton class="btn--secondary" name="Continue as a guest"  />
+                        <GeneralButton  name="Login/ Register" icon={google} />
                     </div>
                 </div>
                 <Footer />
