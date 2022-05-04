@@ -1,0 +1,13 @@
+.party__members-container {
+    position: relative;
+    &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2rem;
+        bottom: 0;
+    }
+}
+.party__member {
+    position: relative;
+}

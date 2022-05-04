@@ -1,0 +1,19 @@
+.dashboard__container {
+    height: fit-content;
+    margin-top: 2rem;
+    gap: 2rem;
+}
+
+.dashboard__info {
+    gap: 0.5rem;
+    h1 {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: $secondary-clr;
+    }
+    p {
+        font-size: 0.6rem;
+        font-weight: 400;
+        color: $text-clr;
+    }
+}

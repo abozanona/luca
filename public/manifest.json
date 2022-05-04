@@ -4,48 +4,31 @@
     "description": "This extension gives you the ability to create rooms and watch online videos with your friends.",
     "version": "1.0.1",
     "action": {
-        "default_icon": "icon128.png",
-        "default_popup": "popup.html",
-        "default_title": "Luca - Watch movies with friends"
+        "default_popup": "index.html",
+        "default_title": "Luca - Watch movies with friends",
+        "default_icon": "assets/imgs/icon-128.png"
     },
     "icons": {
-        "128": "icon128.png"
+        "128": "assets/imgs/icon-128.png"
     },
     "background": {
-        "service_worker": "js/background.js"
+        "service_worker": "js/backgound.bundle.js"
     },
     "content_scripts": [
         {
-            "matches": [
-                "*://*/*"
-            ],
-            "js": [
-                "js/socket.io.js",
-                "js/jquery.min.js",
-                "js/content.js"
-            ],
+            "matches": ["*://*/*"],
+            "js": ["js/socket.bundle.js", "js/content.bundle.js"],
             "run_at": "document_idle",
             "all_frames": true
         }
     ],
-    "host_permissions": [
-        "*://*/*"
-    ],
-    "permissions": [
-        "tabs",
-        "storage"
-    ],
+    "host_permissions": ["*://*/*"],
+    "permissions": ["tabs", "storage"],
     "manifest_version": 3,
     "web_accessible_resources": [
         {
-            "resources": [
-                "js/*",
-                "css/page-style.css",
-                "img/reactions/*"
-            ],
-            "matches": [
-                "<all_urls>"
-            ]
+            "resources": ["js/*", "style/main.css", "assets/imgs/*"],
+            "matches": ["<all_urls>"]
         }
     ]
 }

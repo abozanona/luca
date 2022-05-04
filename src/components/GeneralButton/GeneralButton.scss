@@ -1,0 +1,67 @@
+.btn {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: $radius;
+    border: none;
+    cursor: pointer;
+    transition: $transition-300;
+    span {
+        font-size: 0.875rem;
+        font-weight: 400;
+        color: $secondary-clr;
+    }
+    img {
+        margin-inline-start: 0.5rem;
+    }
+}
+.btn--primary {
+    background-color: $primary-clr;
+    span {
+        color: $white;
+    }
+    &:hover {
+        background-color: darken($primary-clr, 5%);
+    }
+}
+.btn--secondary {
+    background-color: transparent;
+    border: 0.1rem solid $text-clr;
+    span {
+        color: $text-clr;
+    }
+    &:hover {
+        background-color: $primary-clr;
+        border-color: $primary-clr;
+        span {
+            color: $white;
+        }
+    }
+}
+.btn--danger {
+    background-color: $white;
+    border: 0.1rem solid $error;
+    span {
+        color: $error;
+    }
+    img {
+        filter: invert(17%) sepia(63%) saturate(5261%) hue-rotate(352deg) brightness(96%) contrast(93%);
+    }
+    &:hover {
+        background-color: $error;
+        border-color: $error;
+        span {
+            color: $white;
+        }
+        img {
+            filter: invert(100%) sepia(5%) saturate(0%) hue-rotate(326deg) brightness(105%) contrast(107%);
+        }
+    }
+}
+.btn--danger:hover {
+    .list__container {
+        @extend .list--active;
+    }
+}
