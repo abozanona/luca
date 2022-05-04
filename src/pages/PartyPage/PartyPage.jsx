@@ -12,15 +12,15 @@ class PartyPage extends Component {
             <React.Fragment>
                 <div className="page__container">
                     <div className="party__container">
-                        <div className="party__header d-jcb d-aic">
-                            <h1>Party (2)</h1>
+                        <div className="d-jcb d-aic">
+                            <h1 className="page__header">Party (2)</h1>
                             <div className="party__settings d-aic g-1">
                                 <img src={Copy} alt="" />
                                 <img src={Setting} alt="" />
                             </div>
                         </div>
                         <div className="party__members-container">
-                            <div className="party__members  g-1">
+                            <div className="page__memebers  g-1">
                                 <div className="party__member">
                                     <Avatar username="MaD Ps" />
                                     <GeneralList />
@@ -49,7 +49,7 @@ class PartyPage extends Component {
                                 <Avatar username="MaD Ps" />
                             </div>
                         </div>
-                        <div className="party__actins d-aic g-1">
+                        <div className="page__actions d-aic g-1">
                             <GeneralButton name="Scan" icon={Scan}></GeneralButton>
                             <GeneralButton class="btn--danger" name="Leave" icon={Leave}></GeneralButton>
                         </div>
