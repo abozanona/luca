@@ -7,7 +7,7 @@ class Avatar extends Component {
             <div className="avatar_container">
                 <div className="avatar__image d-aic">
                     <span className="avatar__crown">{/* <img src={cronw} alt="" /> */}</span>
-                        <img src={DefaultAvatar} alt="" />
+                    <img src={DefaultAvatar} alt="" />
                     <span className="avatar__status"></span>
                 </div>
                 <p className="avatar__name">{this.props.username}</p>

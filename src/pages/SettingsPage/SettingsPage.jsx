@@ -8,9 +8,7 @@ class SettingsPage extends Component {
             <React.Fragment>
                 <div className="page__container">
                     <div className="settings__container ">
-                        <div className="d-jcb d-aic">
-                            {/* <h1 className="page__header">Settings</h1> */}
-                        </div>
+                        <div className="d-jcb d-aic">{/* <h1 className="page__header">Settings</h1> */}</div>
                         <div className="settings d-flex-col ">
                             <div className="setting d-flex d-aic d-jcb">
                                 <div className="setting__info">
@@ -32,7 +30,12 @@ class SettingsPage extends Component {
                                     </p>
                                 </div>
                                 <div className="toggleWrapper">
-                                    <input className="mobileToggle" type="checkbox" name="enable-shorcut" id="enable-shorcut"  />
+                                    <input
+                                        className="mobileToggle"
+                                        type="checkbox"
+                                        name="enable-shorcut"
+                                        id="enable-shorcut"
+                                    />
                                     <label htmlFor="enable-shorcut"></label>
                                 </div>
                             </div>
@@ -44,7 +47,7 @@ class SettingsPage extends Component {
                                     </p>
                                 </div>
                                 <div className="toggleWrapper">
-                                    <input className="mobileToggle" type="checkbox" name="indecaters" id="indecaters"  />
+                                    <input className="mobileToggle" type="checkbox" name="indecaters" id="indecaters" />
                                     <label htmlFor="indecaters"></label>
                                 </div>
                             </div>

@@ -4,10 +4,10 @@ import { createRoot } from 'react-dom/client';
 import './style/index.scss';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
-import DashboardPage from './pages/DashboardPage/DashboardPage'
+import DashboardPage from './pages/DashboardPage/DashboardPage';
 import FriendsPage from './pages/FriendsPage/FriendsPage';
 import SettingsPage from './pages/SettingsPage/SettingsPage';
-import PartyPage from './pages/PartyPage/PartyPage'
+import PartyPage from './pages/PartyPage/PartyPage';
 class Popup extends React.Component {
     handleClick() {
         console.log('this is:', this);
@@ -30,7 +30,6 @@ class Popup extends React.Component {
                     </div>
                 </Router>
             </React.Fragment>
-
         );
     }
 }
