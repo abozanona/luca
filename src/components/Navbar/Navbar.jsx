@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import navConfig from '../../constant/nav.config';
-import {  Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Avatar from '../Avatar/Avatar';
 
-const CopyCode= require('../../assets/imgs/copy-code.svg')
+const CopyCode = require('../../assets/imgs/copy-code.svg');
 class Navbar extends Component {
     render() {
         return (
