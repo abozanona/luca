@@ -17,13 +17,6 @@ jobs:
         key: ${{ runner.os }}-npm-${{ hashFiles('**/workflows/prettier.yml') }}
         restore-keys: |
           ${{ runner.os }}-npm-
-<<<<<<< HEAD
-<<<<<<< HEAD
     - run: npm ci
-=======
->>>>>>> eb05f7e (push prettier action)
-=======
-    - run: npm ci
->>>>>>> 832b782 (add npm ci to prettier.yml)
     - name: Run prettier
       run: npm run pretty
