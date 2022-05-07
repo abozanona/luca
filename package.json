@@ -6,7 +6,7 @@
     "scripts": {
         "build": "webpack --config webpack.prod.js",
         "dev": "webpack --progress --config webpack.dev.js",
-        "pretty": "prettier --write \"./**/*.{js,jsx,json,html,scss,css,ts}\""
+        "pretty": "prettier --write \"./**/*.{js,jsx,tsx,json,html,scss,css,ts}\""
     },
     "repository": {
         "type": "git",

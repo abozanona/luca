@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 const google = require('../../assets/imgs/google.svg');
 const bug = require('../../assets/imgs/bug.svg');
-class GeneralButton extends Component {
+class GeneralButton extends Component<{
+    class?: string;
+    click?: React.MouseEventHandler;
+    name?: string;
+    icon?: string;
+}> {
     render() {
         return (
             <React.Fragment>

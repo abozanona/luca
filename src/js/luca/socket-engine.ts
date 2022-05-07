@@ -2,7 +2,7 @@ import { ChatEngine } from './chat-engine';
 import { UtilsEngine } from './utils-engine';
 import { VideoEngine } from './video-engine';
 
-export class SocketEnging {
+export class SocketEngine {
     isSocketStarted = false;
     socket: any = null;
     roomId: string = null;
@@ -81,3 +81,5 @@ export class SocketEnging {
         });
     }
 }
+
+export default SocketEngine;

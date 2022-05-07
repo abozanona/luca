@@ -1,13 +1,13 @@
 import { ChatEngine } from './luca/chat-engine';
 import { LucaEngine } from './luca/luca-engine';
-import { SocketEnging } from './luca/socket-engine';
+import { SocketEngine } from './luca/socket-engine';
 import { UtilsEngine } from './luca/utils-engine';
 import { VideoEngine } from './luca/video-engine';
 
 let chatEngine = new ChatEngine();
-let socketEnging = new SocketEnging(chatEngine);
-let videoEngine = new VideoEngine(socketEnging);
-let lucaEngine = new LucaEngine(chatEngine, socketEnging, videoEngine);
+let socketEngine = new SocketEngine(chatEngine);
+let videoEngine = new VideoEngine(socketEngine);
+let lucaEngine = new LucaEngine(chatEngine, socketEngine, videoEngine);
 
 chrome.runtime.onMessage.addListener(gotMessage);
 function gotMessage(message: any, sender: any, sendResponse: any) {
@@ -56,11 +56,11 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
             });
             break;
         case 'Q_CREATE_NEW_ROOM_ID':
-            socketEnging.createRoom(videoEngine, UtilsEngine.uuidv4());
+            socketEngine.createRoom(videoEngine, UtilsEngine.uuidv4());
             break;
         case 'Q_JOIN_ROOM_ID':
-            socketEnging.roomId = message.roomId;
-            socketEnging.joinRoom(videoEngine, UtilsEngine.uuidv4());
+            socketEngine.roomId = message.roomId;
+            socketEngine.joinRoom(videoEngine, UtilsEngine.uuidv4());
             break;
         case 'Q_GET_PAGE_STATUS':
             UtilsEngine.getTabId(function (tabId) {

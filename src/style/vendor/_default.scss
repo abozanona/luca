@@ -65,6 +65,7 @@ body {
         border-radius: $radius;
         border: none;
         padding: 0.6rem;
+        width: 100%;
         &:focus-visible {
             outline: none;
         }
