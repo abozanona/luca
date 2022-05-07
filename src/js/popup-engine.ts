@@ -98,6 +98,11 @@ class PopUpEngine {
                     )[0];
                     _this.renderPopupScreen(_this.currentAction);
                     break;
+                case 'A_GET_ROOM_ID':
+                    if (_this.currentRoomIdCallBack) {
+                        _this.currentRoomIdCallBack(request.body.roomId);
+                    }
+                    break;
             }
         });
     }
@@ -122,6 +127,19 @@ class PopUpEngine {
             chrome.tabs.sendMessage(tabId, message);
         });
     }
+
+    currentRoomIdCallBack: (roomId: string) => void = null;
+    getCurrentRoomId(cb: (roomId: string) => void) {
+        this.currentRoomIdCallBack = cb;
+
+        this.getCurrentTabId(function (tabId: any) {
+            const message = {
+                code: 'Q_GET_ROOM_ID',
+            };
+            chrome.tabs.sendMessage(tabId, message);
+        });
+    }
+
 
     renderPopupScreen(state: string) {
         if (this.currentPageCallBack) {

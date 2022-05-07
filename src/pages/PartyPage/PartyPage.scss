@@ -1,7 +1,12 @@
+.party__settings {
+    .party__copy-id {
+        cursor: pointer;
+    }
+}
 .party__members-container {
     position: relative;
     &::after {
-        content: '';
+        content: "";
         position: absolute;
         width: 100%;
         height: 2rem;

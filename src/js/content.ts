@@ -62,6 +62,18 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
             socketEngine.roomId = message.roomId;
             socketEngine.joinRoom(videoEngine, UtilsEngine.uuidv4());
             break;
+        case 'Q_GET_ROOM_ID':
+            UtilsEngine.getTabId(function (tabId) {
+                const message = {
+                    code: 'A_GET_ROOM_ID',
+                    tabId: tabId,
+                    body: {
+                        roomId: socketEngine.roomId,
+                    },
+                };
+                chrome.runtime.sendMessage(message);
+            });
+            break;
         case 'Q_GET_PAGE_STATUS':
             UtilsEngine.getTabId(function (tabId) {
                 const message = {
