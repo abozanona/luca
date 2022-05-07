@@ -25,14 +25,18 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
                 el.remove();
             });
             document.querySelectorAll('video').forEach((elVideo) => {
+
                 let divVideoHiighlight = document.createElement('div');
                 divVideoHiighlight.classList.add('luca-video-highlight');
+
                 document.body.appendChild(divVideoHiighlight);
+                console.log(divVideoHiighlight);
+
                 let coordinates = UtilsEngine.getOffset(elVideo);
                 divVideoHiighlight.style.top = coordinates.top + 'px';
                 divVideoHiighlight.style.left = coordinates.left + 'px';
-                divVideoHiighlight.style.width = coordinates.width - 10 + 'px';
-                divVideoHiighlight.style.height = coordinates.height - 10 + 'px';
+                divVideoHiighlight.style.width = coordinates.width + 'px';
+                divVideoHiighlight.style.height = coordinates.height + 'px';
 
                 let spanHiighlightClose = document.createElement('div');
                 spanHiighlightClose.classList.add('luca-video-highlight-close');
@@ -75,6 +79,7 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
                 chrome.runtime.sendMessage(message);
             });
             break;
+
     }
 }
 

@@ -27,7 +27,7 @@
     "manifest_version": 3,
     "web_accessible_resources": [
         {
-            "resources": ["js/*", "style/main.css", "style/page-style.css", "assets/imgs/*"],
+            "resources": ["js/*", "style/main.css", "style/page-style.css", "assets/imgs/*", "assets/fonts/*"],
             "matches": ["<all_urls>"]
         }
     ]
