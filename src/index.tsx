@@ -12,32 +12,35 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import SelectVideoPage from './pages/SelectVideoPage/SelectVideoPage';
 import NotRecognisedPage from './pages/NotRecognisedPage/NotRecognisedPage';
 import SplashPage from './pages/SplashPage/SplashPage';
-class Popup extends React.Component {
-    render() {
-        return (
-            <React.Fragment>
-                <Router>
-                    <div className="container">
-                        <Navbar />
-                        <div className="inner__container">
-                            <Routes>
-                                <Route path="/" element={<SplashPage />} />
-                                <Route path="/dashboard" element={<DashboardPage />} />
-                                <Route path="/login" element={<LoginPage />} />
-                                <Route path="/selectvideo" element={<SelectVideoPage />} />
-                                <Route path="/notrecognised" element={<NotRecognisedPage />} />
-                                <Route path="/friends" element={<FriendsPage />} />
-                                <Route path="/settings" element={<SettingsPage />} />
-                                <Route path="/party" element={<PartyPage />} />
-                            </Routes>
-                        </div>
-                        <Footer />
-                    </div>
-                </Router>
-            </React.Fragment>
-        );
-    }
+import { useNavigate } from 'react-router-dom';
+
+function PopupApp() {
+    const navigate = useNavigate();
+    return (
+        <React.Fragment>
+            <div className="container">
+                <Navbar />
+                <div className="inner__container">
+                    <Routes>
+                        <Route path="/" element={<SplashPage />} />
+                        <Route path="/dashboard" element={<DashboardPage navigate={navigate} />} />
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/selectvideo" element={<SelectVideoPage />} />
+                        <Route path="/notrecognised" element={<NotRecognisedPage />} />
+                        <Route path="/friends" element={<FriendsPage />} />
+                        <Route path="/settings" element={<SettingsPage />} />
+                        <Route path="/party" element={<PartyPage />} />
+                    </Routes>
+                </div>
+                <Footer />
+            </div>
+        </React.Fragment>
+    );
 }
 const container = document.getElementById('react-target');
 const root = createRoot(container);
-root.render(<Popup />);
+root.render(
+    <Router>
+        <PopupApp />
+    </Router>
+);
