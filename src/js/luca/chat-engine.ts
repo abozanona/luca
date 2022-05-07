@@ -1,9 +1,9 @@
 import { LucaEngine } from './luca-engine';
-import { SocketEnging } from './socket-engine';
+import { SocketEngine } from './socket-engine';
 
 export class ChatEngine {
-    sendMessageToRoom(socketEnging: SocketEnging, messageText: string) {
-        socketEnging.sendPlayerOrder(
+    sendMessageToRoom(socketEngine: SocketEngine, messageText: string) {
+        socketEngine.sendPlayerOrder(
             'message',
             {
                 text: messageText,
@@ -25,8 +25,8 @@ export class ChatEngine {
         }
     }
 
-    sendReactionToRoom(socketEnging: SocketEnging, reactionName: string) {
-        socketEnging.sendPlayerOrder(
+    sendReactionToRoom(socketEngine: SocketEngine, reactionName: string) {
+        socketEngine.sendPlayerOrder(
             'reaction',
             {
                 name: reactionName,
@@ -70,3 +70,5 @@ export class ChatEngine {
         }, 1);
     }
 }
+
+export default ChatEngine;

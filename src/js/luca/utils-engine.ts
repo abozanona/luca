@@ -52,3 +52,5 @@ export class UtilsEngine {
         );
     }
 }
+
+export default UtilsEngine;

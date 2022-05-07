@@ -1,12 +1,12 @@
 import { ChatEngine } from './chat-engine';
-import { SocketEnging } from './socket-engine';
+import { SocketEngine } from './socket-engine';
 import { VideoEngine } from './video-engine';
 
 export class LucaEngine {
     static isLucaInitted = false;
     static fullScreenElement: HTMLElement = document.body;
 
-    constructor(private chatEngine: ChatEngine, private socketEnging: SocketEnging, private videoEngine: VideoEngine) {}
+    constructor(private chatEngine: ChatEngine, private socketEngine: SocketEngine, private videoEngine: VideoEngine) { }
 
     initLuca() {
         if (LucaEngine.isLucaInitted) {
@@ -32,7 +32,7 @@ export class LucaEngine {
 
     injectStyle() {
         const linkStyle = document.createElement('link');
-        linkStyle.href = chrome.runtime.getURL('css/page-style.css');
+        linkStyle.href = chrome.runtime.getURL('style/page-style.css');
         linkStyle.rel = 'stylesheet';
         linkStyle.type = 'text/css';
         document.head.appendChild(linkStyle);
@@ -85,7 +85,7 @@ export class LucaEngine {
                 el.preventDefault();
                 _this.chatEngine.showReactionOnScreen((el.target as HTMLElement).dataset.reactionName);
                 _this.chatEngine.sendReactionToRoom(
-                    _this.socketEnging,
+                    _this.socketEngine,
                     (el.target as HTMLElement).dataset.reactionName
                 );
             });
@@ -97,7 +97,7 @@ export class LucaEngine {
             if (event.keyCode === 13) {
                 event.preventDefault();
                 if (inputChatMessages.value) {
-                    _this.chatEngine.sendMessageToRoom(_this.socketEnging, inputChatMessages.value);
+                    _this.chatEngine.sendMessageToRoom(_this.socketEngine, inputChatMessages.value);
                     _this.chatEngine.addMessageBubble(inputChatMessages.value);
                     inputChatMessages.value = '';
                 }
@@ -132,7 +132,7 @@ export class LucaEngine {
     }
 
     getCurrentPageStatus() {
-        if (!this.socketEnging.isSocketStarted) {
+        if (!this.socketEngine.isSocketStarted) {
             return 'WAITING_CREATE_ROOM';
         }
         if (!this.videoEngine.isVideoSelected) {
@@ -141,3 +141,5 @@ export class LucaEngine {
         return 'ROOM_SETUP_COMPLETED';
     }
 }
+
+export default LucaEngine;

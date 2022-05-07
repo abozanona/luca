@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Avatar from '../../components/Avatar/Avatar';
-import GeneralButton from '../../components/GeneralButton/GeneralButton';
 const AddFriend = require('../../assets/imgs/add-friend.svg');
 class SettingsPage extends Component {
     render() {

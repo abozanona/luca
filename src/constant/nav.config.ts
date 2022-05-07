@@ -5,7 +5,7 @@ const options = require('../assets/imgs/options.svg');
 const data = [
     {
         id: 1,
-        to: '/',
+        to: '/dashboard',
         icon: home,
         name: 'home',
     },

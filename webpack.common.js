@@ -4,10 +4,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: {
-        main: path.resolve('./src/index.jsx'),
+        main: path.resolve('./src/index.tsx'),
         backgound: path.resolve('./src/js/background.ts'),
         content: path.resolve('./src/js/content.ts'),
-        socket: path.resolve('./src/vendor/socket.io.js'),
+        'page-style': path.resolve('./src/style/page-style.scss'),
     },
     output: {
         filename: 'js/[name].bundle.js',

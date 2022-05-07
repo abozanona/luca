@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Footer from '../../components/Footer';
+import Footer from '../../components/Footer/Footer';
 import GeneralButton from '../../components/GeneralButton/GeneralButton';
 const LucaLogo = require('../../assets/imgs/luca-logo.svg');
 const google = require('../../assets/imgs/google.svg');

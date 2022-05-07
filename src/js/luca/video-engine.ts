@@ -1,4 +1,4 @@
-import { SocketEnging } from './socket-engine';
+import { SocketEngine } from './socket-engine';
 
 export class VideoEngine {
     isVideoSelected: boolean = false;
@@ -9,7 +9,7 @@ export class VideoEngine {
         seek: 0,
     };
 
-    constructor(private socketEngine: SocketEnging) {}
+    constructor(private socketEngine: SocketEngine) { }
 
     play() {
         if ((<any>this.selectedVideo).playing) {
@@ -101,3 +101,5 @@ export class VideoEngine {
         });
     }
 }
+
+export default VideoEngine;
