@@ -18,7 +18,6 @@ class DashboardPage extends React.Component<{navigate: NavigateFunction}, { crea
         if (this.state.createRoom) {
             popupEngine.createRoom();
         } else {
-            alert(this.state.roomId);
             popupEngine.joinRoom(this.state.roomId);
         }
         this.props.navigate("/selectvideo");

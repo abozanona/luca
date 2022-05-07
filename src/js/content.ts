@@ -60,7 +60,7 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
             break;
         case 'Q_JOIN_ROOM_ID':
             socketEngine.roomId = message.roomId;
-            socketEngine.joinRoom(videoEngine, UtilsEngine.uuidv4());
+            socketEngine.joinRoom(videoEngine, socketEngine.roomId);
             break;
         case 'Q_GET_PAGE_STATUS':
             UtilsEngine.getTabId(function (tabId) {
