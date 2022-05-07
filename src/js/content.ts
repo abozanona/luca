@@ -10,6 +10,7 @@ let videoEngine = new VideoEngine(socketEngine);
 let lucaEngine = new LucaEngine(chatEngine, socketEngine, videoEngine);
 
 chrome.runtime.onMessage.addListener(gotMessage);
+
 function gotMessage(message: any, sender: any, sendResponse: any) {
     switch (message.code) {
         case 'Q_HIGHLIGHT_ALL_VIDEOS':

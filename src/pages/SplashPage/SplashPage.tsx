@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PopUpEngine from '../../js/popup-engine';
+const LucaLogo = require('../../assets/imgs/luca-logo.svg');
+
 function SplashPage() {
     const navigate = useNavigate();
     useEffect(() => {
@@ -26,8 +28,10 @@ function SplashPage() {
     return (
         <React.Fragment>
             <div className="page__container">
-                <div>
-                    <h1>Splash Screen</h1>
+                <div className="page__content">
+                    <img src={LucaLogo} alt="Luca Logo" />
+                    <h1>Luca</h1>
+                    <p>Watch movies with friends!</p>
                 </div>
             </div>
         </React.Fragment>

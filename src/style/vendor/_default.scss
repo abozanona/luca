@@ -101,6 +101,24 @@ body {
     font-weight: 500;
     color: $secondary-clr;
 }
+.page__pargraph {
+    font-size: 0.6rem;
+    font-weight: 400;
+    color: $text-clr;
+}
+.page__content {
+    gap: .5rem;
+    h1 {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: $secondary-clr;
+    }
+    p {
+        font-size: 0.6rem;
+        font-weight: 400;
+        color: $text-clr;
+    }
+}
 .page__actions {
     position: absolute;
     bottom: 2rem;
