@@ -2,11 +2,28 @@ import React, { Component } from 'react';
 import Avatar from '../../components/Avatar/Avatar';
 import GeneralButton from '../../components/GeneralButton/GeneralButton';
 import GeneralList from '../../components/GeneralList/GeneralList';
+import PopUpEngine from '../../js/popup-engine';
 const Copy = require('../../assets/imgs/copy.svg');
 const Setting = require('../../assets/imgs/setting.svg');
 const Scan = require('../../assets/imgs/scan.svg');
 const Leave = require('../../assets/imgs/leave.svg');
-class PartyPage extends Component {
+class PartyPage extends Component<{}, { roomId: string }> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            roomId: '',
+        };
+        let popupEngine: PopUpEngine = new PopUpEngine();
+        let _this = this;
+        popupEngine.getCurrentRoomId(function (roomId: string) {
+            _this.setState({ roomId: roomId });
+        });
+    }
+
+    copyPartyId = () => {
+        navigator.clipboard.writeText(this.state.roomId);
+    };
+
     render() {
         return (
             <React.Fragment>
@@ -15,8 +32,15 @@ class PartyPage extends Component {
                         <div className="d-jcb d-aic">
                             <h1 className="page__header">Party (2)</h1>
                             <div className="party__settings d-aic g-1">
-                                <img src={Copy} alt="" />
-                                <img src={Setting} alt="" />
+                                {this.state.roomId}
+                                <img
+                                    src={Copy}
+                                    className="party__copy-id"
+                                    alt="Copy party id"
+                                    title="Copy party id"
+                                    onClick={this.copyPartyId}
+                                />
+                                <img src={Setting} alt="Party settings" title="Party settings" />
                             </div>
                         </div>
                         <div className="party__members-container">
