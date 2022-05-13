@@ -2,7 +2,33 @@
 .luca-selected-video {
     background-color: red;
 }
+.luca--default-value {
+    font-size: 16px;
+    font-family: $font-family !important;
+    p {
+        font-family: $font-family !important;
 
+        margin: 0px !important;
+        padding: 0px !important;
+        font-size: 1em;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: $font-family !important;
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+    label {
+        font-family: $font-family !important;
+        margin: 0px !important;
+        padding: 0px !important;
+        font-size: 1em;
+    }
+}
 #luca-selected-video-frame {
     border: solid 5px $primary-clr;
     border-radius: $radius;
@@ -106,11 +132,7 @@
     cursor: pointer;
 }
 
-.luca-reaction {
-    width: 30px;
-    height: 30px;
-    margin: 10px;
-}
+
 
 .luca-reaction-particle {
     width: 80px;
@@ -119,14 +141,43 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 100%;
+    bottom: -200px;
+    transition: $transition-300;
     margin: auto;
 }
 
-
-#luca-chat-page-container {
+#luca-chat-outer-toggle {
     @extend .luca--default-value;
     font-size: 13px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translate(0%, -50%);
+    background-color: $black;
+    min-width: 2em;
+    max-width: 2em;
+    min-height: 10vh;
+    max-height: 10vh;
+    padding: 0.2em;
+    opacity: 0.4;
+    cursor: pointer;
+    border-radius: $radius 0em 0em $radius;
+    box-shadow: $shadow-z200;
+    transition: $transition-300;
+    z-index: 100000000;
+    &:hover {
+        opacity: 1;
+    }
+}
+#luca-chat-page-container {
+    @extend .luca--default-value;
+    font-size: 12px !important;
+    display: flex;
+    flex-direction: column;
     position: fixed;
     right: 0;
     top: 50%;
@@ -142,9 +193,8 @@
     box-shadow: $shadow-z200;
     transition: $transition-300;
     z-index: 100000000;
-    //TODO:Add the class when click(luca-chat--active-effect)
-    @extend .luca-chat--active-effect;
-    .luca-chat-resizer {
+    // @extend .luca-chat--active-effect;
+    #luca-chat-inner-toggle {
         position: absolute;
         width: 0.35em;
         border-radius: 4px;
@@ -180,6 +230,7 @@
                 border-radius: $radius * 100;
                 width: 2em;
                 height: 2em;
+                cursor: pointer;
                 span {
                     svg {
                         width: 1em;
@@ -194,6 +245,7 @@
                 color: $secondary-clr;
                 border-radius: $radius;
                 padding: 0.5em;
+                width: 90%;
                 &:focus-visible {
                     outline: none !important;
                 }
@@ -201,6 +253,11 @@
         }
         .luca-chat-emoji {
             display: flex;
+            cursor: pointer;
+            transition: $transition-300;
+            &:hover .luca-chat-emoji-reaction-container {
+                @extend .luca-chat-emoji-reaction--active-effect;
+            }
             svg {
                 width: 1.8em;
                 height: 1.8em;
@@ -220,6 +277,10 @@
     .luca-chat-messages-container {
         display: flex;
         flex-direction: column;
+        max-height: 100%;
+        min-height: 100%;
+        margin-bottom: 4em;
+        overflow: scroll;
         gap: 0.5em;
         .luca-message-container {
             .luca-message-information {
@@ -254,6 +315,7 @@
             .luca-message {
                 padding-inline-start: 2.5em;
                 p {
+                    word-break: break-all;
                     font-size: 0.8em;
                     font-weight: 400;
                     color: $secondary-clr;
@@ -263,36 +325,36 @@
         }
     }
 }
-.luca--default-value {
-    font-size: 16px;
-    font-family: $font-family !important;
-    p {
-        font-family: $font-family !important;
 
-        margin: 0px !important;
-        padding: 0px !important;
-        font-size: 1em;
-    }
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-family: $font-family !important;
-        margin: 0px !important;
-        padding: 0px !important;
-    }
-    label {
-        font-family: $font-family !important;
-        margin: 0px !important;
-        padding: 0px !important;
-        font-size: 1em;
-    }
-}
 .luca-chat--active-effect {
     min-width: 22em !important;
     max-width: 22em !important;
     padding: 1em !important;
     opacity: 1 !important;
+}
+.luca-chat-emoji-reaction--active-effect {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+.luca-chat-emoji-reaction-container {
+    background-color: $bg-clr;
+    border-radius: $radius * 100;
+    display: flex;
+    gap: 0.5em;
+    position: absolute;
+    bottom: 3.5em;
+    padding: 0.5em;
+    right: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: $transition-300;
+    img {
+        width: 2.2em;
+        height: 2.2em;
+        transition: $transition-300;
+        cursor: pointer;
+        &:hover {
+            transform: scale(1.5);
+        }
+    }
 }
