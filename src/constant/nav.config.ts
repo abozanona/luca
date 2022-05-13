@@ -23,7 +23,7 @@ const data = [
     },
     {
         id: 4,
-        to: '',
+        to: '/',
         icon: options,
         name: 'options',
     },
