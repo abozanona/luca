@@ -30,7 +30,6 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
                 divVideoHiighlight.classList.add('luca-video-highlight');
 
                 document.body.appendChild(divVideoHiighlight);
-                console.log(divVideoHiighlight);
 
                 let coordinates = UtilsEngine.getOffset(elVideo);
                 divVideoHiighlight.style.top = coordinates.top + 'px';

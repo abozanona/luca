@@ -174,7 +174,6 @@ export class LucaEngine {
         let lucaChatMessagesContainer: HTMLElement = document.getElementsByClassName('luca-chat-messages-container')[0] as HTMLElement;
         let lucaSendMessageAudioUrl = chrome.runtime.getURL('assets/audio/luca-message-send.mp3');
         let lucaSendMessageAudio = new Audio(lucaSendMessageAudioUrl);
-        console.log(lucaSendMessageAudio);
 
         //Add Luca chat and reactions lisetners
         lucaInput.addEventListener('keyup', function (event) {
