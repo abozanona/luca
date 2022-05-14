@@ -1,4 +1,4 @@
-@import './vendor/variables';
+@import "./vendor/variables";
 .luca-selected-video {
     background-color: red;
 }
@@ -61,7 +61,7 @@
     &::after,
     &::before {
         position: absolute;
-        content: '';
+        content: "";
         width: 1em;
         height: 0.15em; /* cross thickness */
         background-color: $secondary-clr;
@@ -123,6 +123,7 @@
 
 #luca-reactions-container {
     position: fixed;
+    z-index: 2147483647;
     display: flex;
     left: 50%;
     transform: translateX(-50%);
@@ -131,8 +132,6 @@
     max-width: 300px;
     cursor: pointer;
 }
-
-
 
 .luca-reaction-particle {
     width: 80px;
@@ -168,7 +167,7 @@
     border-radius: $radius 0em 0em $radius;
     box-shadow: $shadow-z200;
     transition: $transition-300;
-    z-index: 100000000;
+    z-index: 2147483647;
     &:hover {
         opacity: 1;
     }
@@ -192,7 +191,7 @@
     border-radius: $radius;
     box-shadow: $shadow-z200;
     transition: $transition-300;
-    z-index: 100000000;
+    z-index: 2147483647;
     // @extend .luca-chat--active-effect;
     #luca-chat-inner-toggle {
         position: absolute;
@@ -282,6 +281,13 @@
         margin-bottom: 4em;
         overflow: scroll;
         gap: 0.5em;
+        &::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: transparent;
+        }
         .luca-message-container {
             .luca-message-information {
                 display: flex;

@@ -37,7 +37,6 @@ class PopUpEngine {
 
     initEvents() {
         let _this = this;
-        chrome.runtime.connect({ name: 'popup' });
 
         // Array.from(document.getElementsByClassName('img-avatar')).forEach((element) => {
         //     element.addEventListener('click', function (el) {
@@ -61,33 +60,6 @@ class PopUpEngine {
         //     chrome.storage.sync.set({ userName: (el.target as HTMLInputElement).value }, function () { });
         // });
 
-        // chrome.storage.sync.get('userName', function (items) {
-        //     let userName = items.userName;
-        //     if (!userName) {
-        //         var randomNames = [
-        //             'Luca Paguro',
-        //             'Alberto Scorfano',
-        //             'Giulia Marcovaldo',
-        //             'Ercole Visconti',
-        //             'Daniela Paguro',
-        //             'Massimo Marcovaldo',
-        //             'Lorenzo Paguro',
-        //             'Ciccio',
-        //             'Guido',
-        //             'Signora Marsigliese',
-        //             'Tommaso',
-        //             'Grandma Paguro',
-        //             'Giacomo',
-        //             'Concetta Aragosta',
-        //             'Pinuccia Aragosta',
-        //             'Uncle Ugo',
-        //             'Maggiore',
-        //         ];
-        //         userName = randomNames[Math.floor(Math.random() * randomNames.length)];
-        //         chrome.storage.sync.set({ userName: userName }, function () { });
-        //     }
-        //     (document.getElementById('txt-user-name') as HTMLInputElement).value = userName;
-        // });
 
         chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             switch (request.code) {
@@ -147,6 +119,60 @@ class PopUpEngine {
         }
     }
 
+    //Names are generated thanks to https://blog.reedsy.com/character-name-generator/
+    getCurrentUserName(cb: (name: string) => void) {
+        chrome.storage.sync.get('userName', function (items) {
+            let userName = items.userName;
+            if (userName) {
+                cb(userName);
+                return;
+            }
+            var randomNames = [
+                'Xandyr the elf',
+                'Raelle the elf',
+                'Pollo the elf',
+                'Wex the elf',
+                'Solina the elf',
+                'Balon the dragon',
+                'Kolloth the dragon',
+                'Tren the dragon',
+                'Axan the dragon',
+                'Naga the dragon',
+                'Shalana the champ',
+                'Leandra the champ',
+                'Finhad the champ',
+                'Giliel the champ',
+                'Amrond the champ',
+                'Dracul the villan',
+                'Kedron the villan',
+                'Edana the villan',
+                'Brenna the villan',
+                'Gorgon the villan',
+                'Kahraman the superhero',
+                'Lucinda the superhero',
+                'Manning the superhero',
+                'Gunnar the superhero',
+                'Botilda the superhero',
+                'Aanya the sidekick',
+                'Creda the sidekick',
+                'Ervin the sidekick',
+                'Leya the sidekick',
+                'Etel the sidekick',
+                'Konrad the mentor',
+                'Orela the mentor',
+                'Eldred the mentor',
+                'Zilya the mentor',
+                'Kendry the mentor'
+            ];
+            userName = randomNames[Math.floor(Math.random() * randomNames.length)];
+            chrome.storage.sync.set({ userName: userName }, function () { });
+            cb(userName);
+        });
+    }
+
+    setCurrentUserName(newName: string) {
+        chrome.storage.sync.set({ userName: newName }, function () { });
+    }
 }
 
 export default PopUpEngine;

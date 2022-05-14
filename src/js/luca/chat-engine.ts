@@ -18,8 +18,9 @@ export class ChatEngine {
                 clearInterval(id)
             }
         }
-        let id = setInterval(frame, delay) //every Xms
+        let id = setInterval(frame, delay)
     }
+
     sendMessageToRoom(socketEngine: SocketEngine, messageText: string) {
         socketEngine.sendPlayerOrder(
             'message',
@@ -31,7 +32,6 @@ export class ChatEngine {
     }
 
     addMessageBubble(messageText: string) {
-
         let divChatBubble = document.createElement('div');
         divChatBubble.classList.add('luca-message-container');
         divChatBubble.innerHTML = `
@@ -71,7 +71,6 @@ export class ChatEngine {
 
     showReactionOnScreen(reactionName: string) {
         let _this = this;
-        var delay = 50; // The higher, the more delay
         var startScreenPercentage = 0.03;
         var endScreenPercentage = 0.97;
 

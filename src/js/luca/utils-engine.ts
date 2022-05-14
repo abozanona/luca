@@ -1,9 +1,9 @@
 export class UtilsEngine {
-    static refreshPage(){
+    static refreshPage() {
         location.reload();
-        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             chrome.tabs.reload(tabs[0].id);
-          });
+        });
     }
     static getTabId(cb: (a: string) => void) {
         chrome.runtime.sendMessage({ code: 'Q_TAB_ID' }, (res) => {
