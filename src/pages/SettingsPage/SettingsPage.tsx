@@ -1,5 +1,5 @@
 import React, { ChangeEvent, Component } from 'react';
-import PopUpEngine from '../../js/popup-engine';
+import UserEngine from '../../js/luca/user-engine';
 const AddFriend = require('../../assets/imgs/add-friend.svg');
 class SettingsPage extends Component<{}, { userName: string }> {
     constructor(props: any) {
@@ -8,17 +8,17 @@ class SettingsPage extends Component<{}, { userName: string }> {
             userName: '',
         };
 
-        let popupEngine: PopUpEngine = new PopUpEngine();
-        popupEngine.getCurrentUserName((name) => {
+        let userEngine: UserEngine = new UserEngine();
+        userEngine.getCurrentUserName((name) => {
             this.setState({ userName: name });
         });
     }
 
     handleOnChange = (e: ChangeEvent) => {
-        let popupEngine: PopUpEngine = new PopUpEngine();
+        let userEngine: UserEngine = new UserEngine();
         let newName = (e.target as HTMLInputElement).value;
         this.setState({ userName: newName });
-        popupEngine.setCurrentUserName(newName);
+        userEngine.setCurrentUserName(newName);
     };
 
     render() {
@@ -43,6 +43,35 @@ class SettingsPage extends Component<{}, { userName: string }> {
                                         value={this.state.userName}
                                     />
                                     <label htmlFor="user-name"></label>
+                                </div>
+                            </div>
+                            <div className="setting d-flex d-aic d-jcb">
+                                <div className="setting__info">
+                                    <h1>User Avatar</h1>
+                                    <p>Select your avatar</p>
+                                </div>
+                                <div className="avatars--container">
+                                    {[
+                                        '0.jpg',
+                                        '1.jpg',
+                                        '2.jpg',
+                                        '3.jpg',
+                                        '4.jpg',
+                                        '5.jpg',
+                                        '6.jpg',
+                                        '7.jpg',
+                                        '8.jpg',
+                                    ].map((avatar, index) => {
+                                        return (
+                                            <img
+                                                key={index}
+                                                className="img-avatar"
+                                                data-name={avatar}
+                                                src={'/assets/imgs/avatars/' + avatar}
+                                                onClick={this.changeAvatar}
+                                            />
+                                        );
+                                    })}
                                 </div>
                             </div>
                             <div className="setting d-flex d-aic d-jcb">
@@ -91,6 +120,17 @@ class SettingsPage extends Component<{}, { userName: string }> {
                 </div>
             </React.Fragment>
         );
+    }
+
+    changeAvatar(el: React.MouseEvent<HTMLImageElement>) {
+        let clickedImage: HTMLImageElement = el.target as HTMLImageElement;
+        if (document.getElementsByClassName('img-avatar-selected')[0]) {
+            document.getElementsByClassName('img-avatar-selected')[0].classList.remove('img-avatar-selected');
+        }
+        clickedImage.classList.add('img-avatar-selected');
+        let avatarName = clickedImage.dataset.name;
+        let userEngine: UserEngine = new UserEngine();
+        userEngine.setCurrentUserName(avatarName);
     }
 }
 

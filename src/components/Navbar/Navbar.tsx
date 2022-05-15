@@ -2,19 +2,23 @@ import React, { Component } from 'react';
 import navConfig from '../../constant/nav.config';
 import { Link } from 'react-router-dom';
 import Avatar from '../Avatar/Avatar';
-import PopUpEngine from '../../js/popup-engine';
+import UserEngine from '../../js/luca/user-engine';
 const CopyCode = require('../../assets/imgs/copy-code.svg');
 
-class Navbar extends Component<{}, { userName: string; userId: string }> {
+class Navbar extends Component<{}, { userName: string; userAvatar: string; userId: string }> {
     constructor(props: any) {
         super(props);
         this.state = {
             userName: '',
+            userAvatar: '',
             userId: '',
         };
-        let popupEngine: PopUpEngine = new PopUpEngine();
-        popupEngine.getCurrentUserName((name) => {
+        let userEngine: UserEngine = new UserEngine();
+        userEngine.getCurrentUserName((name) => {
             this.setState({ userName: name });
+        });
+        userEngine.getCurrentUserAvatar((avatar) => {
+            this.setState({ userAvatar: avatar });
         });
     }
 
@@ -22,7 +26,7 @@ class Navbar extends Component<{}, { userName: string; userId: string }> {
         return (
             <div className="navbar__container">
                 <div className="navbar__avatar">
-                    <Avatar />
+                    <Avatar username={this.state.userName} avatar={this.state.userAvatar} />
                     <div className="avatar__information">
                         <h5>{this.state.userName}</h5>
                         <p>
