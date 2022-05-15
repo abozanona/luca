@@ -17,7 +17,7 @@ class SelectVideoPage extends Component {
                         <img src={SelectVideo} alt="" />
                         <h1>Select a video to start party</h1>
                         <p className="text-center">
-                            Select the video ypu want to watch the party on.
+                            Select the video you want to watch the party on.
                             <br />
                             If no video selection mark is showing, make sure that the video is already playing.
                         </p>

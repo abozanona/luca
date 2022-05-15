@@ -60,7 +60,7 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
             });
             break;
         case 'Q_CREATE_NEW_ROOM_ID':
-            socketEngine.createRoom(videoEngine, UtilsEngine.uuidv4());
+            socketEngine.createRoom(videoEngine, UtilsEngine.uuid());
             break;
         case 'Q_JOIN_ROOM_ID':
             socketEngine.roomId = message.roomId;
