@@ -33,14 +33,14 @@
     border: solid 5px $primary-clr;
     border-radius: $radius;
     position: absolute;
-    z-index: 999999;
+    z-index: 2147483647;
 }
 
 .luca-video-highlight {
     position: relative;
     border: solid 5px $primary-clr;
     position: absolute;
-    z-index: 999999;
+    z-index: 2147483647;
 }
 
 .luca-video-highlight-close {
@@ -102,7 +102,7 @@
     position: fixed;
     left: 50%;
     bottom: 0px;
-    z-index: 9999999;
+    z-index: 2147483647;
     transform: translateX(-50%);
     opacity: 0.5;
     border: solid 1px brown;

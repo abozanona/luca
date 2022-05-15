@@ -34,8 +34,8 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
                 let coordinates = UtilsEngine.getOffset(elVideo);
                 divVideoHiighlight.style.top = coordinates.top + 'px';
                 divVideoHiighlight.style.left = coordinates.left + 'px';
-                divVideoHiighlight.style.width = coordinates.width + 'px';
-                divVideoHiighlight.style.height = coordinates.height + 'px';
+                divVideoHiighlight.style.width = coordinates.width - 10 + 'px';
+                divVideoHiighlight.style.height = coordinates.height - 10 + 'px';
 
                 let spanHiighlightClose = document.createElement('div');
                 spanHiighlightClose.classList.add('luca-video-highlight-close');

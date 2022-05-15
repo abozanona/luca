@@ -6,7 +6,6 @@ export class LucaEngine {
     static isLucaInitted = false;
     static fullScreenElement: HTMLElement = document.body;
 
-
     constructor(private chatEngine: ChatEngine, private socketEngine: SocketEngine, private videoEngine: VideoEngine) { }
 
     initLuca() {
@@ -18,8 +17,6 @@ export class LucaEngine {
         this.addVideoProperty();
 
         this.injectStyle();
-
-        this.injectChat();
     }
 
     addVideoProperty() {
@@ -139,6 +136,13 @@ export class LucaEngine {
                 lucaInput.value = '';
             }
         });
+
+        let s = document.createElement('script');
+        s.src = chrome.runtime.getURL('/js/content-inject.js');
+        s.onload = function () {
+
+        };
+        (document.body || document.documentElement).appendChild(s);
 
         lucaChatInnerToggle.addEventListener('click', function (event) {
             event.preventDefault();
