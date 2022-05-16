@@ -18,8 +18,9 @@ export class ChatEngine {
                 clearInterval(id)
             }
         }
-        let id = setInterval(frame, delay) //every Xms
+        let id = setInterval(frame, delay)
     }
+
     sendMessageToRoom(socketEngine: SocketEngine, messageText: string) {
         socketEngine.sendPlayerOrder(
             'message',
@@ -30,22 +31,19 @@ export class ChatEngine {
         );
     }
 
-    addMessageBubble(messageText: string) {
+    async addMessageBubble(messageText: string) {
+
+        const chatTemplateRes = await fetch(chrome.runtime.getURL("/templates/chat-bubble.template.html"));
+        const chatTemplateHTML = await chatTemplateRes.text();
 
         let divChatBubble = document.createElement('div');
         divChatBubble.classList.add('luca-message-container');
-        divChatBubble.innerHTML = `
-            <div class="luca-message-information">
-                <div class="luca-message-avatar">
-                    <img src="https://i.pinimg.com/564x/70/ab/7b/70ab7b9eb95c0543e0d1ab4cd4b3152b.jpg">
-                    <h1>Skafi ps </h1>
-                 </div>
-                <p>2h ago</p>
-            </div>
-        <div class="luca-message">
-            <p> ${messageText} </p>
-        </div>
-        `;
+        divChatBubble.innerHTML = chatTemplateHTML
+            .replace("{userName}", "Luca User")
+            .replace("{messageTime}", new Date().toLocaleTimeString())
+            .replace("{messageText}", messageText)
+            .replace("{userAvatar}", 'https://i.pinimg.com/564x/4b/97/1b/4b971b77b4dd3155a535d2536b7c3b12.jpg')
+            ;
 
         let bubblesContainer = document.getElementsByClassName('luca-chat-messages-container')[0];
         bubblesContainer.appendChild(divChatBubble);
@@ -71,7 +69,6 @@ export class ChatEngine {
 
     showReactionOnScreen(reactionName: string) {
         let _this = this;
-        var delay = 50; // The higher, the more delay
         var startScreenPercentage = 0.03;
         var endScreenPercentage = 0.97;
 

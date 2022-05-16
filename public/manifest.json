@@ -33,7 +33,8 @@
                 "style/page-style.css",
                 "assets/imgs/*",
                 "assets/fonts/*",
-                "assets/audio/*"
+                "assets/audio/*",
+                "templates/*"
             ],
             "matches": ["<all_urls>"]
         }

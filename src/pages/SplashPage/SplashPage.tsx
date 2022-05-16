@@ -28,7 +28,7 @@ function SplashPage() {
     return (
         <React.Fragment>
             <div className="page__container">
-                <div className="page__content">
+                <div className="page__content dd-jcc d-aic d-flex-col">
                     <img src={LucaLogo} alt="Luca Logo" />
                     <h1>Luca</h1>
                     <p>Watch movies with friends!</p>
