@@ -82,7 +82,7 @@ Do you want to dotate to the Luca project?
 
 This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
-* [JQuery](https://jquery.com)
+* [React](https://reactjs.org/)
 * [Node.js](https://nodejs.org/)
 * [Socket.IO](https://socket.io/)
 
