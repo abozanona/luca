@@ -1,6 +1,6 @@
 import { ChatEngine } from './chat-engine';
 import { UtilsEngine } from './utils-engine';
-import { VideoEngine } from './video-engine';
+import { VideoControllerEngine } from './video-controller-engine';
 
 export class SocketEngine {
     isSocketStarted = false;
@@ -9,7 +9,7 @@ export class SocketEngine {
 
     constructor(private chatEngine: ChatEngine) {}
 
-    initSocket(videoEngine: VideoEngine): void {
+    initSocket(videoControllerEngine: VideoControllerEngine): void {
         if (this.isSocketStarted) {
             alert(
                 'Cannot create or join a room here. A room is already running. Refresh the page or create a room in another page.'
@@ -27,21 +27,21 @@ export class SocketEngine {
 
         _this.socket.on('play', function (message: any) {
             UtilsEngine.executeUnderDifferentTabId(message.pageId, function () {
-                videoEngine.seek(message.time);
-                videoEngine.play();
+                videoControllerEngine.seek(message.time);
+                videoControllerEngine.play();
             });
         });
 
         _this.socket.on('pause', function (message: any) {
             UtilsEngine.executeUnderDifferentTabId(message.pageId, function () {
-                videoEngine.seek(message.time);
-                videoEngine.pause();
+                videoControllerEngine.seek(message.time);
+                videoControllerEngine.pause();
             });
         });
 
         _this.socket.on('seek', function (message: any) {
             UtilsEngine.executeUnderDifferentTabId(message.pageId, function () {
-                videoEngine.seek(message.time);
+                videoControllerEngine.seek(message.time);
             });
         });
 
@@ -58,15 +58,15 @@ export class SocketEngine {
         });
     }
 
-    createRoom(videoEngine: VideoEngine, roomId: string) {
+    createRoom(videoControllerEngine: VideoControllerEngine, roomId: string) {
         this.roomId = roomId;
-        this.initSocket(videoEngine);
+        this.initSocket(videoControllerEngine);
         this.socket.emit('join', this.roomId);
     }
 
-    joinRoom(videoEngine: VideoEngine, roomId: string) {
+    joinRoom(videoControllerEngine: VideoControllerEngine, roomId: string) {
         this.roomId = roomId;
-        this.initSocket(videoEngine);
+        this.initSocket(videoControllerEngine);
         this.socket.emit('join', this.roomId);
     }
 

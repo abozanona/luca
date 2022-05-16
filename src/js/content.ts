@@ -2,19 +2,20 @@ import { ChatEngine } from './luca/chat-engine';
 import { LucaEngine } from './luca/luca-engine';
 import { SocketEngine } from './luca/socket-engine';
 import { UtilsEngine } from './luca/utils-engine';
-import { VideoEngine } from './luca/video-engine';
+import VideoControllerEngine from './luca/video-controller-engine';
+import GeneralVideoController from './luca/video-controllers/general-video-controller';
 
-let chatEngine = new ChatEngine();
-let socketEngine = new SocketEngine(chatEngine);
-let videoEngine = new VideoEngine(socketEngine);
-let lucaEngine = new LucaEngine(chatEngine, socketEngine, videoEngine);
+let chatEngine: ChatEngine = new ChatEngine();
+let socketEngine: SocketEngine = new SocketEngine(chatEngine);
+let videoController: VideoControllerEngine = new GeneralVideoController(socketEngine);
+let lucaEngine: LucaEngine = new LucaEngine(chatEngine, socketEngine, videoController);
 
 chrome.runtime.onMessage.addListener(gotMessage);
 
 function gotMessage(message: any, sender: any, sendResponse: any) {
     switch (message.code) {
         case 'Q_HIGHLIGHT_ALL_VIDEOS':
-            if (videoEngine.isVideoSelected) {
+            if (videoController.isVideoSelected) {
                 alert(
                     'Cannot create or join a room here. A room is already running. Refresh the page or create a room in another page.'
                 );
@@ -48,7 +49,8 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
                 spanHiighlightPlay.classList.add('luca-video-highlight-play');
                 spanHiighlightPlay.addEventListener('click', function (e) {
                     lucaEngine.injectChat();
-                    videoEngine.startStreamingOnVideo(elVideo);
+                    (videoController as GeneralVideoController).setVideo(elVideo);
+                    videoController.startStreamingOnVideo();
                     ((e.target as HTMLElement).parentNode as HTMLElement).remove();
                 });
                 divVideoHiighlight.appendChild(spanHiighlightPlay);
@@ -60,11 +62,11 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
             });
             break;
         case 'Q_CREATE_NEW_ROOM_ID':
-            socketEngine.createRoom(videoEngine, UtilsEngine.uuid());
+            socketEngine.createRoom(videoController, UtilsEngine.uuid());
             break;
         case 'Q_JOIN_ROOM_ID':
             socketEngine.roomId = message.roomId;
-            socketEngine.joinRoom(videoEngine, socketEngine.roomId);
+            socketEngine.joinRoom(videoController, socketEngine.roomId);
             break;
         case 'Q_GET_ROOM_ID':
             UtilsEngine.getTabId(function (tabId) {
