@@ -4,10 +4,17 @@ import { SocketEngine } from './luca/socket-engine';
 import { UtilsEngine } from './luca/utils-engine';
 import VideoControllerEngine from './luca/video-controller-engine';
 import GeneralVideoController from './luca/video-controllers/general-video-controller';
+import NetflixVideoController from './luca/video-controllers/netflix-video-controller';
 
 let chatEngine: ChatEngine = new ChatEngine();
 let socketEngine: SocketEngine = new SocketEngine(chatEngine);
-let videoController: VideoControllerEngine = new GeneralVideoController(socketEngine);
+let videoController: VideoControllerEngine;
+if (document.location.origin.includes('netflix.com')) {
+    videoController = new NetflixVideoController(socketEngine);
+} else {
+    videoController = new GeneralVideoController(socketEngine);
+}
+
 let lucaEngine: LucaEngine = new LucaEngine(chatEngine, socketEngine, videoController);
 
 chrome.runtime.onMessage.addListener(gotMessage);
@@ -49,7 +56,11 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
                 spanHiighlightPlay.classList.add('luca-video-highlight-play');
                 spanHiighlightPlay.addEventListener('click', function (e) {
                     lucaEngine.injectChat();
-                    (videoController as GeneralVideoController).setVideo(elVideo);
+                    if (document.location.origin.includes('netflix.com')) {
+                        ;
+                    } else {
+                        (videoController as GeneralVideoController).setVideo(elVideo);
+                    }
                     videoController.startStreamingOnVideo();
                     ((e.target as HTMLElement).parentNode as HTMLElement).remove();
                 });

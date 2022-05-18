@@ -14,18 +14,7 @@ export class LucaEngine {
         }
         LucaEngine.isLucaInitted = true;
 
-        this.addVideoProperty();
-
         this.injectStyle();
-    }
-
-    addVideoProperty() {
-        //Add playing property to videos
-        Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
-            get: function () {
-                return !!(this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2);
-            },
-        });
     }
 
     injectStyle() {
