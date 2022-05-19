@@ -70,7 +70,7 @@ export class UserEngine {
             chrome.storage.sync.get('userAvatar').then(function (items) {
                 let userAvatar = items.userAvatar;
                 if (!userAvatar) {
-                    userAvatar = '0.jpg';
+                    userAvatar = '0.svg';
                     chrome.storage.sync.set({ userAvatar: userAvatar }, function () { });
                 }
                 resolve(userAvatar);
