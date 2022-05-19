@@ -18,11 +18,11 @@ export class LucaEngine {
     }
 
     injectStyle() {
-        const linkStyle = document.createElement('link');
-        linkStyle.href = chrome.runtime.getURL('style/page-style.css');
-        linkStyle.rel = 'stylesheet';
-        linkStyle.type = 'text/css';
-        document.head.appendChild(linkStyle);
+        const linkStyleLucaGameplay = document.createElement('link');
+        linkStyleLucaGameplay.href = chrome.runtime.getURL('style/page-style.css');
+        linkStyleLucaGameplay.rel = 'stylesheet';
+        linkStyleLucaGameplay.type = 'text/css';
+        document.head.appendChild(linkStyleLucaGameplay);
     }
 
     async injectChat() {

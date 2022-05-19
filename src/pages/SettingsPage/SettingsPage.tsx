@@ -9,7 +9,7 @@ class SettingsPage extends Component<{}, { userName: string }> {
         };
 
         let userEngine: UserEngine = new UserEngine();
-        userEngine.getCurrentUserName((name) => {
+        userEngine.getCurrentUserName().then((name) => {
             this.setState({ userName: name });
         });
     }

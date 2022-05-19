@@ -36,7 +36,6 @@ function generateEventData() {
 if (document.location.origin.includes('netflix.com')) {
     var lastCurrentTime = 0;
 
-
     selectedVideo().addEventListener('playingchanged', (event) => {
         if (selectedVideo().isPlaying()) {
             document.body.dispatchEvent(new CustomEvent('videoplay', { detail: generateEventData() }));

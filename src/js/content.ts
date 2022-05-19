@@ -19,6 +19,37 @@ let lucaEngine: LucaEngine = new LucaEngine(chatEngine, socketEngine, videoContr
 
 chrome.runtime.onMessage.addListener(gotMessage);
 
+function initLucaJoinParty() {
+    const linkStyleLucaWebsite = document.createElement('link');
+    linkStyleLucaWebsite.href = chrome.runtime.getURL('style/luca-website-style.css');
+    linkStyleLucaWebsite.rel = 'stylesheet';
+    linkStyleLucaWebsite.type = 'text/css';
+    document.head.appendChild(linkStyleLucaWebsite);
+
+    if (document.getElementById("luca-btn-join-party")) {
+        document.getElementById("luca-btn-join-party").addEventListener('click', function () {
+            const params = new URLSearchParams(window.location.search)
+            if (params.has('roomId') && params.has('roomLink')) {
+                let roomId = params.get('roomId');
+                let roomLink = params.get('roomLink');
+                const message = {
+                    code: 'Q_CREATE_PARTY_BY_INVITATION',
+                    body: {
+                        roomId: roomId,
+                        roomLink: roomLink,
+                    },
+                };
+                chrome.runtime.sendMessage(message);
+            }
+            else {
+                alert("Invalid party link");
+            }
+        });
+    };
+}
+
+initLucaJoinParty();
+
 function gotMessage(message: any, sender: any, sendResponse: any) {
     switch (message.code) {
         case 'Q_HIGHLIGHT_ALL_VIDEOS':
@@ -103,7 +134,10 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
                 chrome.runtime.sendMessage(message);
             });
             break;
-
+        case 'Q_INIT_PAGE_WITH_PARTY':
+            let roomId = message.body.roomId;
+            alert("XOXO" + roomId);
+            break;
     }
 }
 

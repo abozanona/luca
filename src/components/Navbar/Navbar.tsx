@@ -14,10 +14,10 @@ class Navbar extends Component<{}, { userName: string; userAvatar: string; userI
             userId: '',
         };
         let userEngine: UserEngine = new UserEngine();
-        userEngine.getCurrentUserName((name) => {
+        userEngine.getCurrentUserName().then((name) => {
             this.setState({ userName: name });
         });
-        userEngine.getCurrentUserAvatar((avatar) => {
+        userEngine.getCurrentUserAvatar().then((avatar) => {
             this.setState({ userAvatar: avatar });
         });
     }
