@@ -4,7 +4,7 @@ import GeneralButton from '../../components/GeneralButton/GeneralButton';
 import PopUpEngine from '../../js/popup-engine';
 const RoomId = require('../../assets/imgs/room-id.svg');
 const Arrow = require('../../assets/imgs/arrow.svg');
-class DashboardPage extends React.Component<{navigate: NavigateFunction}, { createRoom: boolean; roomId: string }> {
+class DashboardPage extends React.Component<{ navigate: NavigateFunction }, { createRoom: boolean; roomId: string }> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -20,8 +20,9 @@ class DashboardPage extends React.Component<{navigate: NavigateFunction}, { crea
         } else {
             popupEngine.joinRoom(this.state.roomId);
         }
-        this.props.navigate("/selectvideo");
+        this.props.navigate('/selectvideo');
     };
+
     handleOnChange = (e: ChangeEvent) => {
         this.setState({ roomId: (e.target as HTMLInputElement).value });
         if ((e.target as HTMLInputElement).value) {
@@ -30,6 +31,7 @@ class DashboardPage extends React.Component<{navigate: NavigateFunction}, { crea
             this.setState({ createRoom: true });
         }
     };
+
     render() {
         return (
             <React.Fragment>

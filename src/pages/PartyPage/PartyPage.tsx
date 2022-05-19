@@ -9,17 +9,27 @@ const Link = require('../../assets/imgs/link.svg');
 const Setting = require('../../assets/imgs/setting.svg');
 const Scan = require('../../assets/imgs/scan.svg');
 const Leave = require('../../assets/imgs/leave.svg');
-class PartyPage extends Component<{}, { roomId: string }> {
+class PartyPage extends Component<{}, { roomId: string; roomLink: string }> {
     constructor(props: any) {
         super(props);
         this.state = {
             roomId: '',
+            roomLink: '',
         };
         let popupEngine: PopUpEngine = new PopUpEngine();
         let _this = this;
         popupEngine.getCurrentRoomId(function (roomId: string) {
             _this.setState({ roomId: roomId });
         });
+        popupEngine.getCurrentRoomUrl(function (roomUrl) {
+            _this.setState({ roomLink: roomUrl });
+        });
+    }
+
+    getRoomLink(): string {
+        return `https://abozanona-luca.herokuapp.com/party?id=${this.state.roomId}&link=${encodeURIComponent(
+            this.state.roomLink
+        )}`;
     }
 
     copyPartyId = () => {

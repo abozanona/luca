@@ -13,10 +13,11 @@ class SettingsPage extends Component<{}, { username: string; userAvatar: string 
         };
 
         let userEngine: UserEngine = new UserEngine();
-        userEngine.getCurrentUserName((name) => {
+
+        userEngine.getCurrentUserName().then((name) => {
             this.setState({ username: name });
         });
-        userEngine.getCurrentUserAvatar((avatar) => {
+        userEngine.getCurrentUserAvatar().then((avatar) => {
             this.setState({ userAvatar: avatar });
         });
     }

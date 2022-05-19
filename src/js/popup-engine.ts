@@ -62,7 +62,7 @@ class PopUpEngine {
         });
     }
 
-    currentPageCallBack: (page: string) => void = null;
+    currentPageCallBack: (page: string) => void;
     getCurrentPageStatus(cb: (page: string) => void) {
         this.currentPageCallBack = cb;
 
@@ -76,7 +76,7 @@ class PopUpEngine {
         });
     }
 
-    currentRoomIdCallBack: (roomId: string) => void = null;
+    currentRoomIdCallBack: (roomId: string) => void;
     getCurrentRoomId(cb: (roomId: string) => void) {
         this.currentRoomIdCallBack = cb;
 
@@ -88,6 +88,15 @@ class PopUpEngine {
         });
     }
 
+    currentRoomUrlCallBack: (roomUrl: string) => void;
+    getCurrentRoomUrl(cb: (roomUrl: string) => void) {
+        this.currentRoomUrlCallBack = cb;
+        let _this = this;
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            const url = tabs[0].url;
+            _this.currentRoomUrlCallBack(url);
+        });
+    }
 
     renderPopupScreen(state: string) {
         if (this.currentPageCallBack) {

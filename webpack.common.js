@@ -8,6 +8,7 @@ module.exports = {
         backgound: path.resolve('./src/js/background.ts'),
         content: path.resolve('./src/js/content.ts'),
         'page-style': path.resolve('./src/style/page-style.scss'),
+        'luca-website-style': path.resolve('./src/style/luca-website-style.scss'),
     },
     output: {
         filename: 'js/[name].bundle.js',
