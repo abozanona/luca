@@ -4,7 +4,9 @@ class Footer extends Component {
     render() {
         return (
             <div className="footer__containter">
-                <p>Copyright © 2021-2022 Luca. All rights reserved.</p>
+                <p>
+                    Powered by <a href="https://cotede.co/" target="_blank">COTEDE</a>
+                </p>
             </div>
         );
     }

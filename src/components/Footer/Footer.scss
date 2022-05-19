@@ -9,5 +9,11 @@
         font-size: 0.563rem;
         font-weight: 400;
         color: $secondary-clr;
+        a {
+            text-decoration: none;
+            font-size: 0.563rem;
+            font-weight: 500;
+            color: $primary-clr;
+        }
     }
 }

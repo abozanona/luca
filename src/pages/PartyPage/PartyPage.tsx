@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Avatar from '../../components/Avatar/Avatar';
 import GeneralButton from '../../components/GeneralButton/GeneralButton';
-import GeneralList from '../../components/GeneralList/GeneralList';
 import PopUpEngine from '../../js/popup-engine';
+import { toast } from 'react-toastify';
+
 const Copy = require('../../assets/imgs/copy.svg');
+const Link = require('../../assets/imgs/link.svg');
 const Setting = require('../../assets/imgs/setting.svg');
 const Scan = require('../../assets/imgs/scan.svg');
 const Leave = require('../../assets/imgs/leave.svg');
@@ -21,6 +23,9 @@ class PartyPage extends Component<{}, { roomId: string }> {
     }
 
     copyPartyId = () => {
+        toast.success('Room id Copied to your clipboard', {
+            toastId: 'success:copy',
+        });
         navigator.clipboard.writeText(this.state.roomId);
     };
 
@@ -30,9 +35,15 @@ class PartyPage extends Component<{}, { roomId: string }> {
                 <div className="page__container">
                     <div className="party__container">
                         <div className="d-jcb d-aic">
-                            <h1 className="page__header">Party (2)</h1>
+                            <h1 className="page__header">Party</h1>
                             <div className="party__settings d-aic g-1">
-                                {this.state.roomId}
+                                <img
+                                    src={Link}
+                                    className="party__copy-id"
+                                    alt="Copy party id"
+                                    title="Copy party id"
+                                    onClick={this.copyPartyId}
+                                />
                                 <img
                                     src={Copy}
                                     className="party__copy-id"
@@ -45,31 +56,6 @@ class PartyPage extends Component<{}, { roomId: string }> {
                         </div>
                         <div className="party__members-container">
                             <div className="page__memebers">
-                                <div className="party__member">
-                                    <Avatar username="MaD Ps" />
-                                    <GeneralList />
-                                </div>
-                                <Avatar username="MaD Ps" />
-                                <Avatar username="MaD Ps" />
-                                <Avatar username="MaD Ps" />
-                                <Avatar username="MaD Ps" />
-                                <div className="party__member">
-                                    <Avatar username="MaD Ps" />
-                                    <GeneralList />
-                                </div>
-                                <Avatar username="MaD Ps" />
-                                <div className="party__member">
-                                    <Avatar username="MaD Ps" />
-                                    <GeneralList />
-                                </div>
-                                <Avatar username="MaD Ps" />
-                                <Avatar username="MaD Ps" />
-                                <Avatar username="MaD Ps" />
-                                <Avatar username="MaD Ps" />
-                                <div className="party__member">
-                                    <Avatar username="MaD Ps" />
-                                    <GeneralList />
-                                </div>
                                 <Avatar username="MaD Ps" />
                             </div>
                         </div>
