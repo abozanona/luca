@@ -21,11 +21,11 @@ const data = [
         icon: settings,
         name: 'settings',
     },
-    {
-        id: 4,
-        to: '/',
-        icon: options,
-        name: 'options',
-    },
+    // {
+    //     id: 4,
+    //     to: '/',
+    //     icon: options,
+    //     name: 'options',
+    // },
 ];
 export default data;

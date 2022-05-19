@@ -3,6 +3,7 @@
     justify-content: space-between;
     background-color: $white;
     padding: 0.225rem 1.438rem;
+    margin: 1rem 1rem 0rem 1rem;
     border-radius: $radius;
     .navbar__avatar {
         display: flex;
@@ -33,6 +34,7 @@
         justify-content: center;
         gap: 2.5rem;
         .element {
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -54,6 +56,67 @@
             img {
                 filter: invert(13%) sepia(8%) saturate(100%) hue-rotate(202deg) brightness(0%) contrast(105%);
             }
+        }
+    }
+}
+
+.element__option {
+    &:hover {
+        .options__list {
+            min-height: 100%;
+            max-height: fit-content;
+            visibility: visible !important;
+            opacity: 1;
+        }
+    }
+}
+.options__list {
+    position: absolute;
+    background-color: $white;
+    width: 10rem;
+    border-radius: $radius;
+    box-shadow: $shadow-z200;
+    top: 3rem;
+    right: -1rem;
+    max-height: 0rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: $transition-300;
+    z-index: 10000;
+    &::after {
+        content: '';
+        position: absolute;
+        top: -31px;
+        left: 77%;
+        transform: translate(-50%, 0rem);
+        width: 2rem;
+        height: 2rem;
+        clip-path: polygon(49% 59%, 0% 100%, 100% 100%);
+        background-color: $white;
+    }
+    a {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        text-decoration: none;
+        padding: 0.8rem;
+        border-bottom: 1px solid #e0e0e0;
+        &:last-child {
+            border-bottom: none !important;
+        }
+        &:hover {
+            background-color: $bg-clr;
+        }
+
+        img {
+            filter: none !important;
+            width: 1.25rem !important;
+            height: 1.25rem !important;
+        }
+        p {
+            font-size: 0.857rem;
+            font-weight: 400;
+            color: $secondary-clr;
         }
     }
 }
