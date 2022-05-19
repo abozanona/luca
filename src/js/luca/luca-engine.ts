@@ -1,12 +1,12 @@
 import { ChatEngine } from './chat-engine';
 import { SocketEngine } from './socket-engine';
-import { VideoEngine } from './video-engine';
+import { VideoControllerEngine } from './video-controller-engine';
 
 export class LucaEngine {
     static isLucaInitted = false;
     static fullScreenElement: HTMLElement = document.body;
 
-    constructor(private chatEngine: ChatEngine, private socketEngine: SocketEngine, private videoEngine: VideoEngine) { }
+    constructor(private chatEngine: ChatEngine, private socketEngine: SocketEngine, private videoControllerEngine: VideoControllerEngine) { }
 
     initLuca() {
         if (LucaEngine.isLucaInitted) {
@@ -14,18 +14,7 @@ export class LucaEngine {
         }
         LucaEngine.isLucaInitted = true;
 
-        this.addVideoProperty();
-
         this.injectStyle();
-    }
-
-    addVideoProperty() {
-        //Add playing property to videos
-        Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
-            get: function () {
-                return !!(this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2);
-            },
-        });
     }
 
     injectStyle() {
@@ -184,7 +173,7 @@ export class LucaEngine {
         if (!this.socketEngine.isSocketStarted) {
             return 'WAITING_CREATE_ROOM';
         }
-        if (!this.videoEngine.isVideoSelected) {
+        if (!this.videoControllerEngine.isVideoSelected) {
             return 'WAITING_SELECT_VIDEO';
         }
         return 'ROOM_SETUP_COMPLETED';
