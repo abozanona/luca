@@ -41,7 +41,7 @@ function PopupApp() {
                         <Route path="/dashboard" element={<DashboardPage navigate={navigate} />} />
                         <Route path="/login" element={<LoginPage />} />
                         <Route path="/selectvideo" element={<SelectVideoPage />} />
-                        <Route path="/notrecognised" element={<PartyPage />} />
+                        <Route path="/notrecognised" element={<NotRecognisedPage />} />
                         <Route path="/friends" element={<FriendsPage />} />
                         <Route path="/settings" element={<SettingsPage />} />
                         <Route path="/party" element={<PartyPage />} />
