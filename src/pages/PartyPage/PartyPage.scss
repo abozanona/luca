@@ -1,12 +1,16 @@
 .party__settings {
     .party__copy-id {
+        transition: $transition-300;
+        &:hover {
+            filter: invert(29%) sepia(96%) saturate(1898%) hue-rotate(198deg) brightness(102%) contrast(105%);
+        }
         cursor: pointer;
     }
 }
 .party__members-container {
     position: relative;
     &::after {
-        content: "";
+        content: '';
         position: absolute;
         width: 100%;
         height: 2rem;

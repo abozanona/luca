@@ -1,6 +1,12 @@
+.settings__container {
+    position: relative;
+}
 .settings {
     margin-top: 1rem;
     gap: 1.5rem;
+    position: relative;
+    max-height: 220px;
+    overflow: scroll;
     .setting {
         .setting__info {
             display: flex;
@@ -20,16 +26,33 @@
         }
     }
 }
-.avatars--container {
-    display: inline-block;
-    overflow-y: scroll;
-    height: 100px;
-    img.img-avatar {
-        width: 70px;
-        height: 70px;
-        padding: 4px;
+.avatars__container {
+    position: relative;
+    &:after {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        background: linear-gradient(270deg, rgba(247, 247, 247, 1) 0%, rgba(0, 0, 0, 0) 100%);
+        width: 30px;
     }
-    .img-avatar-selected {
-        border: solid 3px grey;
+    .avatars__images {
+        display: flex;
+        overflow: scroll;
+        height: fit-content;
+        position: relative;
+        width: 265px;
+        img.img-avatar {
+            width: 70px;
+            height: 70px;
+            padding: 4px;
+            border-radius: $radius * 2;
+        }
+        .img-avatar-selected {
+            border: solid 3px grey;
+        }
     }
 }
