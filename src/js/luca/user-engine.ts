@@ -1,3 +1,4 @@
+import UtilsEngine from "./utils-engine";
 
 export class UserEngine {
     //Names are generated thanks to https://blog.reedsy.com/character-name-generator/
@@ -84,6 +85,24 @@ export class UserEngine {
         return new Promise(function (resolve, reject) {
             chrome.storage.sync.set({ userAvatar: userAvatar }).then(function (items) {
                 resolve();
+            }).catch((err) => {
+                reject(err);
+            });
+        });
+    }
+
+    static getUserId(): Promise<string> {
+        return new Promise(function (resolve, reject) {
+            chrome.storage.sync.get('userid').then(function (items) {
+                var userId = items.userid;
+                if (userId) {
+                    resolve(userId);
+                } else {
+                    userId = UtilsEngine.uuid();
+                    resolve(userId);
+                    chrome.storage.sync.set({ userid: userId }, function () {
+                    });
+                }
             }).catch((err) => {
                 reject(err);
             });

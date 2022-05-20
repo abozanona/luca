@@ -27,16 +27,23 @@ class PartyPage extends Component<{}, { roomId: string; roomLink: string }> {
     }
 
     getRoomLink(): string {
-        return `https://abozanona-luca.herokuapp.com/party?id=${this.state.roomId}&link=${encodeURIComponent(
+        return `https://abozanona-luca.herokuapp.com/party/join?roomId=${this.state.roomId}&roomLink=${encodeURIComponent(
             this.state.roomLink
         )}`;
     }
 
     copyPartyId = () => {
-        toast.success('Room id Copied to your clipboard', {
-            toastId: 'success:copy',
+        toast.success('Room id copied to your clipboard', {
+            toastId: 'success:copy-room-id',
         });
         navigator.clipboard.writeText(this.state.roomId);
+    };
+
+    copyRoomLink = () => {
+        toast.success('Room link copied to your clipboard', {
+            toastId: 'success:copy-room-link',
+        });
+        navigator.clipboard.writeText(this.getRoomLink());
     };
 
     render() {
@@ -49,10 +56,10 @@ class PartyPage extends Component<{}, { roomId: string; roomLink: string }> {
                             <div className="party__settings d-aic g-1">
                                 <img
                                     src={Link}
-                                    className="party__copy-id"
-                                    alt="Copy party id"
-                                    title="Copy party id"
-                                    onClick={this.copyPartyId}
+                                    className="party__copy-link"
+                                    alt="Copy party link"
+                                    title="Copy party link"
+                                    onClick={this.copyRoomLink}
                                 />
                                 <img
                                     src={Copy}
@@ -61,12 +68,12 @@ class PartyPage extends Component<{}, { roomId: string; roomLink: string }> {
                                     title="Copy party id"
                                     onClick={this.copyPartyId}
                                 />
-                                <img src={Setting} alt="Party settings" title="Party settings" />
+                                {/* <img src={Setting} alt="Party settings" title="Party settings" /> */}
                             </div>
                         </div>
                         <div className="party__members-container">
                             <div className="page__memebers">
-                                <Avatar username="MaD Ps" />
+                                {/* <Avatar username="MaD Ps" /> */}
                             </div>
                         </div>
                         <div className="page__actions d-aic g-1">

@@ -12,14 +12,14 @@ const Chat = require('../../assets/imgs/chat.svg');
 const Website = require('../../assets/imgs/website.svg');
 const SupportUs = require('../../assets/imgs/support_us.svg');
 const RateUs = require('../../assets/imgs/rate_us.svg');
-
+import { toast } from 'react-toastify';
 class Navbar extends Component<{}, { userName: string; userAvatar: string; userId: string }> {
     constructor(props: any) {
         super(props);
         this.state = {
             userName: '',
             userAvatar: '',
-            userId: '53Tt#aF',
+            userId: '',
         };
 
         let userEngine: UserEngine = new UserEngine();
@@ -29,35 +29,39 @@ class Navbar extends Component<{}, { userName: string; userAvatar: string; userI
         userEngine.getCurrentUserAvatar().then((avatar) => {
             this.setState({ userAvatar: avatar });
         });
+        UserEngine.getUserId().then((userId) => {
+            this.setState({ userId: userId });
+        });
     }
     avatarSubscription: Subscription;
     usernameSubscription: Subscription;
     componentDidMount() {
-        // subscribe to home component messages
         this.avatarSubscription = SettingsService.getAvatar().subscribe((avatar: any) => {
             if (avatar) {
-                // add message to local state if not empty
                 this.setState({ userAvatar: avatar });
             } else {
-                // clear messages when default image
                 this.setState({ userAvatar: '0.svg' });
             }
         });
         this.usernameSubscription = SettingsService.getUserName().subscribe((name: any) => {
             if (name) {
-                // add message to local state if not empty
                 this.setState({ userName: name });
             } else {
-                // clear messages when default image
                 this.setState({ userName: 'Luca User' });
             }
         });
     }
 
     componentWillUnmount() {
-        // unsubscribe to ensure no memory leaks
         this.avatarSubscription.unsubscribe();
     }
+
+    copyUserId = () => {
+        toast.success('User id copied to your clipboard', {
+            toastId: 'success:copy-user-id',
+        });
+        navigator.clipboard.writeText(this.state.userId);
+    };
 
     render() {
         return (
@@ -69,7 +73,7 @@ class Navbar extends Component<{}, { userName: string; userAvatar: string; userI
                         <p>
                             {this.state.userId}
                             <span>
-                                <img src={CopyCode} alt="" />
+                                <img src={CopyCode} alt="Copy user id" title="Copy user id" onClick={this.copyUserId} />
                             </span>
                         </p>
                     </div>
