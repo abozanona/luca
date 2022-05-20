@@ -1,5 +1,6 @@
 import { ChatEngine } from './chat-engine';
 import { SocketEngine } from './socket-engine';
+import UserEngine from './user-engine';
 import { VideoControllerEngine } from './video-controller-engine';
 
 export class LucaEngine {
@@ -103,16 +104,19 @@ export class LucaEngine {
             emojiReactionContainer.appendChild(imgReaction);
         });
 
+        let userEngine: UserEngine = new UserEngine();
         //Add Luca chat and reactions lisetners
         lucaInput.addEventListener('keyup', function (event) {
             event.preventDefault();
             if (event.keyCode === 13) {
                 if (lucaInput.value) {
                     _this.chatEngine.sendMessageToRoom(_this.socketEngine, lucaInput.value);
-                    _this.chatEngine.addMessageBubble(lucaInput.value);
-                    lucaChatMessagesContainer.scrollTop = lucaChatMessagesContainer.scrollHeight;
-                    lucaSendMessageAudio.play();
-                    lucaInput.value = '';
+                    userEngine.getCurrentUser().then(currentUser => {
+                        _this.chatEngine.addMessageBubble(lucaInput.value, currentUser);
+                        lucaChatMessagesContainer.scrollTop = lucaChatMessagesContainer.scrollHeight;
+                        lucaSendMessageAudio.play();
+                        lucaInput.value = '';
+                    });
                 }
             }
         });
@@ -120,9 +124,12 @@ export class LucaEngine {
             event.preventDefault();
             if (lucaInput.value) {
                 _this.chatEngine.sendMessageToRoom(_this.socketEngine, lucaInput.value);
-                _this.chatEngine.addMessageBubble(lucaInput.value);
-                lucaChatMessagesContainer.scrollTop = lucaChatMessagesContainer.scrollHeight;
-                lucaInput.value = '';
+                userEngine.getCurrentUser().then(currentUser => {
+                    _this.chatEngine.addMessageBubble(lucaInput.value, currentUser);
+                    lucaChatMessagesContainer.scrollTop = lucaChatMessagesContainer.scrollHeight;
+                    lucaSendMessageAudio.play();
+                    lucaInput.value = '';
+                });
             }
         });
 

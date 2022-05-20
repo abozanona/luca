@@ -1,3 +1,4 @@
+import { UserInterface } from './interfaces/user.interface';
 import { LucaEngine } from './luca-engine';
 import { SocketEngine } from './socket-engine';
 
@@ -26,12 +27,11 @@ export class ChatEngine {
             'message',
             {
                 text: messageText,
-            },
-            null
+            }
         );
     }
 
-    async addMessageBubble(messageText: string) {
+    async addMessageBubble(messageText: string, user: UserInterface) {
 
         const chatTemplateRes = await fetch(chrome.runtime.getURL("/templates/chat-bubble.template.html"));
         const chatTemplateHTML = await chatTemplateRes.text();
@@ -39,10 +39,10 @@ export class ChatEngine {
         let divChatBubble = document.createElement('div');
         divChatBubble.classList.add('luca-message-container');
         divChatBubble.innerHTML = chatTemplateHTML
-            .replace("{userName}", "Luca User")
+            .replace("{userName}", user.userName)
             .replace("{messageTime}", new Date().toLocaleTimeString())
             .replace("{messageText}", messageText)
-            .replace("{userAvatar}", 'https://i.pinimg.com/564x/4b/97/1b/4b971b77b4dd3155a535d2536b7c3b12.jpg')
+            .replace("{userAvatar}", chrome.runtime.getURL('assets/imgs/avatars/' + user.userAvatar))
             ;
 
         let bubblesContainer = document.getElementsByClassName('luca-chat-messages-container')[0];
@@ -54,8 +54,7 @@ export class ChatEngine {
             'reaction',
             {
                 name: reactionName,
-            },
-            null
+            }
         );
     }
 

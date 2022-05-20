@@ -29,7 +29,7 @@ class Navbar extends Component<{}, { userName: string; userAvatar: string; userI
         userEngine.getCurrentUserAvatar().then((avatar) => {
             this.setState({ userAvatar: avatar });
         });
-        UserEngine.getUserId().then((userId) => {
+        userEngine.getUserId().then((userId) => {
             this.setState({ userId: userId });
         });
     }

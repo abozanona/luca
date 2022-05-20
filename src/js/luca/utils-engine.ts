@@ -7,9 +7,14 @@ export class UtilsEngine {
             chrome.tabs.reload(tabs[0].id);
         });
     }
-    static getTabId(cb: (a: string) => void) {
-        chrome.runtime.sendMessage({ code: 'Q_TAB_ID' }, (res) => {
-            cb(res.body.tabId);
+
+    static getTabId(): Promise<string> {
+        return new Promise(function (resolve, reject) {
+            chrome.runtime.sendMessage({ code: 'Q_TAB_ID' }).then((res) => {
+                resolve(res.body.tabId);
+            }).catch((err) => {
+                reject(err);
+            });
         });
     }
 
@@ -23,16 +28,17 @@ export class UtilsEngine {
         };
     }
 
-    static getCurrentPageId(cb: (a: string) => void) {
-        UserEngine.getUserId().then(function (userId: string) {
-            UtilsEngine.getTabId(function (tabId) {
-                cb(userId + '-in-' + tabId);
-            });
+    static getCurrentPageId(): Promise<string> {
+        return new Promise(async function (resolve, reject) {
+            let userEngine: UserEngine = new UserEngine();
+            let userId: string = await userEngine.getUserId();
+            let tabId: string = await UtilsEngine.getTabId();
+            resolve(userId + '-in-' + tabId);
         });
     }
 
     static executeUnderDifferentTabId(messagePageId: string, cb: () => void) {
-        UtilsEngine.getCurrentPageId(function (currentPageId) {
+        UtilsEngine.getCurrentPageId().then(function (currentPageId) {
             if (messagePageId == currentPageId) {
                 return;
             }

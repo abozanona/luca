@@ -111,7 +111,7 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
             socketEngine.joinRoom(videoController, socketEngine.roomId);
             break;
         case 'Q_GET_ROOM_ID':
-            UtilsEngine.getTabId(function (tabId) {
+            UtilsEngine.getTabId().then(function (tabId) {
                 const message = {
                     code: 'A_GET_ROOM_ID',
                     tabId: tabId,
@@ -123,7 +123,7 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
             });
             break;
         case 'Q_GET_PAGE_STATUS':
-            UtilsEngine.getTabId(function (tabId) {
+            UtilsEngine.getTabId().then(function (tabId) {
                 const message = {
                     code: 'A_GET_PAGE_STATUS',
                     tabId: tabId,
@@ -138,6 +138,18 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
             let roomId = message.body.roomId;
             socketEngine.roomId = roomId;
             socketEngine.joinRoom(videoController, socketEngine.roomId);
+            break;
+        case 'Q_GET_PARTY_USERS':
+            UtilsEngine.getTabId().then(function (tabId) {
+                const message = {
+                    code: 'A_GET_PARTY_USERS',
+                    tabId: tabId,
+                    body: {
+                        users: socketEngine.currentUsers,
+                    },
+                };
+                chrome.runtime.sendMessage(message);
+            });
             break;
     }
 }

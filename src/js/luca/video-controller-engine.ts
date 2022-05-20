@@ -60,8 +60,7 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
                 'play',
                 {
                     time: this.getCurrentVideoTime(),
-                },
-                null
+                }
             );
         }
         if (this.allowedActions.play > 0) {
@@ -78,8 +77,7 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
                 'pause',
                 {
                     time: this.getCurrentVideoTime(),
-                },
-                null
+                }
             );
         }
         if (this.allowedActions.pause > 0) {
@@ -96,8 +94,7 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
                 'seek',
                 {
                     time: this.getCurrentVideoTime(),
-                },
-                null
+                }
             );
         }
         if (this.allowedActions.seek > 0) {

@@ -1,4 +1,6 @@
 import { ChatEngine } from './chat-engine';
+import { UserInterface } from './interfaces/user.interface';
+import UserEngine from './user-engine';
 import { UtilsEngine } from './utils-engine';
 import { VideoControllerEngine } from './video-controller-engine';
 
@@ -7,7 +9,9 @@ export class SocketEngine {
     socket: any = null;
     roomId: string = null;
 
-    constructor(private chatEngine: ChatEngine) {}
+    currentUsers: UserInterface[] = [];
+
+    constructor(private chatEngine: ChatEngine) { }
 
     initSocket(videoControllerEngine: VideoControllerEngine): void {
         if (this.isSocketStarted) {
@@ -26,6 +30,7 @@ export class SocketEngine {
         });
 
         _this.socket.on('play', function (message: any) {
+            _this.addUserToChat(message.sender);
             UtilsEngine.executeUnderDifferentTabId(message.pageId, function () {
                 videoControllerEngine.seek(message.time);
                 videoControllerEngine.play();
@@ -33,6 +38,7 @@ export class SocketEngine {
         });
 
         _this.socket.on('pause', function (message: any) {
+            _this.addUserToChat(message.sender);
             UtilsEngine.executeUnderDifferentTabId(message.pageId, function () {
                 videoControllerEngine.seek(message.time);
                 videoControllerEngine.pause();
@@ -40,22 +46,41 @@ export class SocketEngine {
         });
 
         _this.socket.on('seek', function (message: any) {
+            _this.addUserToChat(message.sender);
             UtilsEngine.executeUnderDifferentTabId(message.pageId, function () {
                 videoControllerEngine.seek(message.time);
             });
         });
 
         _this.socket.on('message', function (message: any) {
+            _this.addUserToChat(message.sender);
             UtilsEngine.executeUnderDifferentTabId(message.pageId, function () {
-                _this.chatEngine.addMessageBubble(message.text);
+                _this.chatEngine.addMessageBubble(message.text, message.sender);
             });
         });
 
         _this.socket.on('reaction', function (message: any) {
+            _this.addUserToChat(message.sender);
             UtilsEngine.executeUnderDifferentTabId(message.pageId, function () {
                 _this.chatEngine.showReactionOnScreen(message.name);
             });
         });
+    }
+
+    addUserToChat(sender: UserInterface) {
+        if (!sender) {
+            return;
+        }
+        if (this.currentUsers.find(el => el.userId == sender.userId)) {
+            this.currentUsers = this.currentUsers.map(user => {
+                if (user.userId != sender.userId) {
+                    return user;
+                }
+                return sender;
+            });
+        } else {
+            this.currentUsers.push(sender);
+        }
     }
 
     createRoom(videoControllerEngine: VideoControllerEngine, roomId: string) {
@@ -70,14 +95,17 @@ export class SocketEngine {
         this.socket.emit('join', this.roomId);
     }
 
-    sendPlayerOrder(order: string, data: any, cb: () => void) {
+    sendPlayerOrder(order: string, data: any): Promise<void> {
         let _this = this;
-        UtilsEngine.getCurrentPageId(function (pageId: string) {
-            data.pageId = pageId;
+        return new Promise(async function (resolve, reject) {
+            let userEngine: UserEngine = new UserEngine();
+            let currentUser = await userEngine.getCurrentUser();
+            let currentPageId = await UtilsEngine.getCurrentPageId();
+            data.pageId = currentPageId;
+            data.pageId = currentPageId;
+            data.sender = currentUser;
             _this.socket.emit(order, data);
-            if (cb) {
-                cb();
-            }
+            resolve();
         });
     }
 }
