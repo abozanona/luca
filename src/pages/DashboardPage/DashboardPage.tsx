@@ -56,7 +56,7 @@ class DashboardPage extends React.Component<{ navigate: NavigateFunction }, { cr
                         </div>
                         <div className="dashboard__info d-flex-col d-jcc d-aic">
                             <h1>Get Started, by Create/Join Room! </h1>
-                            <p>Put some information here. Put some informationhere Put some information here.</p>
+                            <p>Click on create to start a new party or enter a room id to join an already existing party.</p>
                         </div>
                     </div>
                 </div>

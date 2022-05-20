@@ -35,6 +35,6 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
             tabId: tabId,
             body: messageDetails,
         };
-        chrome.runtime.sendMessage(message);
+        chrome.tabs.sendMessage(tabId, message);
     }
 });

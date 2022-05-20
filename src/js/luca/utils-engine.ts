@@ -1,3 +1,5 @@
+import UserEngine from "./user-engine";
+
 export class UtilsEngine {
     static refreshPage() {
         location.reload();
@@ -5,9 +7,14 @@ export class UtilsEngine {
             chrome.tabs.reload(tabs[0].id);
         });
     }
-    static getTabId(cb: (a: string) => void) {
-        chrome.runtime.sendMessage({ code: 'Q_TAB_ID' }, (res) => {
-            cb(res.body.tabId);
+
+    static getTabId(): Promise<string> {
+        return new Promise(function (resolve, reject) {
+            chrome.runtime.sendMessage({ code: 'Q_TAB_ID' }).then((res) => {
+                resolve(res.body.tabId);
+            }).catch((err) => {
+                reject(err);
+            });
         });
     }
 
@@ -21,30 +28,17 @@ export class UtilsEngine {
         };
     }
 
-    static getCurrentPageId(cb: (a: string) => void) {
-        UtilsEngine.getUserId(function (userId: string) {
-            UtilsEngine.getTabId(function (tabId) {
-                cb(userId + '-in-' + tabId);
-            });
-        });
-    }
-
-    static getUserId(cb: (a: string) => void) {
-        chrome.storage.sync.get('userid', function (items) {
-            var userid = items.userid;
-            if (userid) {
-                cb(userid);
-            } else {
-                userid = UtilsEngine.uuid();
-                chrome.storage.sync.set({ userid: userid }, function () {
-                    cb(userid);
-                });
-            }
+    static getCurrentPageId(): Promise<string> {
+        return new Promise(async function (resolve, reject) {
+            let userEngine: UserEngine = new UserEngine();
+            let userId: string = await userEngine.getUserId();
+            let tabId: string = await UtilsEngine.getTabId();
+            resolve(userId + '-in-' + tabId);
         });
     }
 
     static executeUnderDifferentTabId(messagePageId: string, cb: () => void) {
-        UtilsEngine.getCurrentPageId(function (currentPageId) {
+        UtilsEngine.getCurrentPageId().then(function (currentPageId) {
             if (messagePageId == currentPageId) {
                 return;
             }

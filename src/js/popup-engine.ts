@@ -1,3 +1,5 @@
+import { UserInterface } from "./luca/interfaces/user.interface";
+
 class PopUpEngine {
 
     actionsOrder = ['NOTHING', 'WAITING_CREATE_ROOM', 'WAITING_SELECT_VIDEO', 'ROOM_SETUP_COMPLETED'];
@@ -51,10 +53,14 @@ class PopUpEngine {
                         _this.currentRoomIdCallBack(request.body.roomId);
                     }
                     break;
+                case 'A_GET_PARTY_USERS':
+                    if (_this.currentRoomUsersCallBack) {
+                        _this.currentRoomUsersCallBack(request.body.users);
+                    }
+                    break;
             }
         });
     }
-
 
     getCurrentTabId(cb: any) {
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -95,6 +101,18 @@ class PopUpEngine {
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             const url = tabs[0].url;
             _this.currentRoomUrlCallBack(url);
+        });
+    }
+
+    currentRoomUsersCallBack: (users: UserInterface[]) => void;
+    getCurrentRoomUsers(cb: (users: UserInterface[]) => void) {
+        this.currentRoomUsersCallBack = cb;
+
+        this.getCurrentTabId(function (tabId: any) {
+            const message = {
+                code: 'Q_GET_PARTY_USERS',
+            };
+            chrome.tabs.sendMessage(tabId, message);
         });
     }
 

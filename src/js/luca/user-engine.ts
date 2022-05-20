@@ -1,3 +1,5 @@
+import { UserInterface } from "./interfaces/user.interface";
+import UtilsEngine from "./utils-engine";
 
 export class UserEngine {
     //Names are generated thanks to https://blog.reedsy.com/character-name-generator/
@@ -87,6 +89,34 @@ export class UserEngine {
             }).catch((err) => {
                 reject(err);
             });
+        });
+    }
+
+    getUserId(): Promise<string> {
+        return new Promise(function (resolve, reject) {
+            chrome.storage.sync.get('userid').then(function (items) {
+                var userId = items.userid;
+                if (userId) {
+                    resolve(userId);
+                } else {
+                    userId = UtilsEngine.uuid();
+                    resolve(userId);
+                    chrome.storage.sync.set({ userid: userId }, function () {
+                    });
+                }
+            }).catch((err) => {
+                reject(err);
+            });
+        });
+    }
+
+    getCurrentUser(): Promise<UserInterface> {
+        return new Promise(async function (resolve, reject) {
+            let userEngine: UserEngine = new UserEngine();
+            let userId = await userEngine.getUserId();
+            let userAvatar = await userEngine.getCurrentUserAvatar();
+            let userName = await userEngine.getCurrentUserName();
+            resolve({ userId: userId, userAvatar: userAvatar, userName: userName });
         });
     }
 
