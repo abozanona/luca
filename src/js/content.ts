@@ -136,6 +136,8 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
             break;
         case 'Q_INIT_PAGE_WITH_PARTY':
             let roomId = message.body.roomId;
+            socketEngine.roomId = roomId;
+            socketEngine.joinRoom(videoController, socketEngine.roomId);
             break;
     }
 }
