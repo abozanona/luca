@@ -1,9 +1,10 @@
+import VideoControllerInterface from "../luca/interfaces/video-controller-interface";
 import SocketEngine from "./socket-engine";
-import VideoControllerInterface from "./video-controller-interface";
 
 export abstract class VideoControllerEngine implements VideoControllerInterface {
 
     isVideoSelected: boolean;
+    videoXPath: string = null;
 
     allowedActions: {
         pause: number,
@@ -15,8 +16,8 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
             seek: 0,
         };
 
-    constructor(public socketEngine: SocketEngine) { 
-        
+    constructor(public socketEngine: SocketEngine) {
+
     }
 
     abstract playVideo(): void;

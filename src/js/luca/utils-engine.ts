@@ -51,6 +51,25 @@ export class UtilsEngine {
             (parseInt(c) ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (parseInt(c) / 4)))).toString(16)
         );
     }
+
+    static getXPathTo(element: any): string {
+        if (element === document.body) {
+            return '//' + element.tagName.toLowerCase();
+        }
+
+        var ix = 0;
+        var siblings = element.parentNode.childNodes;
+        for (var i = 0; i < siblings.length; i++) {
+            var sibling = siblings[i];
+
+            if (sibling === element) return this.getXPathTo(element.parentNode) + '/' + element.tagName.toLowerCase() + '[' + (ix + 1) + ']';
+
+            if (sibling.nodeType === 1 && sibling.tagName === element.tagName) {
+                ix++;
+            }
+        }
+    }
+
 }
 
 export default UtilsEngine;

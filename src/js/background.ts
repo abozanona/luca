@@ -14,6 +14,7 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
             partyTabs[tab.id] = {
                 roomLink: msg.body.roomLink,
                 roomId: msg.body.roomId,
+                videoXPath: msg.body.videoXPath,
             };
         });
     }
