@@ -39,3 +39,9 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
         chrome.tabs.sendMessage(tabId, message);
     }
 });
+
+const manifest = chrome.runtime.getManifest();
+let user = {
+    version: manifest.version,
+}
+chrome.runtime.setUninstallURL(`https://docs.google.com/forms/d/e/1FAIpQLSchwIEPLVcl54IOHZOrQ8s_2jyWE_ea2Njk8kajZtUwPmNFcQ/viewform?entry.280944084=${user.version}`);
