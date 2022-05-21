@@ -11,6 +11,15 @@ class DashboardPage extends React.Component<{ navigate: NavigateFunction }, { cr
             createRoom: true,
             roomId: '',
         };
+
+        let popupEngine: PopUpEngine = new PopUpEngine();
+        popupEngine.getCurrentPageStatus((currentPage: string) => {
+            switch (currentPage) {
+                case 'ROOM_SETUP_COMPLETED':
+                    this.props.navigate('/party', { replace: true });
+                    break;
+            }
+        });
     }
 
     handleOnClick = () => {
@@ -56,7 +65,10 @@ class DashboardPage extends React.Component<{ navigate: NavigateFunction }, { cr
                         </div>
                         <div className="dashboard__info d-flex-col d-jcc d-aic">
                             <h1>Get Started, by Create/Join Room! </h1>
-                            <p>Click on create to start a new party or enter a room id to join an already existing party.</p>
+                            <p>
+                                Click on create to start a new party or enter a room id to join an already existing
+                                party.
+                            </p>
                         </div>
                     </div>
                 </div>
