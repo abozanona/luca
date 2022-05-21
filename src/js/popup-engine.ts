@@ -53,6 +53,11 @@ class PopUpEngine {
                         _this.currentRoomIdCallBack(request.body.roomId);
                     }
                     break;
+                case 'A_GET_VIDEO_XPATH':
+                    if (_this.currentRoomVideoXPathCallBack) {
+                        _this.currentRoomVideoXPathCallBack(request.body.videoXPath);
+                    }
+                    break;
                 case 'A_GET_PARTY_USERS':
                     if (_this.currentRoomUsersCallBack) {
                         _this.currentRoomUsersCallBack(request.body.users);
@@ -89,6 +94,18 @@ class PopUpEngine {
         this.getCurrentTabId(function (tabId: any) {
             const message = {
                 code: 'Q_GET_ROOM_ID',
+            };
+            chrome.tabs.sendMessage(tabId, message);
+        });
+    }
+
+    currentRoomVideoXPathCallBack: (videoXPath: string) => void;
+    currentRoomVideoXPath(cb: (videoXPath: string) => void) {
+        this.currentRoomVideoXPathCallBack = cb;
+
+        this.getCurrentTabId(function (tabId: any) {
+            const message = {
+                code: 'Q_GET_VIDEO_XPATH',
             };
             chrome.tabs.sendMessage(tabId, message);
         });

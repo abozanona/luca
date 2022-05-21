@@ -1,5 +1,6 @@
 import { ChatEngine } from './luca/chat-engine';
 import { LucaEngine } from './luca/luca-engine';
+import SharePartyPage from './luca/share-party-page';
 import { SocketEngine } from './luca/socket-engine';
 import { UtilsEngine } from './luca/utils-engine';
 import VideoControllerEngine from './luca/video-controller-engine';
@@ -17,38 +18,22 @@ if (document.location.origin.includes('netflix.com')) {
 
 let lucaEngine: LucaEngine = new LucaEngine(chatEngine, socketEngine, videoController);
 
+lucaEngine.initLuca();
+
 chrome.runtime.onMessage.addListener(gotMessage);
 
-function initLucaJoinParty() {
-    const linkStyleLucaWebsite = document.createElement('link');
-    linkStyleLucaWebsite.href = chrome.runtime.getURL('style/luca-website-style.css');
-    linkStyleLucaWebsite.rel = 'stylesheet';
-    linkStyleLucaWebsite.type = 'text/css';
-    document.head.appendChild(linkStyleLucaWebsite);
+new SharePartyPage().initLucaJoinParty();
 
-    if (document.getElementById("luca-btn-join-party")) {
-        document.getElementById("luca-btn-join-party").addEventListener('click', function () {
-            const params = new URLSearchParams(window.location.search)
-            if (params.has('roomId') && params.has('roomLink')) {
-                let roomId = params.get('roomId');
-                let roomLink = params.get('roomLink');
-                const message = {
-                    code: 'Q_CREATE_PARTY_BY_INVITATION',
-                    body: {
-                        roomId: roomId,
-                        roomLink: roomLink,
-                    },
-                };
-                chrome.runtime.sendMessage(message);
-            }
-            else {
-                alert("Invalid party link");
-            }
-        });
-    };
+function startPartyOnVideo(videoElement: HTMLVideoElement) {
+    lucaEngine.injectChat();
+    if (document.location.origin.includes('netflix.com')) {
+        ;
+    } else {
+        (videoController as GeneralVideoController).setVideo(videoElement);
+    }
+    videoController.startStreamingOnVideo();
+    videoController.videoXPath = UtilsEngine.getXPathTo(videoElement);
 }
-
-initLucaJoinParty();
 
 function gotMessage(message: any, sender: any, sendResponse: any) {
     switch (message.code) {
@@ -59,7 +44,6 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
                 );
                 return;
             }
-            lucaEngine.initLuca();
             document.querySelectorAll('.luca-video-highlight').forEach((el) => {
                 el.remove();
             });
@@ -86,13 +70,7 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
                 let spanHiighlightPlay = document.createElement('button');
                 spanHiighlightPlay.classList.add('luca-video-highlight-play');
                 spanHiighlightPlay.addEventListener('click', function (e) {
-                    lucaEngine.injectChat();
-                    if (document.location.origin.includes('netflix.com')) {
-                        ;
-                    } else {
-                        (videoController as GeneralVideoController).setVideo(elVideo);
-                    }
-                    videoController.startStreamingOnVideo();
+                    startPartyOnVideo(elVideo);
                     ((e.target as HTMLElement).parentNode as HTMLElement).remove();
                 });
                 divVideoHiighlight.appendChild(spanHiighlightPlay);
@@ -109,6 +87,12 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
         case 'Q_JOIN_ROOM_ID':
             socketEngine.roomId = message.roomId;
             socketEngine.joinRoom(videoController, socketEngine.roomId);
+            if (videoController.videoXPath) {
+                let videoElement: HTMLVideoElement = document.evaluate(videoController.videoXPath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue as HTMLVideoElement;
+                if (videoElement) {
+                    startPartyOnVideo(videoElement);
+                }
+            }
             break;
         case 'Q_GET_ROOM_ID':
             UtilsEngine.getTabId().then(function (tabId) {
@@ -117,6 +101,18 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
                     tabId: tabId,
                     body: {
                         roomId: socketEngine.roomId,
+                    },
+                };
+                chrome.runtime.sendMessage(message);
+            });
+            break;
+        case 'Q_GET_VIDEO_XPATH':
+            UtilsEngine.getTabId().then(function (tabId) {
+                const message = {
+                    code: 'A_GET_VIDEO_XPATH',
+                    tabId: tabId,
+                    body: {
+                        videoXPath: videoController.videoXPath,
                     },
                 };
                 chrome.runtime.sendMessage(message);
@@ -138,6 +134,13 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
             let roomId = message.body.roomId;
             socketEngine.roomId = roomId;
             socketEngine.joinRoom(videoController, socketEngine.roomId);
+            if (message.body.videoXPath) {
+                videoController.videoXPath = message.body.videoXPath;
+                let videoElement: HTMLVideoElement = document.evaluate(message.body.videoXPath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue as HTMLVideoElement;
+                if (videoElement) {
+                    startPartyOnVideo(videoElement);
+                }
+            }
             break;
         case 'Q_GET_PARTY_USERS':
             UtilsEngine.getTabId().then(function (tabId) {
@@ -152,9 +155,4 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
             });
             break;
     }
-}
-
-if (document.getElementById('luca-no-extension-found') && document.getElementById('luca-extension-found')) {
-    document.getElementById('luca-no-extension-found').style.display = 'none';
-    document.getElementById('luca-extension-found').style.display = 'block';
 }

@@ -10,18 +10,25 @@ const Link = require('../../assets/imgs/link.svg');
 const Setting = require('../../assets/imgs/setting.svg');
 const Scan = require('../../assets/imgs/scan.svg');
 const Leave = require('../../assets/imgs/leave.svg');
-class PartyPage extends Component<{}, { roomId: string; roomLink: string; partyUsers: UserInterface[] }> {
+class PartyPage extends Component<
+    {},
+    { roomId: string; roomLink: string; partyUsers: UserInterface[]; videoXPath: string }
+> {
     constructor(props: any) {
         super(props);
         this.state = {
             roomId: '',
             roomLink: '',
             partyUsers: [],
+            videoXPath: null,
         };
         let popupEngine: PopUpEngine = new PopUpEngine();
         let _this = this;
         popupEngine.getCurrentRoomId(function (roomId: string) {
             _this.setState({ roomId: roomId });
+        });
+        popupEngine.currentRoomVideoXPath(function (videoXPath: string) {
+            _this.setState({ videoXPath: videoXPath });
         });
         popupEngine.getCurrentRoomUrl(function (roomUrl) {
             _this.setState({ roomLink: roomUrl });
@@ -34,7 +41,7 @@ class PartyPage extends Component<{}, { roomId: string; roomLink: string; partyU
     getRoomLink(): string {
         return `https://abozanona-luca.herokuapp.com/party/join?roomId=${
             this.state.roomId
-        }&roomLink=${encodeURIComponent(this.state.roomLink)}`;
+        }&roomLink=${encodeURIComponent(this.state.roomLink)}&videoXPath=${encodeURIComponent(this.state.videoXPath)}`;
     }
 
     copyPartyId = () => {

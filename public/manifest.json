@@ -2,7 +2,7 @@
     "name": "LUCA - Movies and videos party",
     "short_name": "LUCA",
     "description": "This extension gives you the ability to create rooms and watch online videos with your friends.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "action": {
         "default_popup": "index.html",
         "default_title": "Luca - Watch movies with friends",
