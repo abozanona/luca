@@ -1,6 +1,7 @@
 import { UserInterface } from './interfaces/user.interface';
 import { LucaEngine } from './luca-engine';
 import { SocketEngine } from './socket-engine';
+import UserEngine from './user-engine';
 
 export class ChatEngine {
     reactionScreenAnimation(elem: any, bounds: any, delay: any) {
@@ -29,6 +30,12 @@ export class ChatEngine {
                 text: messageText,
             }
         );
+
+        let userEngine: UserEngine = new UserEngine();
+        userEngine.getCurrentUser().then(currentUser => {
+            this.addMessageBubble(messageText, currentUser);
+        });
+
     }
 
     async addMessageBubble(messageText: string, user: UserInterface) {
@@ -47,6 +54,16 @@ export class ChatEngine {
 
         let bubblesContainer = document.getElementsByClassName('luca-chat-messages-container')[0];
         bubblesContainer.appendChild(divChatBubble);
+
+        let lucaSendMessageAudioUrl = chrome.runtime.getURL('assets/audio/luca-message-send.mp3');
+        let lucaSendMessageAudio = new Audio(lucaSendMessageAudioUrl);
+        lucaSendMessageAudio.play();
+
+        let lucaChatMessagesContainer: HTMLElement = document.getElementsByClassName('luca-chat-messages-container')[0] as HTMLElement;
+        lucaChatMessagesContainer.scrollTop = lucaChatMessagesContainer.scrollHeight;
+
+        let lucaInput: HTMLInputElement = document.getElementById('luca-input-field') as HTMLInputElement;
+        lucaInput.value = '';
     }
 
     sendReactionToRoom(socketEngine: SocketEngine, reactionName: string) {

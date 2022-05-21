@@ -1,6 +1,5 @@
 import { ChatEngine } from './chat-engine';
 import { SocketEngine } from './socket-engine';
-import UserEngine from './user-engine';
 import { VideoControllerEngine } from './video-controller-engine';
 
 export class LucaEngine {
@@ -50,9 +49,7 @@ export class LucaEngine {
         let lucaChatInnerToggle: HTMLElement = document.getElementById('luca-chat-inner-toggle') as HTMLElement;
         let lucaChatOuterToggle: HTMLElement = document.getElementById('luca-chat-outer-toggle') as HTMLElement;
         let lucaChatSendMessageButton: HTMLElement = document.getElementById('luca-chat-send-message-button') as HTMLElement;
-        let lucaChatMessagesContainer: HTMLElement = document.getElementsByClassName('luca-chat-messages-container')[0] as HTMLElement;
-        let lucaSendMessageAudioUrl = chrome.runtime.getURL('assets/audio/luca-message-send.mp3');
-        let lucaSendMessageAudio = new Audio(lucaSendMessageAudioUrl);
+
 
         window.addEventListener('keydown', function (e) {
             if (e.altKey == true && e.keyCode == 90 /*Z*/) {
@@ -104,19 +101,12 @@ export class LucaEngine {
             emojiReactionContainer.appendChild(imgReaction);
         });
 
-        let userEngine: UserEngine = new UserEngine();
         //Add Luca chat and reactions lisetners
         lucaInput.addEventListener('keyup', function (event) {
             event.preventDefault();
             if (event.keyCode === 13) {
                 if (lucaInput.value) {
                     _this.chatEngine.sendMessageToRoom(_this.socketEngine, lucaInput.value);
-                    userEngine.getCurrentUser().then(currentUser => {
-                        _this.chatEngine.addMessageBubble(lucaInput.value, currentUser);
-                        lucaChatMessagesContainer.scrollTop = lucaChatMessagesContainer.scrollHeight;
-                        lucaSendMessageAudio.play();
-                        lucaInput.value = '';
-                    });
                 }
             }
         });
@@ -124,12 +114,6 @@ export class LucaEngine {
             event.preventDefault();
             if (lucaInput.value) {
                 _this.chatEngine.sendMessageToRoom(_this.socketEngine, lucaInput.value);
-                userEngine.getCurrentUser().then(currentUser => {
-                    _this.chatEngine.addMessageBubble(lucaInput.value, currentUser);
-                    lucaChatMessagesContainer.scrollTop = lucaChatMessagesContainer.scrollHeight;
-                    lucaSendMessageAudio.play();
-                    lucaInput.value = '';
-                });
             }
         });
 
