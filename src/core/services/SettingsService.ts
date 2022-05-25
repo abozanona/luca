@@ -13,8 +13,8 @@ export const SettingsService = {
     setAvatar: (avatarImage: string) => $avatar.next(avatarImage),
     setUserName: (username: string) => $username.next(username),
 
-    getWebsiteSettings(): AppearanceSystem {
-        let settings = localStorage.getItem('websiteSettings');
+    getSettings(): AppearanceSystem {
+        let settings = localStorage.getItem('lucaSettings');
         if (settings) return JSON.parse(settings);
         return new AppearanceSystem();
     },

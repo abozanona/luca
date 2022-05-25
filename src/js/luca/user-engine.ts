@@ -1,10 +1,36 @@
+import { AppearanceSystem } from "../../core/model/appearance-system.model";
 import { UserInterface } from "./interfaces/user.interface";
 import UtilsEngine from "./utils-engine";
 
 
 export class UserEngine {
 
+    setSettings(settings: AppearanceSystem): Promise<void> {
+        return new Promise(function (resolve, reject) {
+            chrome.storage.sync.set({ lucaSettings: settings }).then(function (items) {
+                resolve();
+            }).catch((err) => {
+                reject(err);
+            });
+        });
+    }
 
+
+    getSettings(): any {
+        return new Promise(function (resolve, reject) {
+            chrome.storage.sync.get('lucaSettings').then(function (items) {
+                // let userAvatar = items.userAvatar;
+                // if (!userAvatar) {
+                //     userAvatar = '0.svg';
+                //     chrome.storage.sync.set({ userAvatar: userAvatar }, function () { });
+                // }
+                resolve(items);
+            }).catch((err) => {
+                reject(err);
+                return new AppearanceSystem();
+            });
+        });
+    }
     //Names are generated thanks to https://blog.reedsy.com/character-name-generator/
     getCurrentUserName(): Promise<string> {
         return new Promise(function (resolve, reject) {

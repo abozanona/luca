@@ -1,5 +1,7 @@
 export class AppearanceSystem {
-    darkTheme?: boolean = false;
+  username?: string = '';
+  userAvatar?: string = '';
+  darkTheme?: boolean = false;
   }
   
   

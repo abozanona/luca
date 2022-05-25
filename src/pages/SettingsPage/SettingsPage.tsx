@@ -2,13 +2,14 @@ import React, { ChangeEvent, Component, useState } from 'react';
 import UserEngine from '../../js/luca/user-engine';
 import { toast } from 'react-toastify';
 import { SettingsService } from '../../core/services/SettingsService';
+import { AppearanceSystem } from '../../core/model/appearance-system.model';
 
-interface settingsInterface {
-    username: string;
-    userAvatar: string;
-    darkTheme: boolean;
-}
-class SettingsPage extends Component<{}, settingsInterface> {
+// export interface settingsInterface {
+//     username: string;
+//     userAvatar: string;
+//     darkTheme: boolean;
+// }
+class SettingsPage extends Component<{}, AppearanceSystem> {
     maxLength: number = 16;
     minLength: number = 4;
     constructor(props: any) {
@@ -38,7 +39,7 @@ class SettingsPage extends Component<{}, settingsInterface> {
 
         console.log(target.checked);
 
-        this.setState({ ...this.state, [name]: value } as settingsInterface, () => {
+        this.setState({ ...this.state, [name]: value } as AppearanceSystem, () => {
             localStorage.setItem('luca-settings', JSON.stringify(this.state));
         });
     }
