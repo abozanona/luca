@@ -7,6 +7,7 @@
     position: relative;
     max-height: 220px;
     overflow: scroll;
+    overflow-x: hidden;
     .setting {
         .setting__info {
             display: flex;
@@ -15,12 +16,12 @@
             h1 {
                 font-size: 0.875rem;
                 font-weight: 500;
-                color: $secondary-clr;
+                color: var(--secondary-color);
             }
             p {
                 font-size: 0.6rem;
                 font-weight: 400;
-                color: $text-clr;
+                color: var(--text-primary-color);
                 width: 17rem;
             }
         }
@@ -42,9 +43,10 @@
     .avatars__images {
         display: flex;
         overflow: scroll;
+        overflow-y: hidden;
         height: fit-content;
         position: relative;
-        width: 265px;
+        width: 245px;
         img.img-avatar {
             width: 70px;
             height: 70px;

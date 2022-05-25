@@ -26,7 +26,7 @@ class SettingsPage extends Component<{}, { username: string; userAvatar: string 
         return (
             <React.Fragment>
                 <div className="page__container">
-                    <div className="settings__container ">
+                    <div className="settings__container  scrollbar">
                         <div className="d-jcb d-aic">{/* <h1 className="page__header">Settings</h1> */}</div>
                         <div className="settings d-flex-col ">
                             <div className="setting d-flex d-aic d-jcb">
@@ -157,6 +157,9 @@ class SettingsPage extends Component<{}, { username: string; userAvatar: string 
         let userEngine: UserEngine = new UserEngine();
         userEngine.setCurrentUserAvatar(userAvatar);
         SettingsService.setAvatar(userAvatar);
+    }
+    toggleTheme(e:any){
+
     }
 }
 

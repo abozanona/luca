@@ -46,8 +46,10 @@ $font-family: 'FilsonPro', sans-serif;
 
 $primary-clr: #007fff !default;
 $secondary-clr: #15153a !default;
-$text-clr: #a4a4a4 !default;
-$bg-clr: #f7f7f7 !default;
+$bg-primary-clr: #f7f7f7 !default;
+$bg-secondary-clr: #f7f7f7 !default;
+$text-primary-clr: #a4a4a4 !default;
+$text-secondary-clr: #ffffff !default;
 $radius: 0.25rem !default;
 $transition-300: all 0.3s ease-in-out !default;
 $white: #fff !default;
@@ -79,3 +81,28 @@ $warning: #ffc539 !default;
 $shadow-z100: 0px 0px 10px 0px rgba(132, 132, 132, 0.15);
 $shadow-z200: 0px 0px 20px 0px rgba(132, 132, 132, 0.2);
 $shadow-z300: 0px 0px 30px 0px rgba(132, 132, 132, 0.3);
+
+$primary-color: var(--primary-color);
+$secondary-color: var(--secondary-color);
+$bg-primary-color: var(--bg-primary-color);
+$bg-secondary-color: var(--bg-secondary-color);
+$text-primary-color: var(--text-primary-color);
+$text-secondary-color: var(--text-secondary-color);
+
+//DARK THEME
+$dark-primary-clr: #2069e0;
+$dark-secondary-clr: #e4e4e4;
+$dark-primary-bg-clr: #18191a;
+$dark-secondary-bg-clr: #242526;
+$dark-text-primary-clr: #b0b3b8;
+$dark-text-secondary-clr: #f0f5ff;
+
+$dark-input-bg-clr: #242526;
+$dark-input-clr: #e4e4e4;
+$dark-img-filter-clr: brightness(0) invert(1);
+$dark-sidebar-sub-ele-clr: #3a3b3c;
+$dark-sidebar-sub-ele-active-clr: #2d2d2d;
+$dark-sidebar-text-active-clr: #88b5ff;
+$dark-input-border-clr: #464c4e;
+$dark-input-focus-active-clr: #61614a;
+$dark-input-text-focus-active-clr: #e4e4e4;

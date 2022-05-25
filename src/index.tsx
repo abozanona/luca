@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import './style/index.scss';
@@ -18,7 +18,14 @@ import { ToastContainer } from 'react-toastify';
 
 function PopupApp() {
     const navigate = useNavigate();
-
+    useEffect(() => {
+        // Update the document title using the browser API
+            document.documentElement.classList.add('dark-theme');
+          
+            console.log(document.documentElement);
+            
+            
+      });
     return (
         <React.Fragment>
             <div className="container">
