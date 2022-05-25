@@ -177,6 +177,7 @@
     font-size: 12px !important;
     display: flex;
     flex-direction: column;
+    gap: 1em;
     position: fixed;
     right: 0;
     top: 50%;
@@ -257,7 +258,7 @@
             &:hover .luca-chat-emoji-reaction-container {
                 @extend .luca-chat-emoji-reaction--active-effect;
             }
-            svg {
+            > img {
                 width: 1.8em;
                 height: 1.8em;
             }
@@ -265,12 +266,17 @@
     }
     .luca-chat-header {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         h1 {
             font-size: 1.2em;
             font-weight: 500;
             color: var(--secondary-color);
+        }
+        img{
+            width:1.5em;
+            height:1.5em;
+            cursor: pointer;
         }
     }
     .luca-chat-messages-container {
@@ -278,7 +284,7 @@
         flex-direction: column;
         max-height: 100%;
         min-height: 100%;
-        margin-bottom: 4em;
+        margin-bottom: 2em;
         overflow: scroll;
         gap: 0.5em;
         &::-webkit-scrollbar {

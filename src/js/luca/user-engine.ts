@@ -1,7 +1,10 @@
 import { UserInterface } from "./interfaces/user.interface";
 import UtilsEngine from "./utils-engine";
 
+
 export class UserEngine {
+
+
     //Names are generated thanks to https://blog.reedsy.com/character-name-generator/
     getCurrentUserName(): Promise<string> {
         return new Promise(function (resolve, reject) {

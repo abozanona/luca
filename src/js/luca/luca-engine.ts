@@ -37,9 +37,12 @@ export class LucaEngine {
 
         let divChatListFrame = document.createElement('div');
         divChatListFrame.id = 'luca-chat-page-container';
-        divChatListFrame.innerHTML = chatTemplateHTML;
+        divChatListFrame.innerHTML = chatTemplateHTML
+            .replace("{emojiIcon}", chrome.runtime.getURL('assets/imgs/reaction_emoji.svg'))
+            .replace("{arrowUp}", chrome.runtime.getURL('assets/imgs/arrow_up.svg'))
+            .replace("{exitIcon}", chrome.runtime.getURL('assets/imgs/exit.svg'));
         document.body.appendChild(divChatListFrame);
-
+        // luca-chat-exit-icon
         let lucaChatToggle = document.createElement('div');
         lucaChatToggle.id = 'luca-chat-outer-toggle';
         lucaChatToggle.innerHTML = chatToggleTemplateHTML;
@@ -48,6 +51,7 @@ export class LucaEngine {
         let lucaInput: HTMLInputElement = document.getElementById('luca-input-field') as HTMLInputElement;
         let lucaChatInnerToggle: HTMLElement = document.getElementById('luca-chat-inner-toggle') as HTMLElement;
         let lucaChatOuterToggle: HTMLElement = document.getElementById('luca-chat-outer-toggle') as HTMLElement;
+        let lucaChatExitIcon: HTMLElement = document.getElementById('luca-chat-exit-icon') as HTMLElement;
         let lucaChatSendMessageButton: HTMLElement = document.getElementById('luca-chat-send-message-button') as HTMLElement;
 
 
@@ -125,6 +129,10 @@ export class LucaEngine {
         (document.body || document.documentElement).appendChild(s);
 
         lucaChatInnerToggle.addEventListener('click', function (event) {
+            event.preventDefault();
+            divChatListFrame.classList.toggle('luca-chat--active-effect');
+        });
+        lucaChatExitIcon.addEventListener('click', function (event) {
             event.preventDefault();
             divChatListFrame.classList.toggle('luca-chat--active-effect');
         });

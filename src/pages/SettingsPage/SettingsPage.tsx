@@ -1,8 +1,14 @@
-import React, { ChangeEvent, Component } from 'react';
+import React, { ChangeEvent, Component, useState } from 'react';
 import UserEngine from '../../js/luca/user-engine';
 import { toast } from 'react-toastify';
 import { SettingsService } from '../../core/services/SettingsService';
-class SettingsPage extends Component<{}, { username: string; userAvatar: string }> {
+
+interface settingsInterface {
+    username: string;
+    userAvatar: string;
+    darkTheme: boolean;
+}
+class SettingsPage extends Component<{}, settingsInterface> {
     maxLength: number = 16;
     minLength: number = 4;
     constructor(props: any) {
@@ -10,6 +16,7 @@ class SettingsPage extends Component<{}, { username: string; userAvatar: string 
         this.state = {
             username: '',
             userAvatar: '',
+            darkTheme: false,
         };
 
         let userEngine: UserEngine = new UserEngine();
@@ -19,6 +26,20 @@ class SettingsPage extends Component<{}, { username: string; userAvatar: string 
         });
         userEngine.getCurrentUserAvatar().then((avatar) => {
             this.setState({ userAvatar: avatar });
+        });
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    handleInputChange(event: any) {
+        const target: any = event.target;
+        const value: any = target.type === 'checkbox' ? target.checked : target.value;
+        const name: any = target.name;
+
+        console.log(target.checked);
+
+        this.setState({ ...this.state, [name]: value } as settingsInterface, () => {
+            localStorage.setItem('luca-settings', JSON.stringify(this.state));
         });
     }
 
@@ -37,11 +58,11 @@ class SettingsPage extends Component<{}, { username: string; userAvatar: string 
                                 <div className="input__container">
                                     <div className="input__room user__input">
                                         <input
-                                            onChange={this.changeUsername}
                                             className=""
                                             type="text"
-                                            name="user-name"
-                                            id="user-name"
+                                            name="username"
+                                            id="username"
+                                            onChange={this.handleInputChange}
                                             value={this.state.username}
                                             maxLength={this.maxLength}
                                         />
@@ -92,8 +113,15 @@ class SettingsPage extends Component<{}, { username: string; userAvatar: string 
                                     </p>
                                 </div>
                                 <div className="toggleWrapper">
-                                    <input className="mobileToggle" type="checkbox" name="dark-theme" id="dark-theme" />
-                                    <label htmlFor="dark-theme"></label>
+                                    <input
+                                        className="mobileToggle"
+                                        checked={this.state.darkTheme}
+                                        onChange={this.handleInputChange}
+                                        type="checkbox"
+                                        name="darkTheme"
+                                        id="darkTheme"
+                                    />
+                                    <label htmlFor="darkTheme"></label>
                                 </div>
                             </div>
                             <div className="setting d-flex d-aic d-jcb">
@@ -131,7 +159,7 @@ class SettingsPage extends Component<{}, { username: string; userAvatar: string 
             </React.Fragment>
         );
     }
- 
+
     changeUsername = (e: ChangeEvent) => {
         let userEngine: UserEngine = new UserEngine();
         let username = (e.target as HTMLInputElement).value;
@@ -158,8 +186,9 @@ class SettingsPage extends Component<{}, { username: string; userAvatar: string 
         userEngine.setCurrentUserAvatar(userAvatar);
         SettingsService.setAvatar(userAvatar);
     }
-    toggleTheme(e:any){
-
+    toggleTheme() {
+        document.documentElement.classList.toggle('dark-theme');
+        localStorage.setItem('settings', 'value');
     }
 }
 

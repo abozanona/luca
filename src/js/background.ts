@@ -1,5 +1,14 @@
 var partyTabs: any = {};
 
+chrome.storage.onChanged.addListener(function (changes, namespace) {
+    for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
+      console.log(
+        `Storage key "${key}" in namespace "${namespace}" changed.`,
+        `Old value was "${oldValue}", new value is "${newValue}".`
+      );
+    }
+  });
+  
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
     if (msg.code == 'Q_TAB_ID') {
         sendResponse({

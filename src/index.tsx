@@ -20,7 +20,6 @@ function PopupApp() {
     const navigate = useNavigate();
     useEffect(() => {
         // Update the document title using the browser API
-            document.documentElement.classList.add('dark-theme');
           
             console.log(document.documentElement);
             
