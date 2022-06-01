@@ -2,6 +2,7 @@ import React, { ChangeEvent, Component } from 'react';
 import UserEngine from '../../js/luca/user-engine';
 import { toast } from 'react-toastify';
 import { SettingsService } from '../../core/services/SettingsService';
+import UtilsEngine from '../../js/luca/utils-engine';
 class SettingsPage extends Component<{}, { username: string; userAvatar: string }> {
     maxLength: number = 16;
     minLength: number = 4;
@@ -31,8 +32,8 @@ class SettingsPage extends Component<{}, { username: string; userAvatar: string 
                         <div className="settings d-flex-col ">
                             <div className="setting d-flex d-aic d-jcb">
                                 <div className="setting__info">
-                                    <h1>User Name</h1>
-                                    <p>This the name that will appear to other users in rooms</p>
+                                    <h1>{UtilsEngine.translate('SETTINGS_USER_NAME')}</h1>
+                                    <p>{UtilsEngine.translate('SETTINGS_USER_NAME_NNOTICE')}</p>
                                 </div>
                                 <div className="input__container">
                                     <div className="input__room user__input">
@@ -50,8 +51,8 @@ class SettingsPage extends Component<{}, { username: string; userAvatar: string 
                             </div>
                             <div className="setting d-flex d-aic d-jcb">
                                 <div className="setting__info">
-                                    <h1>User Avatar</h1>
-                                    <p>Select your avatar</p>
+                                    <h1>{UtilsEngine.translate('SETTINGS_USER_AVATAR')}</h1>
+                                    <p>{UtilsEngine.translate('SETTINGS_USER_AVATAR_NOTICE')}</p>
                                 </div>
                                 <div className="avatars__container">
                                     <div className="avatars__images">
@@ -86,7 +87,7 @@ class SettingsPage extends Component<{}, { username: string; userAvatar: string 
                             </div>
                             <div className="setting d-flex d-aic d-jcb">
                                 <div className="setting__info">
-                                    <h1>Dark Theme</h1>
+                                    <h1>{UtilsEngine.translate('SETTINGS_DARK_THEME')}</h1>
                                     <p>
                                         Put some information here. Put some information here.Put some information here.
                                     </p>
@@ -98,7 +99,7 @@ class SettingsPage extends Component<{}, { username: string; userAvatar: string 
                             </div>
                             <div className="setting d-flex d-aic d-jcb">
                                 <div className="setting__info">
-                                    <h1>Enable Shortcut</h1>
+                                    <h1>{UtilsEngine.translate('SETTINGS_ENABLE_SHORTCUTS')}</h1>
                                     <p>
                                         Put some information here. Put some information here.Put some information here.
                                     </p>
@@ -115,10 +116,8 @@ class SettingsPage extends Component<{}, { username: string; userAvatar: string 
                             </div>
                             <div className="setting d-flex d-aic d-jcb">
                                 <div className="setting__info">
-                                    <h1>Show Extension Indecaters</h1>
-                                    <p>
-                                        Put some information here. Put some information here.Put some information here.
-                                    </p>
+                                    <h1>{UtilsEngine.translate('SETTINGS_SHOW_ACTIONS')}</h1>
+                                    <p>{UtilsEngine.translate('SETTINGS_SHOW_ACTIONS_NOTICE')}</p>
                                 </div>
                                 <div className="toggleWrapper">
                                     <input className="mobileToggle" type="checkbox" name="indecaters" id="indecaters" />
@@ -131,12 +130,12 @@ class SettingsPage extends Component<{}, { username: string; userAvatar: string 
             </React.Fragment>
         );
     }
- 
+
     changeUsername = (e: ChangeEvent) => {
         let userEngine: UserEngine = new UserEngine();
         let username = (e.target as HTMLInputElement).value;
         if (username.length < this.minLength) {
-            toast.error('The username must be at least ' + this.minLength + ' characters', {
+            toast.error(UtilsEngine.translate('SETTINGS_USERNAME_SMALL_ERROR', [this.minLength.toString()]), {
                 toastId: 'error:username:minLengt',
             });
             this.setState({ username: username });

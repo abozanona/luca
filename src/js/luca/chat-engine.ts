@@ -2,6 +2,7 @@ import { UserInterface } from './interfaces/user.interface';
 import { LucaEngine } from './luca-engine';
 import { SocketEngine } from './socket-engine';
 import UserEngine from './user-engine';
+import UtilsEngine from './utils-engine';
 
 export class ChatEngine {
     reactionScreenAnimation(elem: any, bounds: any, delay: any) {
@@ -40,8 +41,7 @@ export class ChatEngine {
 
     async addMessageBubble(messageText: string, user: UserInterface) {
 
-        const chatTemplateRes = await fetch(chrome.runtime.getURL("/templates/chat-bubble.template.html"));
-        const chatTemplateHTML = await chatTemplateRes.text();
+        const chatTemplateHTML = await UtilsEngine.loadTemplate("/templates/chat-bubble.template.html");
 
         let divChatBubble = document.createElement('div');
         divChatBubble.classList.add('luca-message-container');

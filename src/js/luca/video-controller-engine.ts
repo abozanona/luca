@@ -1,5 +1,6 @@
 import VideoControllerInterface from "../luca/interfaces/video-controller-interface";
 import SocketEngine from "./socket-engine";
+import UtilsEngine from "./utils-engine";
 
 export abstract class VideoControllerEngine implements VideoControllerInterface {
 
@@ -105,9 +106,7 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
 
     startStreamingOnVideo() {
         if (this.isVideoSelected) {
-            alert(
-                'Cannot create or join a room here. A room is already running. Refresh the page or create a room in another page.'
-            );
+            alert(UtilsEngine.translate('ALERT_PARTY_ALREADY_RUNNING'));
             return;
         }
         this.isVideoSelected = true;

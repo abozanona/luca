@@ -39,9 +39,7 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
     switch (message.code) {
         case 'Q_HIGHLIGHT_ALL_VIDEOS':
             if (videoController.isVideoSelected) {
-                alert(
-                    'Cannot create or join a room here. A room is already running. Refresh the page or create a room in another page.'
-                );
+                alert(UtilsEngine.translate('ALERT_PARTY_ALREADY_RUNNING'));
                 return;
             }
             document.querySelectorAll('.luca-video-highlight').forEach((el) => {
