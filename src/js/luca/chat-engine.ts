@@ -35,7 +35,6 @@ export class ChatEngine {
         userEngine.getCurrentUser().then(currentUser => {
             this.addMessageBubble(messageText, currentUser);
         });
-
     }
 
     async addMessageBubble(messageText: string, user: UserInterface) {
@@ -52,18 +51,14 @@ export class ChatEngine {
             .replace("{userAvatar}", chrome.runtime.getURL('assets/imgs/avatars/' + user.userAvatar))
             ;
 
-        let bubblesContainer = document.getElementsByClassName('luca-chat-messages-container')[0];
+        let bubblesContainer = document.getElementsByClassName('luca-chat-messages-container')[0] as HTMLElement;
         bubblesContainer.appendChild(divChatBubble);
+        bubblesContainer.scrollTop = bubblesContainer.scrollHeight;
 
         let lucaSendMessageAudioUrl = chrome.runtime.getURL('assets/audio/luca-message-send.mp3');
         let lucaSendMessageAudio = new Audio(lucaSendMessageAudioUrl);
         lucaSendMessageAudio.play();
 
-        let lucaChatMessagesContainer: HTMLElement = document.getElementsByClassName('luca-chat-messages-container')[0] as HTMLElement;
-        lucaChatMessagesContainer.scrollTop = lucaChatMessagesContainer.scrollHeight;
-
-        let lucaInput: HTMLInputElement = document.getElementById('luca-input-field') as HTMLInputElement;
-        lucaInput.value = '';
     }
 
     sendReactionToRoom(socketEngine: SocketEngine, reactionName: string) {
