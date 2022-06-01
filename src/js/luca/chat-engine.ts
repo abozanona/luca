@@ -2,6 +2,7 @@ import { UserInterface } from './interfaces/user.interface';
 import { LucaEngine } from './luca-engine';
 import { SocketEngine } from './socket-engine';
 import UserEngine from './user-engine';
+import UtilsEngine from './utils-engine';
 
 export class ChatEngine {
     reactionScreenAnimation(elem: any, bounds: any, delay: any) {
@@ -55,9 +56,7 @@ export class ChatEngine {
         let bubblesContainer = document.getElementsByClassName('luca-chat-messages-container')[0];
         bubblesContainer.appendChild(divChatBubble);
 
-        let lucaSendMessageAudioUrl = chrome.runtime.getURL('assets/audio/luca-message-send.mp3');
-        let lucaSendMessageAudio = new Audio(lucaSendMessageAudioUrl);
-        lucaSendMessageAudio.play();
+        UtilsEngine.playAudio('assets/audio/luca-message-send.mp3');
 
         let lucaChatMessagesContainer: HTMLElement = document.getElementsByClassName('luca-chat-messages-container')[0] as HTMLElement;
         lucaChatMessagesContainer.scrollTop = lucaChatMessagesContainer.scrollHeight;

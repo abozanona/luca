@@ -1,6 +1,12 @@
 import UserEngine from "./user-engine";
 
 export class UtilsEngine {
+    static playAudio(mp3Filepath: string) {
+        let audioUrl: string = chrome.runtime.getURL(mp3Filepath);
+        let audio: HTMLAudioElement = new Audio(audioUrl);
+        audio.play();
+    }
+
     static refreshPage() {
         location.reload();
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
