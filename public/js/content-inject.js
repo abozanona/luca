@@ -20,8 +20,8 @@ Array.from(document.getElementsByClassName('luca-reaction')).forEach(function (e
 
 function selectedVideo() {
     let api = window.netflix.appContext.state.playerApp.getAPI().videoPlayer;
-    let playerId = api.getAllPlayerSessionIds().find((val) => val.includes('watch'));
-    let player = api.getVideoPlayerBySessionId(playerId);
+    let playerId = api.getAllPlayerSessionIds().find(((val) => val.includes("watch")));
+    let player = api.getVideoPlayerBySessionId(playerId)
     return player;
 }
 
@@ -50,13 +50,13 @@ if (document.location.origin.includes('netflix.com')) {
         lastCurrentTime = selectedVideo().getCurrentTime();
     });
 
-    document.body.addEventListener('playVideo', function (ev) {
+    document.body.addEventListener("playVideo", function (ev) {
         selectedVideo().play();
     });
-    document.body.addEventListener('pauseVideo', function (ev) {
-        selectedVideo().pause();
+    document.body.addEventListener("pauseVideo", function (ev) {
+        selectedVideo().pause()
     });
-    document.body.addEventListener('seekVideo', function (ev) {
+    document.body.addEventListener("seekVideo", function (ev) {
         lastCurrentTime = ev.detail.time;
         selectedVideo().seek(ev.detail.time);
     });
