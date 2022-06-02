@@ -1,3 +1,5 @@
+import UtilsEngine from "./utils-engine";
+
 class SharePartyPage {
     initLucaJoinParty() {
         const linkStyleLucaWebsite = document.createElement('link');
@@ -24,7 +26,7 @@ class SharePartyPage {
                     chrome.runtime.sendMessage(message);
                 }
                 else {
-                    alert("Invalid party link");
+                    alert(UtilsEngine.translate('ALERT_INVALID_PARTY_LINK'));
                 }
             });
         };

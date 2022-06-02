@@ -13,6 +13,7 @@ const Website = require('../../assets/imgs/website.svg');
 const SupportUs = require('../../assets/imgs/support_us.svg');
 const RateUs = require('../../assets/imgs/rate_us.svg');
 import { toast } from 'react-toastify';
+import UtilsEngine from '../../js/luca/utils-engine';
 class Navbar extends Component<{}, { userName: string; userAvatar: string; userId: string }> {
     constructor(props: any) {
         super(props);
@@ -47,7 +48,7 @@ class Navbar extends Component<{}, { userName: string; userAvatar: string; userI
             if (name) {
                 this.setState({ userName: name });
             } else {
-                this.setState({ userName: 'Luca User' });
+                this.setState({ userName: UtilsEngine.translate('NAVBAR_LUCA_USER') });
             }
         });
     }
@@ -57,7 +58,7 @@ class Navbar extends Component<{}, { userName: string; userAvatar: string; userI
     }
 
     copyUserId = () => {
-        toast.success('User id copied to your clipboard', {
+        toast.success(UtilsEngine.translate('NAVBAR_USER_ID_COPIED_TO_YOUR_CLIPBOARD'), {
             toastId: 'success:copy-user-id',
         });
         navigator.clipboard.writeText(this.state.userId);
@@ -73,7 +74,12 @@ class Navbar extends Component<{}, { userName: string; userAvatar: string; userI
                         <p>
                             {this.state.userId}
                             <span>
-                                <img src={CopyCode} alt="Copy user id" title="Copy user id" onClick={this.copyUserId} />
+                                <img
+                                    src={CopyCode}
+                                    alt={UtilsEngine.translate('NAVBAR_COPY_USER_ID')}
+                                    title={UtilsEngine.translate('NAVBAR_COPY_USER_ID')}
+                                    onClick={this.copyUserId}
+                                />
                             </span>
                         </p>
                     </div>
@@ -94,26 +100,26 @@ class Navbar extends Component<{}, { userName: string; userAvatar: string; userI
                         <div className="options__list">
                             <a href="https://github.com/abozanona/luca/issues" target="_blank">
                                 <img src={Bug} alt="" />
-                                <p>Report Bug</p>
+                                <p>{UtilsEngine.translate('NAVBAR_REPORT_BUG')}</p>
                             </a>
                             <a href="https://discord.gg/T3uvQupA" target="_blank">
                                 <img src={Chat} alt="" />
-                                <p>Contact us</p>
+                                <p>{UtilsEngine.translate('NAVBAR_CONTACT_US')}</p>
                             </a>
                             <a href="https://cotede.co/" target="_blank">
                                 <img src={Website} alt="" />
-                                <p>Website</p>
+                                <p>{UtilsEngine.translate('NAVBAR_WEBSITE')}</p>
                             </a>
                             <a href="https://www.buymeacoffee.com/lucamovices" target="_blank">
                                 <img src={SupportUs} alt="" />
-                                <p>Support us</p>
+                                <p>{UtilsEngine.translate('NAVBAR_SUPPORT_US')}</p>
                             </a>
                             <a
                                 href="https://chrome.google.com/webstore/detail/luca-movies-and-videos-pa/obnoakbedffbolampagecgineggakiii/reviews"
                                 target="_blank"
                             >
                                 <img src={RateUs} alt="" />
-                                <p>Rate us</p>
+                                <p>{UtilsEngine.translate('NAVBAR_RATE_US')}</p>
                             </a>
                         </div>
                     </div>

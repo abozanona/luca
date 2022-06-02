@@ -1,5 +1,6 @@
 import { ChatEngine } from './chat-engine';
 import { SocketEngine } from './socket-engine';
+import UtilsEngine from './utils-engine';
 import { VideoControllerEngine } from './video-controller-engine';
 
 export class LucaEngine {
@@ -29,11 +30,9 @@ export class LucaEngine {
         let _this = this;
         //Add Luca chat container and bubbles
 
-        const chatTemplateRes = await fetch(chrome.runtime.getURL("/templates/chat.template.html"));
-        const chatTemplateHTML = await chatTemplateRes.text();
+        const chatTemplateHTML = await UtilsEngine.loadTemplate("/templates/chat.template.html");
 
-        const chatToggleTemplateRes = await fetch(chrome.runtime.getURL("/templates/chat-toggle.template.html"));
-        const chatToggleTemplateHTML = await chatToggleTemplateRes.text();
+        const chatToggleTemplateHTML = await UtilsEngine.loadTemplate("/templates/chat-toggle.template.html");
 
         let divChatListFrame = document.createElement('div');
         divChatListFrame.id = 'luca-chat-page-container';

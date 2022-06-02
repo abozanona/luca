@@ -1,3 +1,5 @@
+import UtilsEngine from "../js/luca/utils-engine";
+
 const home = require('../assets/imgs/home.svg');
 const friends = require('../assets/imgs/friends.svg');
 const settings = require('../assets/imgs/settings.svg');
@@ -7,25 +9,19 @@ const data = [
         id: 1,
         to: '/dashboard',
         icon: home,
-        name: 'home',
+        name: UtilsEngine.translate('NAV_HOME'),
     },
     {
         id: 2,
         to: '/friends',
         icon: friends,
-        name: 'friends',
+        name: UtilsEngine.translate('NAV_FRIENDS'),
     },
     {
         id: 3,
         to: '/settings',
         icon: settings,
-        name: 'settings',
+        name: UtilsEngine.translate('NAV_SETTINGS'),
     },
-    // {
-    //     id: 4,
-    //     to: '/',
-    //     icon: options,
-    //     name: 'options',
-    // },
 ];
 export default data;

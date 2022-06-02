@@ -1,0 +1,154 @@
+{
+    "MANIFEST_APP_NAME": {
+        "message": "لوكا"
+    },
+    "MANIFEST_APP_LONG_NAME": {
+        "message": "لوكا - إقامة حفلات أفلام وفيديوهات"
+    },
+    "MANIFEST_APP_DESCRIPTION": {
+        "message": "This extension gives you the ability to create rooms and watch online videos with your friends."
+    },
+    "ALERT_PARTY_ALREADY_RUNNING": {
+        "message": "Cannot create or join a room here. A room is already running. Refresh the page or create a room in another page."
+    },
+    "ALERT_INVALID_PARTY_LINK": {
+        "message": "Invalid party link."
+    },
+    "TEMPLATE_CHAT_CHAT": {
+        "message": "Chat"
+    },
+    "TEMPLATE_CHAT_WRITE_SOMETHING_HERE": {
+        "message": "Write Something here"
+    },
+    "NAV_HOME": {
+        "message": "Home"
+    },
+    "NAV_FRIENDS": {
+        "message": "Friends"
+    },
+    "NAV_SETTINGS": {
+        "message": "Settings"
+    },
+    "NAVBAR_LUCA_USER": {
+        "message": "Luca User"
+    },
+    "NAVBAR_USER_ID_COPIED_TO_YOUR_CLIPBOARD": {
+        "message": "User id copied to your clipboard"
+    },
+    "NAVBAR_COPY_USER_ID": {
+        "message": "Copy user id"
+    },
+    "NAVBAR_REPORT_BUG": {
+        "message": "Repoer a Bug"
+    },
+    "NAVBAR_CONTACT_US": {
+        "message": "Contact Us"
+    },
+    "NAVBAR_WEBSITE": {
+        "message": "Website"
+    },
+    "NAVBAR_SUPPORT_US": {
+        "message": "Support Us"
+    },
+    "NAVBAR_RATE_US": {
+        "message": "Rate Us"
+    },
+    "FOOTER_POWERED_BY": {
+        "message": "Powered by"
+    },
+    "FOOTER_COTEDE": {
+        "message": "Co.Te.De"
+    },
+    "SPLASH_APP_NAME": {
+        "message": "Luca"
+    },
+    "SPLASH_NOTICE": {
+        "message": "Watch movies with friends!"
+    },
+    "SETTINGS_USER_NAME": {
+        "message": "User Name"
+    },
+    "SETTINGS_USER_NAME_NNOTICE": {
+        "message": "This the name that will appear to other users in rooms."
+    },
+    "SETTINGS_USER_AVATAR": {
+        "message": "User Avatar"
+    },
+    "SETTINGS_USER_AVATAR_NOTICE": {
+        "message": "Select your avatar."
+    },
+    "SETTINGS_DARK_THEME": {
+        "message": "Dark Theme"
+    },
+    "SETTINGS_ENABLE_SHORTCUTS": {
+        "message": "Enable Shortcuts"
+    },
+    "SETTINGS_SHOW_ACTIONS": {
+        "message": "Show Actions"
+    },
+    "SETTINGS_SHOW_ACTIONS_NOTICE": {
+        "message": "Show actions other users do in the chat window"
+    },
+    "SETTINGS_USERNAME_SMALL_ERROR": {
+        "message": "The username must be at least $minLength$ characters",
+        "placeholders": {
+            "minLength": {
+                "content": "$1"
+            }
+        }
+    },
+    "SELECT_VIDEO_SELECT_VIDEO_To_START_PARTY": {
+        "message": "Select a video to start party"
+    },
+    "SELECT_VIDEO_SELECT_VIDEO_To_START_PARTY_NOTICE_1": {
+        "message": "Select the video you want to watch the party on."
+    },
+    "SELECT_VIDEO_SELECT_VIDEO_To_START_PARTY_NOTICE_2": {
+        "message": "If no video selection mark is showing, make sure that the video is already playing."
+    },
+    "PARTY_ROOM_ID_COPIED": {
+        "message": "Room id copied to your clipboard"
+    },
+    "PARTY_ROOM_LINK_COPIED": {
+        "message": "Room link copied to your clipboard"
+    },
+    "PARTY_COPY_PARTY_LINK": {
+        "message": "Copy party link"
+    },
+    "PARTY_COPY_PARTY_ID": {
+        "message": "Copy party id"
+    },
+    "PARTY_PARTY_SETTINGS": {
+        "message": "Party Settings"
+    },
+    "NOT_RECOGNISED_PAGE_NOT_SUPPORTED": {
+        "message": "This Page Is Not Supported"
+    },
+    "NOT_RECOGNISED_PAGE_NOT_SUPPORTED_NOTICE": {
+        "message": "This page is not supported by Luca extension. Please make sure it's a valid page or try to reload it."
+    },
+    "NOT_RECOGNISED_TRY_AGAIN": {
+        "message": "Try Again"
+    },
+    "FRIENDS_FRIENDS_COMING_SOON": {
+        "message": "Friends is coming soon!"
+    },
+    "FRIENDS_FRIENDS_COMING_SOON_NOTICE": {
+        "message": "Soon you will be able to create your own friends list and invite them to watch movies togother."
+    },
+    "DASHBOARD_ROOM_ID": {
+        "message": "Room ID"
+    },
+    "DASHBOARD_CREATE": {
+        "message": "Create"
+    },
+    "DASHBOARD_JOIN": {
+        "message": "Join"
+    },
+    "DASHBOARD_GET_STARTED_CREATE_OR_JOIN": {
+        "message": "Get Started, by Create/Join Room!"
+    },
+    "DASHBOARD_GET_STARTED_CREATE_OR_JOIN_NOTICE": {
+        "message": "Click on create to start a new party or enter a room id to join an already existing party."
+    }
+}

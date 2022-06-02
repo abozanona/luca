@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Avatar from '../../components/Avatar/Avatar';
 import GeneralButton from '../../components/GeneralButton/GeneralButton';
+import UtilsEngine from '../../js/luca/utils-engine';
 const AddFriend = require('../../assets/imgs/add-friend.svg');
 const Soon = require('../../assets/imgs/soon.svg');
 class FriendsPage extends Component {
@@ -10,10 +11,8 @@ class FriendsPage extends Component {
                 <div className="page__container">
                     <div className="page__content d-flex-col d-aic d-jcc">
                         <img src={Soon} alt="" />
-                        <h1>Friends is coming soon!</h1>
-                        <p>
-                            Soon you will be able to create your own friends list and invite them to watch movies togother.
-                        </p>
+                        <h1>{UtilsEngine.translate('FRIENDS_FRIENDS_COMING_SOON')}</h1>
+                        <p>{UtilsEngine.translate('FRIENDS_FRIENDS_COMING_SOON_NOTICE')}</p>
                     </div>
                 </div>
                 {/* <div className="page__container">

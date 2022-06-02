@@ -1,11 +1,12 @@
 {
-    "name": "LUCA - Movies and videos party",
-    "short_name": "LUCA",
-    "description": "This extension gives you the ability to create rooms and watch online videos with your friends.",
-    "version": "1.0.2",
+    "name": "__MSG_MANIFEST_APP_LONG_NAME__",
+    "short_name": "__MSG_MANIFEST_APP_NAME__",
+    "description": "__MSG_MANIFEST_APP_DESCRIPTION__",
+    "version": "1.0.3",
+    "default_locale": "en",
     "action": {
         "default_popup": "index.html",
-        "default_title": "Luca - Watch movies with friends",
+        "default_title": "__MSG_MANIFEST_APP_LONG_NAME__",
         "default_icon": "assets/imgs/icon-128.png"
     },
     "icons": {

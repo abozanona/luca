@@ -70,6 +70,17 @@ export class UtilsEngine {
         }
     }
 
+    static translate(message: string, parameters: string[] = []) {
+        return chrome.i18n.getMessage(message, parameters);
+    }
+
+    static async loadTemplate(templatePath: string) {
+        const templateRes = await fetch(chrome.runtime.getURL(templatePath));
+        let templateHTML = await templateRes.text();
+        templateHTML = templateHTML.replace(/{__MSG_([a-zA-Z0-9_]+)__}/g, (m, o) => UtilsEngine.translate(o));
+        return templateHTML;
+    }
+
 }
 
 export default UtilsEngine;
