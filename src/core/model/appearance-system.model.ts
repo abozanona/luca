@@ -1,8 +1,8 @@
-import { randomNames, uuid } from '../utils/utils';
+import UtilsEngine from "../../js/luca/utils-engine";
 
 export class AppearanceSystem {
-    username?: string = randomNames();
+    username?: string = UtilsEngine.randomNames();
     userAvatar?: string = '0.svg';
-    userId?: string = uuid();
+    userId?: string = UtilsEngine.uuid();
     darkTheme?: boolean = false;
 }

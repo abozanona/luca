@@ -1,5 +1,5 @@
 import { AppearanceSystem } from '../../core/model/appearance-system.model';
-import { isEmptyObject } from '../../core/utils/utils';
+import UtilsEngine from './utils-engine';
 
 export class UserEngine {
     //Just for testing
@@ -27,7 +27,7 @@ export class UserEngine {
                 .get('lucaSettings')
                 .then(async (items) => {
                     console.log(items);
-                    if (isEmptyObject(items)) {
+                    if (UtilsEngine.isEmptyObject(items)) {
                         await this.setSettings(new AppearanceSystem()).then((res) => {
                             this.getSettings();
                         });

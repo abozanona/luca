@@ -1,4 +1,5 @@
 import { AppearanceSystem } from '../../core/model/appearance-system.model';
+import { UserInterface } from './interfaces/user.interface';
 import { LucaEngine } from './luca-engine';
 import { SocketEngine } from './socket-engine';
 import UserEngine from './user-engine';
@@ -31,11 +32,11 @@ export class ChatEngine {
 
         let userEngine: UserEngine = new UserEngine();
         userEngine.getSettings().then((settings: AppearanceSystem) => {
-            this.addMessageBubble(messageText, settings);
+            this.addMessageBubble(messageText, { username: settings.username, userAvatar: settings.userAvatar, userId: settings.userId });
         });
     }
 
-    async addMessageBubble(messageText: string, user: AppearanceSystem) {
+    async addMessageBubble(messageText: string, user: UserInterface) {
         const chatTemplateHTML = await UtilsEngine.loadTemplate("/templates/chat-bubble.template.html");
         let divChatBubble = document.createElement('div');
         divChatBubble.classList.add('luca-message-container');
