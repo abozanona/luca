@@ -2,10 +2,14 @@ import { Subject } from 'rxjs';
 import { AppearanceSystem } from '../model/appearance-system.model';
 
 const $avatar = new Subject();
+const $settings = new Subject();
 const $username = new Subject();
-const themes = ['dark-theme', 'light-theme']
+const themes = ['dark-theme', 'light-theme'];
 
 export const SettingsService = {
+    getSettingsChange: () => $settings.asObservable(),
+
+    setSettingsChange: (settings: AppearanceSystem) => $settings.next(settings),
 
     getAvatar: () => $avatar.asObservable(),
     getUserName: () => $username.asObservable(),
@@ -24,5 +28,5 @@ export const SettingsService = {
             document.documentElement.classList.remove(themes[i]);
         }
         document.documentElement.classList.add(settings.darkTheme ? 'dark-theme' : 'light-theme');
-    }
+    },
 };

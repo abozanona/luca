@@ -6,9 +6,9 @@ class SharePartyPage {
         linkStyleLucaWebsite.type = 'text/css';
         document.head.appendChild(linkStyleLucaWebsite);
 
-        if (document.getElementById("luca-btn-join-party")) {
-            document.getElementById("luca-btn-join-party").addEventListener('click', function () {
-                const params = new URLSearchParams(window.location.search)
+        if (document.getElementById('luca-btn-join-party')) {
+            document.getElementById('luca-btn-join-party').addEventListener('click', function () {
+                const params = new URLSearchParams(window.location.search);
                 if (params.has('roomId') && params.has('roomLink')) {
                     let roomId = params.get('roomId');
                     let roomLink = params.get('roomLink');
@@ -22,12 +22,11 @@ class SharePartyPage {
                         },
                     };
                     chrome.runtime.sendMessage(message);
-                }
-                else {
-                    alert("Invalid party link");
+                } else {
+                    alert('Invalid party link');
                 }
             });
-        };
+        }
     }
 }
 

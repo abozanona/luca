@@ -2,7 +2,6 @@ import SocketEngine from '../socket-engine';
 import VideoControllerEngine from '../video-controller-engine';
 
 export class GeneralVideoController extends VideoControllerEngine {
-
     selectedVideo: HTMLVideoElement = null;
 
     constructor(socketEngine: SocketEngine) {

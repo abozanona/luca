@@ -4,45 +4,62 @@ import { toast } from 'react-toastify';
 import { SettingsService } from '../../core/services/SettingsService';
 import { AppearanceSystem } from '../../core/model/appearance-system.model';
 
-// export interface settingsInterface {
-//     username: string;
-//     userAvatar: string;
-//     darkTheme: boolean;
-// }
 class SettingsPage extends Component<{}, AppearanceSystem> {
     maxLength: number = 16;
     minLength: number = 4;
-    constructor(props: any) {
+    userEngine: UserEngine = new UserEngine();
+
+    constructor(props: AppearanceSystem) {
         super(props);
-        this.state = {
-            username: '',
-            userAvatar: '',
-            darkTheme: false,
-        };
-
-        let userEngine: UserEngine = new UserEngine();
-
-        userEngine.getCurrentUserName().then((name) => {
-            this.setState({ username: name });
-        });
-        userEngine.getCurrentUserAvatar().then((avatar) => {
-            this.setState({ userAvatar: avatar });
+        this.state = new AppearanceSystem();
+        this.userEngine.getSettings().then((settings: AppearanceSystem) => {
+            this.setState(settings);
         });
 
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.changeAvatar = this.changeAvatar.bind(this);
     }
 
-    handleInputChange(event: any) {
+    handleInputChange = (event: any) => {
         const target: any = event.target;
         const value: any = target.type === 'checkbox' ? target.checked : target.value;
         const name: any = target.name;
 
-        console.log(target.checked);
-
         this.setState({ ...this.state, [name]: value } as AppearanceSystem, () => {
-            localStorage.setItem('luca-settings', JSON.stringify(this.state));
+            this.userEngine.setSettings(this.state);
+            SettingsService.setSettingsChange({ ...this.state });
+            SettingsService.setTheme({ ...this.state });
         });
-    }
+    };
+
+    changeAvatar = (el: React.MouseEvent<HTMLImageElement>) => {
+        let clickedImage: HTMLImageElement = el.target as HTMLImageElement;
+        let imageAvatar = document.getElementsByClassName('img-avatar-selected')[0];
+
+        imageAvatar ? imageAvatar.classList.remove('img-avatar-selected') : null;
+        clickedImage.classList.add('img-avatar-selected');
+
+        this.setState({ userAvatar: clickedImage.dataset.name }, () => {
+            this.userEngine.setSettings({ ...this.state });
+            SettingsService.setSettingsChange({ ...this.state });
+        });
+    };
+
+    changeUsername = (e: ChangeEvent) => {
+        let username = (e.target as HTMLInputElement).value;
+        if (username.length < this.minLength) {
+            toast.error('The username must be at least ' + this.minLength + ' characters', {
+                toastId: 'error:username:minLengt',
+            });
+            this.setState({ username: username });
+            return;
+        }
+
+        this.setState({ username: username }, () => {
+            this.userEngine.setSettings({ ...this.state });
+            SettingsService.setSettingsChange({ ...this.state });
+        });
+    };
 
     render() {
         return (
@@ -63,7 +80,7 @@ class SettingsPage extends Component<{}, AppearanceSystem> {
                                             type="text"
                                             name="username"
                                             id="username"
-                                            onChange={this.handleInputChange}
+                                            onChange={this.changeUsername}
                                             value={this.state.username}
                                             maxLength={this.maxLength}
                                         />
@@ -159,37 +176,6 @@ class SettingsPage extends Component<{}, AppearanceSystem> {
                 </div>
             </React.Fragment>
         );
-    }
-
-    changeUsername = (e: ChangeEvent) => {
-        let userEngine: UserEngine = new UserEngine();
-        let username = (e.target as HTMLInputElement).value;
-        if (username.length < this.minLength) {
-            toast.error('The username must be at least ' + this.minLength + ' characters', {
-                toastId: 'error:username:minLengt',
-            });
-            this.setState({ username: username });
-            return;
-        }
-        this.setState({ username: username });
-        userEngine.setCurrentUserName(username);
-        SettingsService.setUserName(username);
-    };
-
-    changeAvatar(el: React.MouseEvent<HTMLImageElement>) {
-        let clickedImage: HTMLImageElement = el.target as HTMLImageElement;
-        if (document.getElementsByClassName('img-avatar-selected')[0]) {
-            document.getElementsByClassName('img-avatar-selected')[0].classList.remove('img-avatar-selected');
-        }
-        clickedImage.classList.add('img-avatar-selected');
-        let userAvatar = clickedImage.dataset.name;
-        let userEngine: UserEngine = new UserEngine();
-        userEngine.setCurrentUserAvatar(userAvatar);
-        SettingsService.setAvatar(userAvatar);
-    }
-    toggleTheme() {
-        document.documentElement.classList.toggle('dark-theme');
-        localStorage.setItem('settings', 'value');
     }
 }
 

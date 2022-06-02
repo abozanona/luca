@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import navConfig from '../../constant/nav.config';
 import { Link } from 'react-router-dom';
 import Avatar from '../Avatar/Avatar';
@@ -13,47 +13,26 @@ const Website = require('../../assets/imgs/website.svg');
 const SupportUs = require('../../assets/imgs/support_us.svg');
 const RateUs = require('../../assets/imgs/rate_us.svg');
 import { toast } from 'react-toastify';
-class Navbar extends Component<{}, { userName: string; userAvatar: string; userId: string }> {
+import { AppearanceSystem } from '../../core/model/appearance-system.model';
+class Navbar extends Component<{}, { username?: string; userAvatar?: string; userId?: string }> {
+    userEngine: UserEngine = new UserEngine();
+    settingsSubscription: Subscription;
+
     constructor(props: any) {
         super(props);
-        this.state = {
-            userName: '',
-            userAvatar: '',
-            userId: '',
-        };
-
-        let userEngine: UserEngine = new UserEngine();
-        userEngine.getCurrentUserName().then((name) => {
-            this.setState({ userName: name });
-        });
-        userEngine.getCurrentUserAvatar().then((avatar) => {
-            this.setState({ userAvatar: avatar });
-        });
-        userEngine.getUserId().then((userId) => {
-            this.setState({ userId: userId });
+        this.state = new AppearanceSystem();
+        this.userEngine.getSettings().then((settings: AppearanceSystem) => {
+            this.setState(settings);
         });
     }
-    avatarSubscription: Subscription;
-    usernameSubscription: Subscription;
     componentDidMount() {
-        this.avatarSubscription = SettingsService.getAvatar().subscribe((avatar: any) => {
-            if (avatar) {
-                this.setState({ userAvatar: avatar });
-            } else {
-                this.setState({ userAvatar: '0.svg' });
-            }
-        });
-        this.usernameSubscription = SettingsService.getUserName().subscribe((name: any) => {
-            if (name) {
-                this.setState({ userName: name });
-            } else {
-                this.setState({ userName: 'Luca User' });
-            }
+        this.settingsSubscription = SettingsService.getSettingsChange().subscribe((settings: AppearanceSystem) => {
+            this.setState(settings);
         });
     }
 
     componentWillUnmount() {
-        this.avatarSubscription.unsubscribe();
+        this.settingsSubscription.unsubscribe();
     }
 
     copyUserId = () => {
@@ -69,7 +48,7 @@ class Navbar extends Component<{}, { userName: string; userAvatar: string; userI
                 <div className="navbar__avatar">
                     <Avatar avatar={this.state.userAvatar} />
                     <div className="avatar__information">
-                        <h5>{this.state.userName}</h5>
+                        <h5>{this.state.username}</h5>
                         <p>
                             {this.state.userId}
                             <span>
@@ -81,11 +60,11 @@ class Navbar extends Component<{}, { userName: string; userAvatar: string; userI
                 <div className="navbar__elements">
                     {navConfig.map((item, index) => {
                         return (
-                            <div className="element" key={index}>
-                                <Link to={item.to}>
+                            <Link to={item.to} key={index}>
+                                <div className="element">
                                     <img src={item.icon} alt={item.name} />
-                                </Link>
-                            </div>
+                                </div>
+                            </Link>
                         );
                     })}
 

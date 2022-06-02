@@ -27,7 +27,6 @@ new SharePartyPage().initLucaJoinParty();
 function startPartyOnVideo(videoElement: HTMLVideoElement) {
     lucaEngine.injectChat();
     if (document.location.origin.includes('netflix.com')) {
-        ;
     } else {
         (videoController as GeneralVideoController).setVideo(videoElement);
     }
@@ -48,7 +47,6 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
                 el.remove();
             });
             document.querySelectorAll('video').forEach((elVideo) => {
-
                 let divVideoHiighlight = document.createElement('div');
                 divVideoHiighlight.classList.add('luca-video-highlight');
 
@@ -88,7 +86,13 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
             socketEngine.roomId = message.roomId;
             socketEngine.joinRoom(videoController, socketEngine.roomId);
             if (videoController.videoXPath) {
-                let videoElement: HTMLVideoElement = document.evaluate(videoController.videoXPath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue as HTMLVideoElement;
+                let videoElement: HTMLVideoElement = document.evaluate(
+                    videoController.videoXPath,
+                    document,
+                    null,
+                    XPathResult.FIRST_ORDERED_NODE_TYPE,
+                    null
+                ).singleNodeValue as HTMLVideoElement;
                 if (videoElement) {
                     startPartyOnVideo(videoElement);
                 }
@@ -136,7 +140,13 @@ function gotMessage(message: any, sender: any, sendResponse: any) {
             socketEngine.joinRoom(videoController, socketEngine.roomId);
             if (message.body.videoXPath) {
                 videoController.videoXPath = message.body.videoXPath;
-                let videoElement: HTMLVideoElement = document.evaluate(message.body.videoXPath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue as HTMLVideoElement;
+                let videoElement: HTMLVideoElement = document.evaluate(
+                    message.body.videoXPath,
+                    document,
+                    null,
+                    XPathResult.FIRST_ORDERED_NODE_TYPE,
+                    null
+                ).singleNodeValue as HTMLVideoElement;
                 if (videoElement) {
                     startPartyOnVideo(videoElement);
                 }

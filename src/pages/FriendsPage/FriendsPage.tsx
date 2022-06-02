@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import Avatar from '../../components/Avatar/Avatar';
 import GeneralButton from '../../components/GeneralButton/GeneralButton';
+import UserEngine from '../../js/luca/user-engine';
 const AddFriend = require('../../assets/imgs/add-friend.svg');
 const Soon = require('../../assets/imgs/soon.svg');
 class FriendsPage extends Component {
+    constructor(props: any) {
+        super(props);
+    }
     render() {
         return (
             <React.Fragment>
@@ -12,7 +16,8 @@ class FriendsPage extends Component {
                         <img src={Soon} alt="" />
                         <h1>Friends is coming soon!</h1>
                         <p>
-                            Soon you will be able to create your own friends list and invite them to watch movies togother.
+                            Soon you will be able to create your own friends list and invite them to watch movies
+                            togother.
                         </p>
                     </div>
                 </div>

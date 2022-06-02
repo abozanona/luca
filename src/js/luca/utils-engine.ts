@@ -1,4 +1,4 @@
-import UserEngine from "./user-engine";
+import UserEngine from './user-engine';
 
 export class UtilsEngine {
     static refreshPage() {
@@ -10,11 +10,14 @@ export class UtilsEngine {
 
     static getTabId(): Promise<string> {
         return new Promise(function (resolve, reject) {
-            chrome.runtime.sendMessage({ code: 'Q_TAB_ID' }).then((res) => {
-                resolve(res.body.tabId);
-            }).catch((err) => {
-                reject(err);
-            });
+            chrome.runtime
+                .sendMessage({ code: 'Q_TAB_ID' })
+                .then((res) => {
+                    resolve(res.body.tabId);
+                })
+                .catch((err) => {
+                    reject(err);
+                });
         });
     }
 
@@ -31,7 +34,7 @@ export class UtilsEngine {
     static getCurrentPageId(): Promise<string> {
         return new Promise(async function (resolve, reject) {
             let userEngine: UserEngine = new UserEngine();
-            let userId: string = await userEngine.getUserId();
+            let userId: string = await (await userEngine.getSettings()).userId;
             let tabId: string = await UtilsEngine.getTabId();
             resolve(userId + '-in-' + tabId);
         });
@@ -62,14 +65,14 @@ export class UtilsEngine {
         for (var i = 0; i < siblings.length; i++) {
             var sibling = siblings[i];
 
-            if (sibling === element) return this.getXPathTo(element.parentNode) + '/' + element.tagName.toLowerCase() + '[' + (ix + 1) + ']';
+            if (sibling === element)
+                return this.getXPathTo(element.parentNode) + '/' + element.tagName.toLowerCase() + '[' + (ix + 1) + ']';
 
             if (sibling.nodeType === 1 && sibling.tagName === element.tagName) {
                 ix++;
             }
         }
     }
-
 }
 
 export default UtilsEngine;
