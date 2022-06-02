@@ -15,9 +15,7 @@ export class SocketEngine {
 
     initSocket(videoControllerEngine: VideoControllerEngine): void {
         if (this.isSocketStarted) {
-            alert(
-                'Cannot create or join a room here. A room is already running. Refresh the page or create a room in another page.'
-            );
+            alert(UtilsEngine.translate('ALERT_PARTY_ALREADY_RUNNING'));
             return;
         }
         this.isSocketStarted = true;

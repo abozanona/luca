@@ -2,6 +2,7 @@ import { AppearanceSystem } from '../../core/model/appearance-system.model';
 import { LucaEngine } from './luca-engine';
 import { SocketEngine } from './socket-engine';
 import UserEngine from './user-engine';
+import UtilsEngine from './utils-engine';
 
 export class ChatEngine {
     reactionScreenAnimation(elem: any, bounds: any, delay: any) {
@@ -35,9 +36,7 @@ export class ChatEngine {
     }
 
     async addMessageBubble(messageText: string, user: AppearanceSystem) {
-        const chatTemplateRes = await fetch(chrome.runtime.getURL('/templates/chat-bubble.template.html'));
-        const chatTemplateHTML = await chatTemplateRes.text();
-
+        const chatTemplateHTML = await UtilsEngine.loadTemplate("/templates/chat-bubble.template.html");
         let divChatBubble = document.createElement('div');
         divChatBubble.classList.add('luca-message-container');
         divChatBubble.innerHTML = chatTemplateHTML
@@ -46,20 +45,14 @@ export class ChatEngine {
             .replace('{messageText}', messageText)
             .replace('{userAvatar}', chrome.runtime.getURL('assets/imgs/avatars/' + user.userAvatar));
 
-        let bubblesContainer = document.getElementsByClassName('luca-chat-messages-container')[0];
+        let bubblesContainer = document.getElementsByClassName('luca-chat-messages-container')[0] as HTMLElement;
         bubblesContainer.appendChild(divChatBubble);
+        bubblesContainer.scrollTop = bubblesContainer.scrollHeight;
 
         let lucaSendMessageAudioUrl = chrome.runtime.getURL('assets/audio/luca-message-send.mp3');
         let lucaSendMessageAudio = new Audio(lucaSendMessageAudioUrl);
         lucaSendMessageAudio.play();
 
-        let lucaChatMessagesContainer: HTMLElement = document.getElementsByClassName(
-            'luca-chat-messages-container'
-        )[0] as HTMLElement;
-        lucaChatMessagesContainer.scrollTop = lucaChatMessagesContainer.scrollHeight;
-
-        let lucaInput: HTMLInputElement = document.getElementById('luca-input-field') as HTMLInputElement;
-        lucaInput.value = '';
     }
 
     sendReactionToRoom(socketEngine: SocketEngine, reactionName: string) {
