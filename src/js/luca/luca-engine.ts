@@ -54,12 +54,7 @@ export class LucaEngine {
         window.addEventListener('keydown', function (e) {
             if (e.altKey == true && e.keyCode == 90 /*Z*/) {
                 e.preventDefault();
-                if (divChatListFrame.classList.contains('luca-chat--active-effect')) {
-                    divChatListFrame.classList.remove('luca-chat--active-effect');
-                } else {
-                    divChatListFrame.classList.add('luca-chat--active-effect');
-                    lucaInput.focus();
-                }
+                _this.toggleChatContainer();
             }
         });
 
@@ -107,6 +102,7 @@ export class LucaEngine {
             if (event.keyCode === 13) {
                 if (lucaInput.value) {
                     _this.chatEngine.sendMessageToRoom(_this.socketEngine, lucaInput.value);
+                    lucaInput.value = '';
                 }
             }
         });
@@ -114,6 +110,7 @@ export class LucaEngine {
             event.preventDefault();
             if (lucaInput.value) {
                 _this.chatEngine.sendMessageToRoom(_this.socketEngine, lucaInput.value);
+                lucaInput.value = '';
             }
         });
 
@@ -126,14 +123,11 @@ export class LucaEngine {
 
         lucaChatInnerToggle.addEventListener('click', function (event) {
             event.preventDefault();
-            divChatListFrame.classList.toggle('luca-chat--active-effect');
+            _this.toggleChatContainer();
         });
         lucaChatOuterToggle.addEventListener('click', function (event) {
             event.preventDefault();
-            divChatListFrame.classList.toggle('luca-chat--active-effect');
-            if (divChatListFrame.classList.contains('luca-chat--active-effect')) {
-                lucaInput.focus();
-            }
+            _this.toggleChatContainer();
         });
 
         //Show elements in full screne mode
@@ -168,6 +162,20 @@ export class LucaEngine {
             return 'WAITING_SELECT_VIDEO';
         }
         return 'ROOM_SETUP_COMPLETED';
+    }
+
+    toggleChatContainer() {
+        let divChatListFrame: HTMLElement = document.getElementById('luca-chat-page-container');
+        let lucaInput: HTMLInputElement = document.getElementById('luca-input-field') as HTMLInputElement;
+        let bubblesContainer = document.getElementsByClassName('luca-chat-messages-container')[0] as HTMLElement;
+
+        if (divChatListFrame.classList.contains('luca-chat--active-effect')) {
+            divChatListFrame.classList.remove('luca-chat--active-effect');
+        } else {
+            divChatListFrame.classList.add('luca-chat--active-effect');
+            lucaInput.focus();
+            bubblesContainer.scrollTop = bubblesContainer.scrollHeight;
+        }
     }
 }
 
