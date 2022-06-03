@@ -1,43 +1,6 @@
 import UserEngine from './user-engine';
 
 export class UtilsEngine {
-    static lucaRandomNames = [
-        'Xandyr the elf',
-        'Raelle the elf',
-        'Pollo the elf',
-        'Wex the elf',
-        'Solina the elf',
-        'Balon the dragon',
-        'Kolloth the dragon',
-        'Tren the dragon',
-        'Axan the dragon',
-        'Naga the dragon',
-        'Shalana the champ',
-        'Leandra the champ',
-        'Finhad the champ',
-        'Giliel the champ',
-        'Amrond the champ',
-        'Dracul the villan',
-        'Kedron the villan',
-        'Edana the villan',
-        'Brenna the villan',
-        'Gorgon the villan',
-        'Kahraman the superhero',
-        'Lucinda the superhero',
-        'Manning the superhero',
-        'Gunnar the superhero',
-        'Botilda the superhero',
-        'Aanya the sidekick',
-        'Creda the sidekick',
-        'Ervin the sidekick',
-        'Leya the sidekick',
-        'Etel the sidekick',
-        'Konrad the mentor',
-        'Orela the mentor',
-        'Eldred the mentor',
-        'Zilya the mentor',
-        'Kendry the mentor',
-    ];
 
     static refreshPage() {
         location.reload();
@@ -97,8 +60,9 @@ export class UtilsEngine {
         for (var i = 0; i < siblings.length; i++) {
             var sibling = siblings[i];
 
-            if (sibling === element)
+            if (sibling === element) {
                 return this.getXPathTo(element.parentNode) + '/' + element.tagName.toLowerCase() + '[' + (ix + 1) + ']';
+            }
 
             if (sibling.nodeType === 1 && sibling.tagName === element.tagName) {
                 ix++;
@@ -116,16 +80,47 @@ export class UtilsEngine {
         templateHTML = templateHTML.replace(/{__MSG_([a-zA-Z0-9_]+)__}/g, (m, o) => UtilsEngine.translate(o));
         return templateHTML;
     }
-    static customLog = function (item: any): any {
-        try {
-            console.log(JSON.parse(JSON.stringify(item)));
-        } catch (e) {
-            console.log('');
-        }
-    };
 
     static randomNames = (): string => {
-        return this.lucaRandomNames[Math.floor(Math.random() * this.lucaRandomNames.length)];
+        let lucaRandomNames = [
+            'Xandyr the elf',
+            'Raelle the elf',
+            'Pollo the elf',
+            'Wex the elf',
+            'Solina the elf',
+            'Balon the dragon',
+            'Kolloth the dragon',
+            'Tren the dragon',
+            'Axan the dragon',
+            'Naga the dragon',
+            'Shalana the champ',
+            'Leandra the champ',
+            'Finhad the champ',
+            'Giliel the champ',
+            'Amrond the champ',
+            'Dracul the villan',
+            'Kedron the villan',
+            'Edana the villan',
+            'Brenna the villan',
+            'Gorgon the villan',
+            'Kahraman the superhero',
+            'Lucinda the superhero',
+            'Manning the superhero',
+            'Gunnar the superhero',
+            'Botilda the superhero',
+            'Aanya the sidekick',
+            'Creda the sidekick',
+            'Ervin the sidekick',
+            'Leya the sidekick',
+            'Etel the sidekick',
+            'Konrad the mentor',
+            'Orela the mentor',
+            'Eldred the mentor',
+            'Zilya the mentor',
+            'Kendry the mentor',
+        ];
+
+        return lucaRandomNames[Math.floor(Math.random() * lucaRandomNames.length)];
     };
     static isEmptyObject = (obj: any) => {
         return JSON.stringify(obj) === '{}';

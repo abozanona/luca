@@ -2,18 +2,18 @@ import React, { ChangeEvent, Component, useState } from 'react';
 import UserEngine from '../../js/luca/user-engine';
 import { toast } from 'react-toastify';
 import { SettingsService } from '../../core/services/SettingsService';
-import { AppearanceSystem } from '../../core/model/appearance-system.model';
+import { Settings } from '../../core/model/settings.model';
 import UtilsEngine from '../../js/luca/utils-engine';
 
-class SettingsPage extends Component<{}, AppearanceSystem> {
+class SettingsPage extends Component<{}, Settings> {
     maxLength: number = 16;
     minLength: number = 4;
     userEngine: UserEngine = new UserEngine();
 
-    constructor(props: AppearanceSystem) {
+    constructor(props: Settings) {
         super(props);
-        this.state = new AppearanceSystem();
-        this.userEngine.getSettings().then((settings: AppearanceSystem) => {
+        this.state = new Settings();
+        this.userEngine.getSettings().then((settings: Settings) => {
             this.setState(settings);
         });
 
@@ -26,7 +26,7 @@ class SettingsPage extends Component<{}, AppearanceSystem> {
         const value: any = target.type === 'checkbox' ? target.checked : target.value;
         const name: any = target.name;
 
-        this.setState({ ...this.state, [name]: value } as AppearanceSystem, () => {
+        this.setState({ ...this.state, [name]: value } as Settings, () => {
             this.userEngine.setSettings(this.state);
             SettingsService.setSettingsChange({ ...this.state });
             SettingsService.setTheme({ ...this.state });

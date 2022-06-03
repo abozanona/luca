@@ -1,13 +1,8 @@
-import { AppearanceSystem } from '../../core/model/appearance-system.model';
+import { Settings } from '../../core/model/settings.model';
 import UtilsEngine from './utils-engine';
 
 export class UserEngine {
-    //Just for testing
-    clearGoogleSyncStorage() {
-        chrome.storage.sync.clear();
-    }
-
-    async setSettings(settings: AppearanceSystem): Promise<void> {
+    async setSettings(settings: Settings): Promise<void> {
         return new Promise((resolve, reject) => {
             chrome.storage.sync
                 .set({ lucaSettings: settings })
@@ -21,14 +16,14 @@ export class UserEngine {
         });
     }
 
-    async getSettings(): Promise<AppearanceSystem> {
+    async getSettings(): Promise<Settings> {
         return new Promise((resolve, reject) => {
             chrome.storage.sync
                 .get('lucaSettings')
                 .then(async (items) => {
                     console.log(items);
                     if (UtilsEngine.isEmptyObject(items)) {
-                        await this.setSettings(new AppearanceSystem()).then((res) => {
+                        await this.setSettings(new Settings()).then((res) => {
                             this.getSettings();
                         });
                     }

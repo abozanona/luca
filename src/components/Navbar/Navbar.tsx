@@ -13,20 +13,20 @@ const Website = require('../../assets/imgs/website.svg');
 const SupportUs = require('../../assets/imgs/support_us.svg');
 const RateUs = require('../../assets/imgs/rate_us.svg');
 import { toast } from 'react-toastify';
-import { AppearanceSystem } from '../../core/model/appearance-system.model';import UtilsEngine from '../../js/luca/utils-engine';
+import { Settings } from '../../core/model/settings.model';import UtilsEngine from '../../js/luca/utils-engine';
 class Navbar extends Component<{}, { username?: string; userAvatar?: string; userId?: string }> {
     userEngine: UserEngine = new UserEngine();
     settingsSubscription: Subscription;
 
     constructor(props: any) {
         super(props);
-        this.state = new AppearanceSystem();
-        this.userEngine.getSettings().then((settings: AppearanceSystem) => {
+        this.state = new Settings();
+        this.userEngine.getSettings().then((settings: Settings) => {
             this.setState(settings);
         });
     }
     componentDidMount() {
-        this.settingsSubscription = SettingsService.getSettingsChange().subscribe((settings: AppearanceSystem) => {
+        this.settingsSubscription = SettingsService.getSettingsChange().subscribe((settings: Settings) => {
             this.setState(settings);
         });
     }

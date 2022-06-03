@@ -1,4 +1,4 @@
-import { AppearanceSystem } from '../../core/model/appearance-system.model';
+import { Settings } from '../../core/model/settings.model';
 import { UserInterface } from './interfaces/user.interface';
 import { LucaEngine } from './luca-engine';
 import { SocketEngine } from './socket-engine';
@@ -31,7 +31,7 @@ export class ChatEngine {
         });
 
         let userEngine: UserEngine = new UserEngine();
-        userEngine.getSettings().then((settings: AppearanceSystem) => {
+        userEngine.getSettings().then((settings: Settings) => {
             this.addMessageBubble(messageText, { username: settings.username, userAvatar: settings.userAvatar, userId: settings.userId });
         });
     }

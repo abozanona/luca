@@ -16,7 +16,7 @@ import SplashPage from './pages/SplashPage/SplashPage';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import userEngine, { UserEngine } from './js/luca/user-engine';
-import { AppearanceSystem } from './core/model/appearance-system.model';
+import { Settings } from './core/model/settings.model';
 import { SettingsService } from './core/services/SettingsService';
 
 function PopupApp() {
