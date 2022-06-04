@@ -1,4 +1,38 @@
 @import "./vendor/variables";
+
+:root {
+    --primary-color: #{$primary-clr};
+    --secondary-color: #{$secondary-clr};
+    --bg-primary-color: #{$bg-primary-clr};
+    --bg-secondary-color: #{$white};
+    --text-primary-color: #{$text-primary-clr};
+    --text-secondary-color: #{$text-secondary-clr};
+}
+
+:root.dark-theme {
+    --primary-color: #{$dark-primary-clr};
+    --secondary-color: #{$dark-secondary-clr};
+    --bg-primary-color: #{$dark-primary-bg-clr};
+    --bg-secondary-color: #{$dark-secondary-bg-clr};
+    --text-primary-color: #{$dark-text-primary-clr};
+    --text-secondary-color: #{$dark-text-secondary-clr};
+    .element {
+        img {
+            filter: invert(99%) sepia(76%) saturate(2%) hue-rotate(131deg) brightness(114%) contrast(100%) !important;
+        }
+    }
+    .avatars__container {
+        &::after {
+            background: linear-gradient(270deg, rgba(24, 25, 26, 1) 0%, rgba(255, 255, 255, 0) 100%) !important;
+        }
+    }
+    .input__room {
+        img {
+            filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(43deg) brightness(102%) contrast(101%);
+        }
+    }
+}
+
 .luca-selected-video {
     background-color: red;
 }
@@ -30,7 +64,7 @@
     }
 }
 #luca-selected-video-frame {
-    border: solid 5px $primary-clr;
+    border: solid 5px var(--primary-color);
     border-radius: $radius;
     position: absolute;
     z-index: 2147483647;
@@ -38,7 +72,7 @@
 
 .luca-video-highlight {
     position: relative;
-    border: solid 5px $primary-clr;
+    border: solid 5px var(--primary-color);
     position: absolute;
     z-index: 2147483647;
 }
@@ -54,7 +88,7 @@
     width: 1.5em;
     top: 1em;
     left: 1em;
-    background-color: $white;
+    background-color: var(--bg-secondary-color);
     border-radius: $radius;
     transition: $transition-300;
     cursor: pointer;
@@ -64,7 +98,7 @@
         content: "";
         width: 1em;
         height: 0.15em; /* cross thickness */
-        background-color: $secondary-clr;
+        background-color: var(--secondary-color);
     }
     &::after {
         transform: rotate(-45deg);
@@ -73,7 +107,7 @@
         transform: rotate(45deg);
     }
     &:hover {
-        background-color: darken($white, 20%);
+        // background-color: darken(var(--bg-secondary-color), 20%);
     }
 }
 
@@ -87,7 +121,7 @@
     box-sizing: border-box;
     width: 0;
     height: 74px;
-    border-color: transparent transparent transparent $primary-clr;
+    border-color: transparent transparent transparent var(--primary-color);
     transition: 100ms all ease;
     cursor: pointer;
     border-style: solid;
@@ -177,11 +211,12 @@
     font-size: 12px !important;
     display: flex;
     flex-direction: column;
+    gap: 1em;
     position: fixed;
     right: 0;
     top: 50%;
     transform: translate(0%, -50%);
-    background-color: $white;
+    background-color: var(--bg-secondary-color);
     min-width: 0em;
     max-width: 0em;
     min-height: 60vh;
@@ -200,7 +235,7 @@
         height: 20%;
         left: 0.3rem;
         top: 50%;
-        background-color: $text-clr;
+        background-color: var(--text-primary-color);
         transform: translate(0%, -50%);
         cursor: pointer;
     }
@@ -217,14 +252,14 @@
             justify-content: space-between;
             align-items: center;
             flex: 1;
-            background-color: $bg-clr;
+            background-color: var(--bg-primary-color);
             border-radius: $radius;
             padding: 0.2em;
             button {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background-color: $primary-clr;
+                background-color: var(--primary-color);
                 border: none;
                 border-radius: $radius * 100;
                 width: 2em;
@@ -239,9 +274,9 @@
             }
             input {
                 border: none;
-                background-color: $bg-clr;
+                background-color: var(--bg-primary-color);
                 font-size: 0.9em;
-                color: $secondary-clr;
+                color: var(--secondary-color);
                 border-radius: $radius;
                 padding: 0.5em;
                 width: 90%;
@@ -257,7 +292,7 @@
             &:hover .luca-chat-emoji-reaction-container {
                 @extend .luca-chat-emoji-reaction--active-effect;
             }
-            svg {
+            > img {
                 width: 1.8em;
                 height: 1.8em;
             }
@@ -265,12 +300,17 @@
     }
     .luca-chat-header {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         h1 {
             font-size: 1.2em;
             font-weight: 500;
-            color: $secondary-clr;
+            color: var(--secondary-color);
+        }
+        img {
+            width: 1.5em;
+            height: 1.5em;
+            cursor: pointer;
         }
     }
     .luca-chat-messages-container {
@@ -278,7 +318,7 @@
         flex-direction: column;
         max-height: 100%;
         min-height: 100%;
-        margin-bottom: 4em;
+        margin-bottom: 2em;
         overflow: scroll;
         gap: 0.5em;
         &::-webkit-scrollbar {
@@ -297,7 +337,7 @@
                 p {
                     font-size: 0.6em;
                     font-weight: 300;
-                    color: $text-clr;
+                    color: var(--text-primary-color);
                 }
                 .luca-message-avatar {
                     display: flex;
@@ -314,7 +354,7 @@
                     h1 {
                         font-size: 0.8em;
                         font-weight: 500;
-                        color: $secondary-clr;
+                        color: var(--secondary-color);
                     }
                 }
             }
@@ -324,7 +364,7 @@
                     word-break: break-all;
                     font-size: 0.8em;
                     font-weight: 400;
-                    color: $secondary-clr;
+                    color: var(--secondary-color);
                     padding-inline-start: 3em;
                 }
             }
@@ -343,7 +383,7 @@
     opacity: 1 !important;
 }
 .luca-chat-emoji-reaction-container {
-    background-color: $bg-clr;
+    background-color: var(--bg-primary-color);
     border-radius: $radius * 100;
     display: flex;
     gap: 0.5em;

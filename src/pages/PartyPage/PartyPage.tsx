@@ -91,7 +91,7 @@ class PartyPage extends Component<
                         <div className="party__members-container">
                             <div className="page__memebers">
                                 {(this.state.partyUsers ?? []).map((user, index) => {
-                                    return <Avatar key={index} username={user.userName} avatar={user.userAvatar} />;
+                                    return <Avatar key={index} username={user.username} avatar={user.userAvatar} />;
                                 })}
                             </div>
                         </div>

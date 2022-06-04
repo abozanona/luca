@@ -1,7 +1,6 @@
-import { UserInterface } from "./luca/interfaces/user.interface";
+import { UserInterface } from './luca/interfaces/user.interface';
 
 class PopUpEngine {
-
     actionsOrder = ['NOTHING', 'WAITING_CREATE_ROOM', 'WAITING_SELECT_VIDEO', 'ROOM_SETUP_COMPLETED'];
     currentAction = 'NOTHING';
 
@@ -138,7 +137,6 @@ class PopUpEngine {
             this.currentPageCallBack(state);
         }
     }
-
 }
 
 export default PopUpEngine;

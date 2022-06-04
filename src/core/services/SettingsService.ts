@@ -1,12 +1,18 @@
 import { Subject } from 'rxjs';
+import { Settings } from '../model/settings.model';
 
-const $avatar = new Subject();
-const $username = new Subject();
+const $settings = new Subject();
+const themes = ['dark-theme', 'light-theme'];
 
 export const SettingsService = {
-    getAvatar: () => $avatar.asObservable(),
-    getUserName: () => $username.asObservable(),
+    getSettingsChange: () => $settings.asObservable(),
 
-    setAvatar: (avatarImage: string) => $avatar.next(avatarImage),
-    setUserName: (username: string) => $username.next(username),
+    setSettingsChange: (settings: Settings) => $settings.next(settings),
+
+    setTheme(settings: Settings): void {
+        for (let i = 0; i < themes.length; i++) {
+            document.documentElement.classList.remove(themes[i]);
+        }
+        document.documentElement.classList.add(settings.darkTheme ? 'dark-theme' : 'light-theme');
+    },
 };

@@ -3,17 +3,17 @@
     width: 100%;
     bottom: 0;
     padding: 0.3rem;
-    background-color: $white;
+    background-color: var(--bg-secondary-color);
     text-align: center;
     p {
         font-size: 0.563rem;
         font-weight: 400;
-        color: $secondary-clr;
+        color: var(--secondary-color);
         a {
             text-decoration: none;
             font-size: 0.563rem;
             font-weight: 500;
-            color: $primary-clr;
+            color: var(--primary-color);
         }
     }
 }

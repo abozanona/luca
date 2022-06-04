@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Avatar from '../../components/Avatar/Avatar';
-import GeneralButton from '../../components/GeneralButton/GeneralButton';
 import UtilsEngine from '../../js/luca/utils-engine';
-const AddFriend = require('../../assets/imgs/add-friend.svg');
 const Soon = require('../../assets/imgs/soon.svg');
 class FriendsPage extends Component {
+    constructor(props: any) {
+        super(props);
+    }
     render() {
         return (
             <React.Fragment>

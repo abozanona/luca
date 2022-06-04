@@ -1,33 +1,72 @@
-import React, { ChangeEvent, Component } from 'react';
+import React, { ChangeEvent, Component, useState } from 'react';
 import UserEngine from '../../js/luca/user-engine';
 import { toast } from 'react-toastify';
 import { SettingsService } from '../../core/services/SettingsService';
+import { Settings } from '../../core/model/settings.model';
 import UtilsEngine from '../../js/luca/utils-engine';
-class SettingsPage extends Component<{}, { username: string; userAvatar: string }> {
+
+class SettingsPage extends Component<{}, Settings> {
     maxLength: number = 16;
     minLength: number = 4;
-    constructor(props: any) {
+    userEngine: UserEngine = new UserEngine();
+
+    constructor(props: Settings) {
         super(props);
-        this.state = {
-            username: '',
-            userAvatar: '',
-        };
-
-        let userEngine: UserEngine = new UserEngine();
-
-        userEngine.getCurrentUserName().then((name) => {
-            this.setState({ username: name });
+        this.state = new Settings();
+        this.userEngine.getSettings().then((settings: Settings) => {
+            this.setState(settings);
         });
-        userEngine.getCurrentUserAvatar().then((avatar) => {
-            this.setState({ userAvatar: avatar });
-        });
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.changeAvatar = this.changeAvatar.bind(this);
     }
+
+    handleInputChange = (event: any) => {
+        const target: any = event.target;
+        const value: any = target.type === 'checkbox' ? target.checked : target.value;
+        const name: any = target.name;
+
+        this.setState({ ...this.state, [name]: value } as Settings, () => {
+            this.userEngine.setSettings(this.state);
+            SettingsService.setSettingsChange({ ...this.state });
+            SettingsService.setTheme({ ...this.state });
+        });
+    };
+
+    changeAvatar = (el: React.MouseEvent<HTMLImageElement>) => {
+        let clickedImage: HTMLImageElement = el.target as HTMLImageElement;
+        let imageAvatar = document.getElementsByClassName('img-avatar-selected')[0];
+
+        imageAvatar ? imageAvatar.classList.remove('img-avatar-selected') : null;
+        clickedImage.classList.add('img-avatar-selected');
+
+        this.setState({ userAvatar: clickedImage.dataset.name }, () => {
+            this.userEngine.setSettings({ ...this.state });
+            SettingsService.setSettingsChange({ ...this.state });
+        });
+    };
+
+    changeUsername = (e: ChangeEvent) => {
+        let username = (e.target as HTMLInputElement).value;
+        if (username.length < this.minLength) {
+            toast.error('The username must be at least ' + this.minLength + ' characters', {
+                toastId: 'error:username:minLengt',
+            });
+            this.setState({ username: username });
+            return;
+        }
+
+        this.setState({ username: username }, () => {
+            this.userEngine.setSettings({ ...this.state });
+            SettingsService.setSettingsChange({ ...this.state });
+        });
+    };
 
     render() {
         return (
             <React.Fragment>
                 <div className="page__container">
-                    <div className="settings__container ">
+                    <div className="settings__container  scrollbar">
                         <div className="d-jcb d-aic">{/* <h1 className="page__header">Settings</h1> */}</div>
                         <div className="settings d-flex-col ">
                             <div className="setting d-flex d-aic d-jcb">
@@ -38,11 +77,11 @@ class SettingsPage extends Component<{}, { username: string; userAvatar: string 
                                 <div className="input__container">
                                     <div className="input__room user__input">
                                         <input
-                                            onChange={this.changeUsername}
                                             className=""
                                             type="text"
-                                            name="user-name"
-                                            id="user-name"
+                                            name="username"
+                                            id="username"
+                                            onChange={this.changeUsername}
                                             value={this.state.username}
                                             maxLength={this.maxLength}
                                         />
@@ -93,8 +132,15 @@ class SettingsPage extends Component<{}, { username: string; userAvatar: string 
                                     </p>
                                 </div>
                                 <div className="toggleWrapper">
-                                    <input className="mobileToggle" type="checkbox" name="dark-theme" id="dark-theme" />
-                                    <label htmlFor="dark-theme"></label>
+                                    <input
+                                        className="mobileToggle"
+                                        checked={this.state.darkTheme}
+                                        onChange={this.handleInputChange}
+                                        type="checkbox"
+                                        name="darkTheme"
+                                        id="darkTheme"
+                                    />
+                                    <label htmlFor="darkTheme"></label>
                                 </div>
                             </div>
                             <div className="setting d-flex d-aic d-jcb">
@@ -129,33 +175,6 @@ class SettingsPage extends Component<{}, { username: string; userAvatar: string 
                 </div>
             </React.Fragment>
         );
-    }
-
-    changeUsername = (e: ChangeEvent) => {
-        let userEngine: UserEngine = new UserEngine();
-        let username = (e.target as HTMLInputElement).value;
-        if (username.length < this.minLength) {
-            toast.error(UtilsEngine.translate('SETTINGS_USERNAME_SMALL_ERROR', [this.minLength.toString()]), {
-                toastId: 'error:username:minLengt',
-            });
-            this.setState({ username: username });
-            return;
-        }
-        this.setState({ username: username });
-        userEngine.setCurrentUserName(username);
-        SettingsService.setUserName(username);
-    };
-
-    changeAvatar(el: React.MouseEvent<HTMLImageElement>) {
-        let clickedImage: HTMLImageElement = el.target as HTMLImageElement;
-        if (document.getElementsByClassName('img-avatar-selected')[0]) {
-            document.getElementsByClassName('img-avatar-selected')[0].classList.remove('img-avatar-selected');
-        }
-        clickedImage.classList.add('img-avatar-selected');
-        let userAvatar = clickedImage.dataset.name;
-        let userEngine: UserEngine = new UserEngine();
-        userEngine.setCurrentUserAvatar(userAvatar);
-        SettingsService.setAvatar(userAvatar);
     }
 }
 

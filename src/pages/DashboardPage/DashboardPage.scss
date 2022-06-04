@@ -9,11 +9,11 @@
     h1 {
         font-size: 0.875rem;
         font-weight: 500;
-        color: $secondary-clr;
+        color: var(--secondary-color);
     }
     p {
         font-size: 0.6rem;
         font-weight: 400;
-        color: $text-clr;
+        color: var(--text-primary-color);
     }
 }

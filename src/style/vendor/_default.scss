@@ -5,13 +5,45 @@
     font-family: $font-family;
     font-size: 16px;
 }
+:root {
+    --primary-color: #{$primary-clr};
+    --secondary-color: #{$secondary-clr};
+    --bg-primary-color: #{$bg-primary-clr};
+    --bg-secondary-color: #{$white};
+    --text-primary-color: #{$text-primary-clr};
+    --text-secondary-color: #{$text-secondary-clr};
+}
+
+:root.dark-theme {
+    --primary-color: #{$dark-primary-clr};
+    --secondary-color: #{$dark-secondary-clr};
+    --bg-primary-color: #{$dark-primary-bg-clr};
+    --bg-secondary-color: #{$dark-secondary-bg-clr};
+    --text-primary-color: #{$dark-text-primary-clr};
+    --text-secondary-color: #{$dark-text-secondary-clr};
+    .element {
+        img {
+            filter: invert(99%) sepia(76%) saturate(2%) hue-rotate(131deg) brightness(114%) contrast(100%) !important;
+        }
+    }
+    .avatars__container {
+        &::after {
+            background: linear-gradient(270deg, rgba(24, 25, 26, 1) 0%, rgba(255, 255, 255, 0) 100%) !important;
+        }
+    }
+    .input__room {
+        img {
+            filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(43deg) brightness(102%) contrast(101%);
+        }
+    }
+}
 body {
     background-image: url('../assets/imgs/danger.png');
 }
 .container {
     display: flex;
     flex-direction: column;
-    background-color: $bg-clr;
+    background-color: var(--bg-primary-color);
     width: 600px;
     height: 380px;
     position: relative;
@@ -25,7 +57,7 @@ body {
 
 .popup__container {
     position: absolute;
-    background-color: $white;
+    background-color: var(--bg-secondary-color);
     transition: $transition-300;
     margin: 0 auto;
     top: 50%;
@@ -60,8 +92,8 @@ body {
     flex-direction: column;
     width: 80%;
     input {
-        background-color: $white;
-        color: $secondary-clr;
+        background-color: var(--bg-secondary-color);
+        color: var(--secondary-color);
         border-radius: $radius;
         border: none;
         padding: 0.6rem;
@@ -74,7 +106,7 @@ body {
     .input__room {
         display: flex;
         align-items: center;
-        background-color: $white;
+        background-color: var(--bg-secondary-color);
         border-radius: $radius;
         padding: 0rem 1rem;
     }
@@ -93,7 +125,7 @@ body {
     label {
         font-size: 0.875rem;
         font-weight: 500;
-        color: $secondary-clr;
+        color: var(--secondary-color);
         margin-bottom: 0.5rem;
     }
 }
@@ -106,24 +138,24 @@ body {
 .page__header {
     font-size: 0.875rem;
     font-weight: 500;
-    color: $secondary-clr;
+    color: var(--secondary-color);
 }
 .page__pargraph {
     font-size: 0.6rem;
     font-weight: 400;
-    color: $text-clr;
+    color: var(--text-primary-color);
 }
 .page__content {
     gap: 0.5rem;
     h1 {
         font-size: 0.875rem;
         font-weight: 500;
-        color: $secondary-clr;
+        color: var(--secondary-color);
     }
     p {
         font-size: 0.6rem;
         font-weight: 400;
-        color: $text-clr;
+        color: var(--text-primary-color);
     }
 }
 .page__actions {
@@ -168,7 +200,7 @@ body {
                 transition: $transition-300;
                 height: 23px;
                 width: 50px;
-                background-color: $white;
+                background-color: var(--bg-secondary-color);
                 border-radius: $radius * 100;
                 &:before {
                     @extend .inactiveMixin;
@@ -182,7 +214,7 @@ body {
                 &:after {
                     @extend .inactiveMixin;
                     @extend .afterAnimation;
-                    background-color: $text-clr;
+                    background-color: var(--text-primary-color);
                     height: 18px;
                     width: 18px;
                     top: 2px;

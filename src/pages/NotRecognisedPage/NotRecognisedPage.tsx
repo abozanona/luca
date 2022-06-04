@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GeneralButton from '../../components/GeneralButton/GeneralButton';
 import UtilsEngine from '../../js/luca/utils-engine';
-const Reload = require('../../assets/imgs/reload.svg')
+const Reload = require('../../assets/imgs/reload.svg');
 const UnsupportedPage = require('../../assets/imgs/page-not-supported.svg');
 class NotRecognisedPage extends Component {
     refreshPage = () => {

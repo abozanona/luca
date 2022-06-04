@@ -1,25 +1,22 @@
-import VideoControllerInterface from "../luca/interfaces/video-controller-interface";
-import SocketEngine from "./socket-engine";
+import VideoControllerInterface from '../luca/interfaces/video-controller-interface';
+import SocketEngine from './socket-engine';
 import UtilsEngine from "./utils-engine";
 
 export abstract class VideoControllerEngine implements VideoControllerInterface {
-
     isVideoSelected: boolean;
     videoXPath: string = null;
 
     allowedActions: {
-        pause: number,
-        play: number,
-        seek: number,
+        pause: number;
+        play: number;
+        seek: number;
     } = {
-            pause: 0,
-            play: 0,
-            seek: 0,
-        };
+        pause: 0,
+        play: 0,
+        seek: 0,
+    };
 
-    constructor(public socketEngine: SocketEngine) {
-
-    }
+    constructor(public socketEngine: SocketEngine) {}
 
     abstract playVideo(): void;
     abstract isVideoPlaying(): boolean;
@@ -58,12 +55,9 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
             this.allowedActions.play = 0;
         }
         if (this.allowedActions.play == 0) {
-            this.socketEngine.sendPlayerOrder(
-                'play',
-                {
-                    time: this.getCurrentVideoTime(),
-                }
-            );
+            this.socketEngine.sendPlayerOrder('play', {
+                time: this.getCurrentVideoTime(),
+            });
         }
         if (this.allowedActions.play > 0) {
             this.allowedActions.play--;
@@ -75,12 +69,9 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
             this.allowedActions.pause = 0;
         }
         if (this.allowedActions.pause == 0) {
-            this.socketEngine.sendPlayerOrder(
-                'pause',
-                {
-                    time: this.getCurrentVideoTime(),
-                }
-            );
+            this.socketEngine.sendPlayerOrder('pause', {
+                time: this.getCurrentVideoTime(),
+            });
         }
         if (this.allowedActions.pause > 0) {
             this.allowedActions.pause--;
@@ -92,12 +83,9 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
             this.allowedActions.seek = 0;
         }
         if (this.allowedActions.seek == 0) {
-            this.socketEngine.sendPlayerOrder(
-                'seek',
-                {
-                    time: this.getCurrentVideoTime(),
-                }
-            );
+            this.socketEngine.sendPlayerOrder('seek', {
+                time: this.getCurrentVideoTime(),
+            });
         }
         if (this.allowedActions.seek > 0) {
             this.allowedActions.seek--;

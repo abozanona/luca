@@ -1,6 +1,4 @@
-
 export interface VideoControllerInterface {
-
     playVideo(): void;
 
     isVideoPaused(): boolean;
@@ -14,7 +12,6 @@ export interface VideoControllerInterface {
     getCurrentVideoTime(): number;
 
     initVideoListners(): void;
-
 }
 
 export default VideoControllerInterface;
