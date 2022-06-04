@@ -96,8 +96,7 @@ export class SocketEngine {
     sendPlayerOrder(order: string, data: any): Promise<void> {
         let _this = this;
         return new Promise(async function (resolve, reject) {
-            let userEngine: UserEngine = new UserEngine();
-            let currentUser = (await userEngine.getSettings()).username;
+            let currentUser = (await UserEngine.getSettings()).username;
             let currentPageId = await UtilsEngine.getCurrentPageId();
             data.pageId = currentPageId;
             data.pageId = currentPageId;

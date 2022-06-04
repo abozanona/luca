@@ -89,6 +89,12 @@
     "SETTINGS_SHOW_ACTIONS_NOTICE": {
         "message": "Show actions other users do in the chat window"
     },
+    "SETTINGS_PLAY_SOUNDS": {
+        "message": "Play Sounds"
+    },
+    "SETTINGS_PLAY_SOUNDS_NOTICE": {
+        "message": "Enable/disable playing sounds"
+    },
     "SETTINGS_USERNAME_SMALL_ERROR": {
         "message": "The username must be at least $minLength$ characters",
         "placeholders": {

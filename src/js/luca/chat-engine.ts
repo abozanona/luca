@@ -30,8 +30,7 @@ export class ChatEngine {
             text: messageText,
         });
 
-        let userEngine: UserEngine = new UserEngine();
-        userEngine.getSettings().then((settings: Settings) => {
+        UserEngine.getSettings().then((settings: Settings) => {
             this.addMessageBubble(messageText, { username: settings.username, userAvatar: settings.userAvatar, userId: settings.userId });
         });
     }
