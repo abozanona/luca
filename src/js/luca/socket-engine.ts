@@ -13,7 +13,7 @@ export class SocketEngine {
 
     constructor(private chatEngine: ChatEngine) {}
 
-    initSocket(videoControllerEngine: VideoControllerEngine): void {
+    private initSocket(videoControllerEngine: VideoControllerEngine): void {
         if (this.isSocketStarted) {
             alert(UtilsEngine.translate('ALERT_PARTY_ALREADY_RUNNING'));
             return;
@@ -65,7 +65,7 @@ export class SocketEngine {
         });
     }
 
-    addUserToChat(sender: UserInterface) {
+    private addUserToChat(sender: UserInterface) {
         if (!sender) {
             return;
         }
@@ -81,19 +81,19 @@ export class SocketEngine {
         }
     }
 
-    createRoom(videoControllerEngine: VideoControllerEngine, roomId: string) {
+    public createRoom(videoControllerEngine: VideoControllerEngine, roomId: string) {
         this.roomId = roomId;
         this.initSocket(videoControllerEngine);
         this.socket.emit('join', this.roomId);
     }
 
-    joinRoom(videoControllerEngine: VideoControllerEngine, roomId: string) {
+    public joinRoom(videoControllerEngine: VideoControllerEngine, roomId: string) {
         this.roomId = roomId;
         this.initSocket(videoControllerEngine);
         this.socket.emit('join', this.roomId);
     }
 
-    sendPlayerOrder(order: string, data: any): Promise<void> {
+    public sendPlayerOrder(order: string, data: any): Promise<void> {
         let _this = this;
         return new Promise(async function (resolve, reject) {
             let currentUser = (await UserEngine.getSettings()).username;

@@ -1,7 +1,7 @@
 import UtilsEngine from "./utils-engine";
 
 class SharePartyPage {
-    initLucaJoinParty() {
+    public initLucaJoinParty() {
         const linkStyleLucaWebsite = document.createElement('link');
         linkStyleLucaWebsite.href = chrome.runtime.getURL('style/luca-website-style.css');
         linkStyleLucaWebsite.rel = 'stylesheet';

@@ -8,7 +8,7 @@ class PopUpEngine {
         this.initEvents();
     }
 
-    createRoom() {
+    public createRoom() {
         this.getCurrentTabId(function (tabId: any) {
             const message = {
                 code: 'Q_CREATE_NEW_ROOM_ID',
@@ -17,7 +17,7 @@ class PopUpEngine {
         });
     }
 
-    joinRoom(roomId: string) {
+    public joinRoom(roomId: string) {
         this.getCurrentTabId(function (tabId: any) {
             const message = {
                 code: 'Q_JOIN_ROOM_ID',
@@ -27,7 +27,7 @@ class PopUpEngine {
         });
     }
 
-    highlightPageVideos() {
+    public highlightPageVideos() {
         this.getCurrentTabId(function (tabId: any) {
             const message = {
                 code: 'Q_HIGHLIGHT_ALL_VIDEOS',
@@ -36,7 +36,7 @@ class PopUpEngine {
         });
     }
 
-    initEvents() {
+    private initEvents() {
         let _this = this;
         chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             switch (request.code) {
@@ -66,14 +66,14 @@ class PopUpEngine {
         });
     }
 
-    getCurrentTabId(cb: any) {
+    private getCurrentTabId(cb: any) {
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             cb(tabs[0].id);
         });
     }
 
-    currentPageCallBack: (page: string) => void;
-    getCurrentPageStatus(cb: (page: string) => void) {
+    private currentPageCallBack: (page: string) => void;
+    public getCurrentPageStatus(cb: (page: string) => void) {
         this.currentPageCallBack = cb;
 
         this.currentAction = 'NOTHING';
@@ -86,8 +86,8 @@ class PopUpEngine {
         });
     }
 
-    currentRoomIdCallBack: (roomId: string) => void;
-    getCurrentRoomId(cb: (roomId: string) => void) {
+    private currentRoomIdCallBack: (roomId: string) => void;
+    public getCurrentRoomId(cb: (roomId: string) => void) {
         this.currentRoomIdCallBack = cb;
 
         this.getCurrentTabId(function (tabId: any) {
@@ -98,8 +98,8 @@ class PopUpEngine {
         });
     }
 
-    currentRoomVideoXPathCallBack: (videoXPath: string) => void;
-    currentRoomVideoXPath(cb: (videoXPath: string) => void) {
+    private currentRoomVideoXPathCallBack: (videoXPath: string) => void;
+    public currentRoomVideoXPath(cb: (videoXPath: string) => void) {
         this.currentRoomVideoXPathCallBack = cb;
 
         this.getCurrentTabId(function (tabId: any) {
@@ -110,8 +110,8 @@ class PopUpEngine {
         });
     }
 
-    currentRoomUrlCallBack: (roomUrl: string) => void;
-    getCurrentRoomUrl(cb: (roomUrl: string) => void) {
+    private currentRoomUrlCallBack: (roomUrl: string) => void;
+    public getCurrentRoomUrl(cb: (roomUrl: string) => void) {
         this.currentRoomUrlCallBack = cb;
         let _this = this;
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -120,8 +120,8 @@ class PopUpEngine {
         });
     }
 
-    currentRoomUsersCallBack: (users: UserInterface[]) => void;
-    getCurrentRoomUsers(cb: (users: UserInterface[]) => void) {
+    private currentRoomUsersCallBack: (users: UserInterface[]) => void;
+    public getCurrentRoomUsers(cb: (users: UserInterface[]) => void) {
         this.currentRoomUsersCallBack = cb;
 
         this.getCurrentTabId(function (tabId: any) {
@@ -132,7 +132,7 @@ class PopUpEngine {
         });
     }
 
-    renderPopupScreen(state: string) {
+    public renderPopupScreen(state: string) {
         if (this.currentPageCallBack) {
             this.currentPageCallBack(state);
         }

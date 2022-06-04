@@ -6,7 +6,7 @@ import UserEngine from './user-engine';
 import UtilsEngine from './utils-engine';
 
 export class ChatEngine {
-    reactionScreenAnimation(elem: any, bounds: any, delay: any) {
+    private reactionScreenAnimation(elem: any, bounds: any, delay: any) {
         let bottom = 0;
         let opacity = 1;
         let startRight = false;
@@ -25,7 +25,7 @@ export class ChatEngine {
         let id = setInterval(frame, delay);
     }
 
-    sendMessageToRoom(socketEngine: SocketEngine, messageText: string) {
+    public sendMessageToRoom(socketEngine: SocketEngine, messageText: string) {
         socketEngine.sendPlayerOrder('message', {
             text: messageText,
         });
@@ -35,7 +35,7 @@ export class ChatEngine {
         });
     }
 
-    async addMessageBubble(messageText: string, user: UserInterface) {
+    public async addMessageBubble(messageText: string, user: UserInterface) {
         const chatTemplateHTML = await UtilsEngine.loadTemplate("/templates/chat-bubble.template.html");
         let divChatBubble = document.createElement('div');
         divChatBubble.classList.add('luca-message-container');
@@ -53,21 +53,21 @@ export class ChatEngine {
 
     }
 
-    sendReactionToRoom(socketEngine: SocketEngine, reactionName: string) {
+    public sendReactionToRoom(socketEngine: SocketEngine, reactionName: string) {
         socketEngine.sendPlayerOrder('reaction', {
             name: reactionName,
         });
     }
 
-    getRandomInteger = function (min: number, max: number): number {
+    private getRandomInteger = function (min: number, max: number): number {
         return Math.ceil(Math.random() * (max - min + 1)) + min;
     };
 
-    getRandomIntegerRanged = function (min: number, max: number): number {
+    private getRandomIntegerRanged = function (min: number, max: number): number {
         return Math.ceil(Math.random() * (max - min + 1)) + min * (Math.round(Math.random()) ? 1 : -1);
     };
 
-    showReactionOnScreen(reactionName: string) {
+    public showReactionOnScreen(reactionName: string) {
         let _this = this;
         var startScreenPercentage = 0.03;
         var endScreenPercentage = 0.97;

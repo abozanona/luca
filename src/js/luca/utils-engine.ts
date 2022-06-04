@@ -1,7 +1,7 @@
 import UserEngine from './user-engine';
 
 export class UtilsEngine {
-    static async playAudio(mp3Filepath: string) {
+    public static async playAudio(mp3Filepath: string) {
         let playSounds: boolean = (await UserEngine.getSettings()).playSounds;
         if (!playSounds) {
             return;
@@ -11,14 +11,14 @@ export class UtilsEngine {
         audio.play();
     }
 
-    static refreshPage() {
+    public static refreshPage() {
         location.reload();
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             chrome.tabs.reload(tabs[0].id);
         });
     }
 
-    static getTabId(): Promise<string> {
+    public static getTabId(): Promise<string> {
         return new Promise(function (resolve, reject) {
             chrome.runtime
                 .sendMessage({ code: 'Q_TAB_ID' })
@@ -31,7 +31,7 @@ export class UtilsEngine {
         });
     }
 
-    static getOffset(el: HTMLElement) {
+    public static getOffset(el: HTMLElement) {
         const rect = el.getBoundingClientRect();
         return {
             left: rect.left + window.scrollX,
@@ -41,7 +41,7 @@ export class UtilsEngine {
         };
     }
 
-    static getCurrentPageId(): Promise<string> {
+    public static getCurrentPageId(): Promise<string> {
         return new Promise(async function (resolve, reject) {
             let userId: string = (await UserEngine.getSettings()).userId;
             let tabId: string = await UtilsEngine.getTabId();
@@ -49,7 +49,7 @@ export class UtilsEngine {
         });
     }
 
-    static executeUnderDifferentTabId(messagePageId: string, cb: () => void) {
+    public static executeUnderDifferentTabId(messagePageId: string, cb: () => void) {
         UtilsEngine.getCurrentPageId().then(function (currentPageId) {
             if (messagePageId == currentPageId) {
                 return;
@@ -58,7 +58,7 @@ export class UtilsEngine {
         });
     }
 
-    static getXPathTo(element: any): string {
+    public static getXPathTo(element: any): string {
         if (element === document.body) {
             return '//' + element.tagName.toLowerCase();
         }
@@ -78,18 +78,18 @@ export class UtilsEngine {
         }
     }
 
-    static translate(message: string, parameters: string[] = []) {
+    public static translate(message: string, parameters: string[] = []) {
         return chrome.i18n.getMessage(message, parameters);
     }
 
-    static async loadTemplate(templatePath: string) {
+    public static async loadTemplate(templatePath: string) {
         const templateRes = await fetch(chrome.runtime.getURL(templatePath));
         let templateHTML = await templateRes.text();
         templateHTML = templateHTML.replace(/{__MSG_([a-zA-Z0-9_]+)__}/g, (m, o) => UtilsEngine.translate(o));
         return templateHTML;
     }
 
-    static randomNames = (): string => {
+    public static randomNames = (): string => {
         let lucaRandomNames = [
             'Xandyr the elf',
             'Raelle the elf',
@@ -131,7 +131,7 @@ export class UtilsEngine {
         return lucaRandomNames[Math.floor(Math.random() * lucaRandomNames.length)];
     };
 
-    static uuid = () => {
+    public static uuid = () => {
         return ('' + 1e8).replace(/[018]/g, (c) =>
             (parseInt(c) ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (parseInt(c) / 4)))).toString(16)
         );
