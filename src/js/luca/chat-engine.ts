@@ -55,6 +55,10 @@ export class ChatEngine {
         if (!user) {
             return;
         }
+        let showActionsInChat: boolean = (await UserEngine.getSettings()).showActionsInChat;
+        if (!showActionsInChat) {
+            return;
+        }
         const chatTemplateHTML = await UtilsEngine.loadTemplate("/templates/chat-action.template.html");
         let divChatBubble = document.createElement('div');
         divChatBubble.classList.add('luca-message-container');

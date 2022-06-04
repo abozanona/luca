@@ -165,8 +165,15 @@ class SettingsPage extends Component<{}, Settings> {
                                     <p>{UtilsEngine.translate('SETTINGS_SHOW_ACTIONS_NOTICE')}</p>
                                 </div>
                                 <div className="toggleWrapper">
-                                    <input className="mobileToggle" type="checkbox" name="indecaters" id="indecaters" />
-                                    <label htmlFor="indecaters"></label>
+                                    <input
+                                        className="mobileToggle"
+                                        checked={this.state.showActionsInChat}
+                                        onChange={this.handleInputChange}
+                                        type="checkbox"
+                                        name="showActionsInChat"
+                                        id="showActionsInChat"
+                                    />
+                                    <label htmlFor="showActionsInChat"></label>
                                 </div>
                             </div>
                             <div className="setting d-flex d-aic d-jcb">
@@ -175,7 +182,7 @@ class SettingsPage extends Component<{}, Settings> {
                                     <p>{UtilsEngine.translate('SETTINGS_PLAY_SOUNDS_NOTICE')}</p>
                                 </div>
                                 <div className="toggleWrapper">
-                                <input
+                                    <input
                                         className="mobileToggle"
                                         checked={this.state.playSounds}
                                         onChange={this.handleInputChange}
