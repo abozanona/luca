@@ -6,91 +6,97 @@
         "message": "لوكا - إقامة حفلات أفلام وفيديوهات"
     },
     "MANIFEST_APP_DESCRIPTION": {
-        "message": "This extension gives you the ability to create rooms and watch online videos with your friends."
+        "message": "تمنحك هذه الإضافة القدرة على إنشاء غرف ومشاهدة مقاطع الفيديو عبر الإنترنت مع أصدقائك."
     },
     "ALERT_PARTY_ALREADY_RUNNING": {
-        "message": "Cannot create or join a room here. A room is already running. Refresh the page or create a room in another page."
+        "message": "لا يمكن إنشاء أو الانضمام إلى غرفة هنا. هنلك غرفة بالفعل. قم بتحديث الصفحة أو إنشاء غرفة في صفحة أخرى."
     },
     "ALERT_INVALID_PARTY_LINK": {
-        "message": "Invalid party link."
+        "message": "رابط الحفلة غير صالح."
     },
     "TEMPLATE_CHAT_CHAT": {
-        "message": "Chat"
+        "message": "الدردشة"
     },
     "TEMPLATE_CHAT_WRITE_SOMETHING_HERE": {
-        "message": "Write Something here"
+        "message": "اكتب شيء هنا"
     },
     "NAV_HOME": {
-        "message": "Home"
+        "message": "الرئيسية"
     },
     "NAV_FRIENDS": {
-        "message": "Friends"
+        "message": "الأصدقاء"
     },
     "NAV_SETTINGS": {
-        "message": "Settings"
+        "message": "الإعدادات"
     },
     "NAVBAR_LUCA_USER": {
-        "message": "Luca User"
+        "message": "مستخدم لوكا"
     },
     "NAVBAR_USER_ID_COPIED_TO_YOUR_CLIPBOARD": {
-        "message": "User id copied to your clipboard"
+        "message": "تم نسخ معرف المستخدم إلى الحافظة"
     },
     "NAVBAR_COPY_USER_ID": {
-        "message": "Copy user id"
+        "message": "نسخ معرف المستخدم"
     },
     "NAVBAR_REPORT_BUG": {
-        "message": "Repoer a Bug"
+        "message": "الإبلاغ عن مشكلة"
     },
     "NAVBAR_CONTACT_US": {
-        "message": "Contact Us"
+        "message": "تواصل معنا"
     },
     "NAVBAR_WEBSITE": {
-        "message": "Website"
+        "message": "الموقع الإلكتروني"
     },
     "NAVBAR_SUPPORT_US": {
-        "message": "Support Us"
+        "message": "ادعمنا"
     },
     "NAVBAR_RATE_US": {
-        "message": "Rate Us"
+        "message": "قيمنا"
     },
     "FOOTER_POWERED_BY": {
-        "message": "Powered by"
+        "message": "مقدم من قبل"
     },
     "FOOTER_COTEDE": {
-        "message": "Co.Te.De"
+        "message": "كو تي دي"
     },
     "SPLASH_APP_NAME": {
-        "message": "Luca"
+        "message": "لوكا"
     },
     "SPLASH_NOTICE": {
-        "message": "Watch movies with friends!"
+        "message": "مشاهدة الأفلام مع الأصدقاء!"
     },
     "SETTINGS_USER_NAME": {
-        "message": "User Name"
+        "message": "اسم المستخدم"
     },
     "SETTINGS_USER_NAME_NNOTICE": {
-        "message": "This the name that will appear to other users in rooms."
+        "message": "هذا هو الاسم الذي سيظهر للمستخدمين الآخرين في الغرف."
     },
     "SETTINGS_USER_AVATAR": {
-        "message": "User Avatar"
+        "message": "الصورة الرمزية للمستخدم"
     },
     "SETTINGS_USER_AVATAR_NOTICE": {
-        "message": "Select your avatar."
+        "message": "حدد الصورة الرمزية الخاصة بك."
     },
     "SETTINGS_DARK_THEME": {
-        "message": "Dark Theme"
+        "message": "مظهر داكن"
     },
     "SETTINGS_ENABLE_SHORTCUTS": {
-        "message": "Enable Shortcuts"
+        "message": "تفعيل الاختصارات"
     },
     "SETTINGS_SHOW_ACTIONS": {
-        "message": "Show Actions"
+        "message": "إظهار الأحداص"
     },
     "SETTINGS_SHOW_ACTIONS_NOTICE": {
-        "message": "Show actions other users do in the chat window"
+        "message": "اعرض الإجراءات التي يقوم بها المستخدمون الآخرون في نافذة الدردشة"
+    },
+    "SETTINGS_PLAY_SOUNDS": {
+        "message": "تفعيل الأصوات"
+    },
+    "SETTINGS_PLAY_SOUNDS_NOTICE": {
+        "message": "تفعيل/تعطيل الأصوات"
     },
     "SETTINGS_USERNAME_SMALL_ERROR": {
-        "message": "The username must be at least $minLength$ characters",
+        "message": "لا يجب أن يقل طول المستخدم عن $minLength$ حروف",
         "placeholders": {
             "minLength": {
                 "content": "$1"
@@ -98,57 +104,57 @@
         }
     },
     "SELECT_VIDEO_SELECT_VIDEO_To_START_PARTY": {
-        "message": "Select a video to start party"
+        "message": "حدد مقطع فيديو لبدء الحفلة"
     },
     "SELECT_VIDEO_SELECT_VIDEO_To_START_PARTY_NOTICE_1": {
-        "message": "Select the video you want to watch the party on."
+        "message": "حدد الفيديو الذي تريد مشاهدة الحفلة عليه."
     },
     "SELECT_VIDEO_SELECT_VIDEO_To_START_PARTY_NOTICE_2": {
-        "message": "If no video selection mark is showing, make sure that the video is already playing."
+        "message": "إذا لم تظهر علامة اختيار الفيديو ، فتأكد من أن الفيديو شغال بالفعل."
     },
     "PARTY_ROOM_ID_COPIED": {
-        "message": "Room id copied to your clipboard"
+        "message": "تم نسخ معرف الغرفة إلى الحافظة"
     },
     "PARTY_ROOM_LINK_COPIED": {
-        "message": "Room link copied to your clipboard"
+        "message": "تم نسخ رابط الغرفة إلى الحافظة"
     },
     "PARTY_COPY_PARTY_LINK": {
-        "message": "Copy party link"
+        "message": "نسخ رابط الحفلة"
     },
     "PARTY_COPY_PARTY_ID": {
-        "message": "Copy party id"
+        "message": "نسخ معرف الحفلة"
     },
     "PARTY_PARTY_SETTINGS": {
-        "message": "Party Settings"
+        "message": "إعدادات الحفلة"
     },
     "NOT_RECOGNISED_PAGE_NOT_SUPPORTED": {
-        "message": "This Page Is Not Supported"
+        "message": "هذه الصفحة غير مدعومة"
     },
     "NOT_RECOGNISED_PAGE_NOT_SUPPORTED_NOTICE": {
-        "message": "This page is not supported by Luca extension. Please make sure it's a valid page or try to reload it."
+        "message": "هذه الصفحة لا تدعمها إضافة لوكا. يرجى التأكد من أنها صفحة صالحة أو محاولة إعادة تحميلها."
     },
     "NOT_RECOGNISED_TRY_AGAIN": {
-        "message": "Try Again"
+        "message": "حاول مجدداً"
     },
     "FRIENDS_FRIENDS_COMING_SOON": {
-        "message": "Friends is coming soon!"
+        "message": "ميزة الأصدقاء قريباً"
     },
     "FRIENDS_FRIENDS_COMING_SOON_NOTICE": {
-        "message": "Soon you will be able to create your own friends list and invite them to watch movies togother."
+        "message": "ستتمكن قريبًا من إنشاء قائمة الأصدقاء الخاصة بك ودعوتهم لمشاهدة الأفلام معًا."
     },
     "DASHBOARD_ROOM_ID": {
-        "message": "Room ID"
+        "message": "معرف الغرفة"
     },
     "DASHBOARD_CREATE": {
-        "message": "Create"
+        "message": "إنشاء"
     },
     "DASHBOARD_JOIN": {
-        "message": "Join"
+        "message": "انضمام"
     },
     "DASHBOARD_GET_STARTED_CREATE_OR_JOIN": {
-        "message": "Get Started, by Create/Join Room!"
+        "message": "ابدأ ، من خلال إنشاء / الانضمام إلى غرفة!"
     },
     "DASHBOARD_GET_STARTED_CREATE_OR_JOIN_NOTICE": {
-        "message": "Click on create to start a new party or enter a room id to join an already existing party."
+        "message": "انقر فوق إنشاء لبدء حفلة جديدة أو أدخل معرف الغرفة للانضمام إلى حفلة موجودة بالفعل."
     }
 }

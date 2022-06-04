@@ -30,8 +30,7 @@ export class ChatEngine {
             text: messageText,
         });
 
-        let userEngine: UserEngine = new UserEngine();
-        userEngine.getSettings().then((settings: Settings) => {
+        UserEngine.getSettings().then((settings: Settings) => {
             this.addMessageBubble(messageText, { username: settings.username, userAvatar: settings.userAvatar, userId: settings.userId });
         });
     }
@@ -50,9 +49,7 @@ export class ChatEngine {
         bubblesContainer.appendChild(divChatBubble);
         bubblesContainer.scrollTop = bubblesContainer.scrollHeight;
 
-        let lucaSendMessageAudioUrl = chrome.runtime.getURL('assets/audio/luca-message-send.mp3');
-        let lucaSendMessageAudio = new Audio(lucaSendMessageAudioUrl);
-        lucaSendMessageAudio.play();
+        UtilsEngine.playAudio('assets/audio/luca-message-send.mp3');
 
     }
 

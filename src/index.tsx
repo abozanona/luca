@@ -20,10 +20,9 @@ import { SettingsService } from './core/services/SettingsService';
 
 function PopupApp() {
     const navigate = useNavigate();
-    const userEngine: UserEngine = new UserEngine();
 
     useEffect(() => {
-        userEngine.getSettings().then((settings) => {
+        UserEngine.getSettings().then((settings) => {
             SettingsService.setTheme(settings);
         });
     });

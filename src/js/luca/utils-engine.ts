@@ -1,6 +1,15 @@
 import UserEngine from './user-engine';
 
 export class UtilsEngine {
+    static async playAudio(mp3Filepath: string) {
+        let playSounds: boolean = (await UserEngine.getSettings()).playSounds;
+        if (!playSounds) {
+            return;
+        }
+        let audioUrl: string = chrome.runtime.getURL(mp3Filepath);
+        let audio: HTMLAudioElement = new Audio(audioUrl);
+        audio.play();
+    }
 
     static refreshPage() {
         location.reload();
@@ -34,8 +43,7 @@ export class UtilsEngine {
 
     static getCurrentPageId(): Promise<string> {
         return new Promise(async function (resolve, reject) {
-            let userEngine: UserEngine = new UserEngine();
-            let userId: string = (await userEngine.getSettings()).userId;
+            let userId: string = (await UserEngine.getSettings()).userId;
             let tabId: string = await UtilsEngine.getTabId();
             resolve(userId + '-in-' + tabId);
         });

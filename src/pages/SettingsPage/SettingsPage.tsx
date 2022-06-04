@@ -8,12 +8,11 @@ import UtilsEngine from '../../js/luca/utils-engine';
 class SettingsPage extends Component<{}, Settings> {
     maxLength: number = 16;
     minLength: number = 4;
-    userEngine: UserEngine = new UserEngine();
 
     constructor(props: Settings) {
         super(props);
         this.state = new Settings();
-        this.userEngine.getSettings().then((settings: Settings) => {
+        UserEngine.getSettings().then((settings: Settings) => {
             this.setState(settings);
         });
 
@@ -27,7 +26,7 @@ class SettingsPage extends Component<{}, Settings> {
         const name: any = target.name;
 
         this.setState({ ...this.state, [name]: value } as Settings, () => {
-            this.userEngine.setSettings(this.state);
+            UserEngine.setSettings(this.state);
             SettingsService.setSettingsChange({ ...this.state });
             SettingsService.setTheme({ ...this.state });
         });
@@ -41,7 +40,7 @@ class SettingsPage extends Component<{}, Settings> {
         clickedImage.classList.add('img-avatar-selected');
 
         this.setState({ userAvatar: clickedImage.dataset.name }, () => {
-            this.userEngine.setSettings({ ...this.state });
+            UserEngine.setSettings({ ...this.state });
             SettingsService.setSettingsChange({ ...this.state });
         });
     };
@@ -57,7 +56,7 @@ class SettingsPage extends Component<{}, Settings> {
         }
 
         this.setState({ username: username }, () => {
-            this.userEngine.setSettings({ ...this.state });
+            UserEngine.setSettings({ ...this.state });
             SettingsService.setSettingsChange({ ...this.state });
         });
     };
@@ -168,6 +167,23 @@ class SettingsPage extends Component<{}, Settings> {
                                 <div className="toggleWrapper">
                                     <input className="mobileToggle" type="checkbox" name="indecaters" id="indecaters" />
                                     <label htmlFor="indecaters"></label>
+                                </div>
+                            </div>
+                            <div className="setting d-flex d-aic d-jcb">
+                                <div className="setting__info">
+                                    <h1>{UtilsEngine.translate('SETTINGS_PLAY_SOUNDS')}</h1>
+                                    <p>{UtilsEngine.translate('SETTINGS_PLAY_SOUNDS_NOTICE')}</p>
+                                </div>
+                                <div className="toggleWrapper">
+                                <input
+                                        className="mobileToggle"
+                                        checked={this.state.playSounds}
+                                        onChange={this.handleInputChange}
+                                        type="checkbox"
+                                        name="playSounds"
+                                        id="playSounds"
+                                    />
+                                    <label htmlFor="playSounds"></label>
                                 </div>
                             </div>
                         </div>

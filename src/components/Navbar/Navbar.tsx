@@ -22,7 +22,7 @@ class Navbar extends Component<{}, { username?: string; userAvatar?: string; use
     constructor(props: any) {
         super(props);
         this.state = new Settings();
-        this.userEngine.getSettings().then((settings: Settings) => {
+        UserEngine.getSettings().then((settings: Settings) => {
             this.setState(settings);
         });
     }
