@@ -11,7 +11,7 @@ export class LucaEngine {
         private chatEngine: ChatEngine,
         private socketEngine: SocketEngine,
         private videoControllerEngine: VideoControllerEngine
-    ) {}
+    ) { }
 
     initLuca() {
         if (LucaEngine.isLucaInitted) {
@@ -125,7 +125,7 @@ export class LucaEngine {
 
         let s = document.createElement('script');
         s.src = chrome.runtime.getURL('/js/content-inject.js');
-        s.onload = function () {};
+        s.onload = function () { };
         (document.body || document.documentElement).appendChild(s);
 
         lucaChatInnerToggle.addEventListener('click', function (event) {

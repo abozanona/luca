@@ -35,7 +35,7 @@ export class UtilsEngine {
     static getCurrentPageId(): Promise<string> {
         return new Promise(async function (resolve, reject) {
             let userEngine: UserEngine = new UserEngine();
-            let userId: string = await (await userEngine.getSettings()).userId;
+            let userId: string = (await userEngine.getSettings()).userId;
             let tabId: string = await UtilsEngine.getTabId();
             resolve(userId + '-in-' + tabId);
         });
@@ -122,9 +122,7 @@ export class UtilsEngine {
 
         return lucaRandomNames[Math.floor(Math.random() * lucaRandomNames.length)];
     };
-    static isEmptyObject = (obj: any) => {
-        return JSON.stringify(obj) === '{}';
-    };
+
     static uuid = () => {
         return ('' + 1e8).replace(/[018]/g, (c) =>
             (parseInt(c) ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (parseInt(c) / 4)))).toString(16)

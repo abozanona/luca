@@ -97,7 +97,7 @@ export class SocketEngine {
         let _this = this;
         return new Promise(async function (resolve, reject) {
             let userEngine: UserEngine = new UserEngine();
-            let currentUser = await (await userEngine.getSettings()).username;
+            let currentUser = (await userEngine.getSettings()).username;
             let currentPageId = await UtilsEngine.getCurrentPageId();
             data.pageId = currentPageId;
             data.pageId = currentPageId;

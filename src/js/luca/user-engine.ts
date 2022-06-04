@@ -1,39 +1,19 @@
 import { Settings } from '../../core/model/settings.model';
-import UtilsEngine from './utils-engine';
 
 export class UserEngine {
     async setSettings(settings: Settings): Promise<void> {
-        return new Promise((resolve, reject) => {
-            chrome.storage.sync
-                .set({ lucaSettings: settings })
-                .then((items) => {
-                    console.log('set', settings);
-                    resolve();
-                })
-                .catch((err) => {
-                    reject(err);
-                });
-        });
+        await chrome.storage.sync.set({ lucaSettings: settings });
     }
 
     async getSettings(): Promise<Settings> {
-        return new Promise((resolve, reject) => {
-            chrome.storage.sync
-                .get('lucaSettings')
-                .then(async (items) => {
-                    console.log(items);
-                    if (UtilsEngine.isEmptyObject(items)) {
-                        await this.setSettings(new Settings()).then((res) => {
-                            this.getSettings();
-                        });
-                    }
-                    resolve(items.lucaSettings);
-                })
-                .catch((err) => {
-                    reject(err);
-                });
-        });
+        let settings = await chrome.storage.sync.get('lucaSettings');
+        if (!settings) {
+            await this.setSettings(new Settings());
+            return this.getSettings();
+        }
+        return <Settings>(settings.lucaSettings);
     }
+
 }
 
 export default UserEngine;

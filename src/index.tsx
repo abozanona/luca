@@ -15,18 +15,19 @@ import NotRecognisedPage from './pages/NotRecognisedPage/NotRecognisedPage';
 import SplashPage from './pages/SplashPage/SplashPage';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import userEngine, { UserEngine } from './js/luca/user-engine';
-import { Settings } from './core/model/settings.model';
+import { UserEngine } from './js/luca/user-engine';
 import { SettingsService } from './core/services/SettingsService';
 
 function PopupApp() {
     const navigate = useNavigate();
     const userEngine: UserEngine = new UserEngine();
+
     useEffect(() => {
         userEngine.getSettings().then((settings) => {
             SettingsService.setTheme(settings);
         });
     });
+
     return (
         <React.Fragment>
             <div className="container">
