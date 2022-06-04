@@ -11,13 +11,11 @@ export class SocketEngine {
 
     currentUsers: UserInterface[] = [];
 
-    constructor(private chatEngine: ChatEngine) { }
+    constructor(private chatEngine: ChatEngine) {}
 
     initSocket(videoControllerEngine: VideoControllerEngine): void {
         if (this.isSocketStarted) {
-            alert(
-                'Cannot create or join a room here. A room is already running. Refresh the page or create a room in another page.'
-            );
+            alert(UtilsEngine.translate('ALERT_PARTY_ALREADY_RUNNING'));
             return;
         }
         this.isSocketStarted = true;
@@ -71,8 +69,8 @@ export class SocketEngine {
         if (!sender) {
             return;
         }
-        if (this.currentUsers.find(el => el.userId == sender.userId)) {
-            this.currentUsers = this.currentUsers.map(user => {
+        if (this.currentUsers.find((el) => el.userId == sender.userId)) {
+            this.currentUsers = this.currentUsers.map((user) => {
                 if (user.userId != sender.userId) {
                     return user;
                 }
@@ -99,7 +97,7 @@ export class SocketEngine {
         let _this = this;
         return new Promise(async function (resolve, reject) {
             let userEngine: UserEngine = new UserEngine();
-            let currentUser = await userEngine.getCurrentUser();
+            let currentUser = (await userEngine.getSettings()).username;
             let currentPageId = await UtilsEngine.getCurrentPageId();
             data.pageId = currentPageId;
             data.pageId = currentPageId;

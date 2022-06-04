@@ -8,8 +8,7 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
                 tabId: sender.tab.id,
             },
         });
-    }
-    else if (msg.code == 'Q_CREATE_PARTY_BY_INVITATION') {
+    } else if (msg.code == 'Q_CREATE_PARTY_BY_INVITATION') {
         chrome.tabs.create({ url: msg.body.roomLink, active: true }).then((tab) => {
             partyTabs[tab.id] = {
                 roomLink: msg.body.roomLink,
@@ -43,5 +42,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 const manifest = chrome.runtime.getManifest();
 let user = {
     version: manifest.version,
-}
-chrome.runtime.setUninstallURL(`https://docs.google.com/forms/d/e/1FAIpQLSchwIEPLVcl54IOHZOrQ8s_2jyWE_ea2Njk8kajZtUwPmNFcQ/viewform?entry.280944084=${user.version}`);
+};
+chrome.runtime.setUninstallURL(
+    `https://docs.google.com/forms/d/e/1FAIpQLSchwIEPLVcl54IOHZOrQ8s_2jyWE_ea2Njk8kajZtUwPmNFcQ/viewform?entry.280944084=${user.version}`
+);

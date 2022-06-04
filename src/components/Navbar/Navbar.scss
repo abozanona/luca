@@ -1,7 +1,7 @@
 .navbar__container {
     display: flex;
     justify-content: space-between;
-    background-color: $white;
+    background-color: var(--bg-secondary-color);
     padding: 0.225rem 1.438rem;
     margin: 1rem 1rem 0rem 1rem;
     border-radius: $radius;
@@ -18,14 +18,19 @@
         h5 {
             font-size: 0.875rem;
             font-weight: 500;
-            color: $secondary-clr;
+            color: var(--secondary-color);
         }
         p {
             font-size: 0.75rem;
             font-weight: 500;
-            color: $text-clr;
+            color: var(--text-primary-color);
             display: flex;
             gap: 0.5rem;
+            span {
+                img {
+                    cursor: pointer;
+                }
+            }
         }
     }
     .navbar__elements {
@@ -52,7 +57,7 @@
             }
         }
         .element--active {
-            background-color: $bg-clr;
+            background-color: var(--bg-primary-color);
             img {
                 filter: invert(13%) sepia(8%) saturate(100%) hue-rotate(202deg) brightness(0%) contrast(105%);
             }
@@ -72,7 +77,7 @@
 }
 .options__list {
     position: absolute;
-    background-color: $white;
+    background-color: var(--bg-secondary-color);
     width: 10rem;
     border-radius: $radius;
     box-shadow: $shadow-z200;
@@ -92,7 +97,7 @@
         width: 2rem;
         height: 2rem;
         clip-path: polygon(49% 59%, 0% 100%, 100% 100%);
-        background-color: $white;
+        background-color: var(--bg-secondary-color);
     }
     a {
         display: flex;
@@ -100,12 +105,12 @@
         gap: 0.4rem;
         text-decoration: none;
         padding: 0.8rem;
-        border-bottom: 1px solid #e0e0e0;
+        border-bottom: 1px solid var(--text-primary-color);
         &:last-child {
             border-bottom: none !important;
         }
         &:hover {
-            background-color: $bg-clr;
+            background-color: var(--bg-primary-color);
         }
 
         img {
@@ -116,7 +121,7 @@
         p {
             font-size: 0.857rem;
             font-weight: 400;
-            color: $secondary-clr;
+            color: var(--secondary-color);
         }
     }
 }

@@ -1,5 +1,6 @@
 .party__settings {
-    .party__copy-id, .party__copy-link {
+    .party__copy-id,
+    .party__copy-link {
         transition: $transition-300;
         &:hover {
             filter: invert(29%) sepia(96%) saturate(1898%) hue-rotate(198deg) brightness(102%) contrast(105%);

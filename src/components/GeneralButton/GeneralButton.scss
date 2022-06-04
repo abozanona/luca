@@ -11,37 +11,37 @@
     span {
         font-size: 0.875rem;
         font-weight: 400;
-        color: $secondary-clr;
+        color: var(--secondary-color);
     }
     img {
         margin-inline-start: 0.5rem;
     }
 }
 .btn--primary {
-    background-color: $primary-clr;
+    background-color: var(--primary-color);
     span {
-        color: $white;
+        color: var(--text-secondary-color);
     }
     &:hover {
-        background-color: darken($primary-clr, 5%);
+        transform: scale(1.02);
     }
 }
 .btn--secondary {
     background-color: transparent;
-    border: 0.1rem solid $text-clr;
+    border: 0.1rem solid var(--text-primary-color);
     span {
-        color: $text-clr;
+        color: var(--text-primary-color);
     }
     &:hover {
-        background-color: $primary-clr;
-        border-color: $primary-clr;
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
         span {
-            color: $white;
+            color: var(--bg-secondary-color);
         }
     }
 }
 .btn--danger {
-    background-color: $white;
+    background-color: var(--bg-secondary-color);
     border: 0.1rem solid $error;
     span {
         color: $error;
@@ -53,7 +53,7 @@
         background-color: $error;
         border-color: $error;
         span {
-            color: $white;
+            color: var(--bg-secondary-color);
         }
         img {
             filter: invert(100%) sepia(5%) saturate(0%) hue-rotate(326deg) brightness(105%) contrast(107%);

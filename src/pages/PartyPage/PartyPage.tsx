@@ -4,6 +4,7 @@ import GeneralButton from '../../components/GeneralButton/GeneralButton';
 import PopUpEngine from '../../js/popup-engine';
 import { toast } from 'react-toastify';
 import { UserInterface } from '../../js/luca/interfaces/user.interface';
+import UtilsEngine from '../../js/luca/utils-engine';
 
 const Copy = require('../../assets/imgs/copy.svg');
 const Link = require('../../assets/imgs/link.svg');
@@ -45,14 +46,14 @@ class PartyPage extends Component<
     }
 
     copyPartyId = () => {
-        toast.success('Room id copied to your clipboard', {
+        toast.success(UtilsEngine.translate('PARTY_ROOM_ID_COPIED'), {
             toastId: 'success:copy-room-id',
         });
         navigator.clipboard.writeText(this.state.roomId);
     };
 
     copyRoomLink = () => {
-        toast.success('Room link copied to your clipboard', {
+        toast.success(UtilsEngine.translate('PARTY_ROOM_LINK_COPIED'), {
             toastId: 'success:copy-room-link',
         });
         navigator.clipboard.writeText(this.getRoomLink());
@@ -69,24 +70,28 @@ class PartyPage extends Component<
                                 <img
                                     src={Link}
                                     className="party__copy-link"
-                                    alt="Copy party link"
-                                    title="Copy party link"
+                                    alt={UtilsEngine.translate('PARTY_COPY_PARTY_LINK')}
+                                    title={UtilsEngine.translate('PARTY_COPY_PARTY_LINK')}
                                     onClick={this.copyRoomLink}
                                 />
                                 <img
                                     src={Copy}
                                     className="party__copy-id"
-                                    alt="Copy party id"
-                                    title="Copy party id"
+                                    alt={UtilsEngine.translate('PARTY_COPY_PARTY_ID')}
+                                    title={UtilsEngine.translate('PARTY_COPY_PARTY_ID')}
                                     onClick={this.copyPartyId}
                                 />
-                                <img src={Setting} alt="Party settings" title="Party settings" />
+                                <img
+                                    src={Setting}
+                                    alt={UtilsEngine.translate('PARTY_PARTY_SETTINGS')}
+                                    title={UtilsEngine.translate('PARTY_PARTY_SETTINGS')}
+                                />
                             </div>
                         </div>
                         <div className="party__members-container">
                             <div className="page__memebers">
                                 {(this.state.partyUsers ?? []).map((user, index) => {
-                                    return <Avatar key={index} username={user.userName} avatar={user.userAvatar} />;
+                                    return <Avatar key={index} username={user.username} avatar={user.userAvatar} />;
                                 })}
                             </div>
                         </div>
