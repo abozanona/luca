@@ -20,6 +20,26 @@
     "TEMPLATE_CHAT_WRITE_SOMETHING_HERE": {
         "message": "Write Something here"
     },
+    "TEMPLATE_ACTION_USER_JOINED_PARTY": {
+        "message": "Joined the party"
+    },
+    "TEMPLATE_ACTION_USER_PLAYED_PARTY": {
+        "message": "Started playing video"
+    },
+    "TEMPLATE_ACTION_USER_PAUSED_PARTY": {
+        "message": "Paused video"
+    },
+    "TEMPLATE_ACTION_USER_SEEKED_PARTY": {
+        "message": "Seeked video to time $duration$",
+        "placeholders": {
+            "duration": {
+                "content": "$1"
+            }
+        }
+    },
+    "TEMPLATE_ACTION_USER_REACTED_ON_PARTY": {
+        "message": "Sent reaction on party"
+    },
     "NAV_HOME": {
         "message": "Home"
     },

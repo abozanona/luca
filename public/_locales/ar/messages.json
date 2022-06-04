@@ -20,6 +20,26 @@
     "TEMPLATE_CHAT_WRITE_SOMETHING_HERE": {
         "message": "اكتب شيء هنا"
     },
+    "TEMPLATE_ACTION_USER_JOINED_PARTY": {
+        "message": "انضم للحفلة"
+    },
+    "TEMPLATE_ACTION_USER_PLAYED_PARTY": {
+        "message": "قام بتشغيل الفيديو"
+    },
+    "TEMPLATE_ACTION_USER_PAUSED_PARTY": {
+        "message": "قام بإيقاف الفيديو"
+    },
+    "TEMPLATE_ACTION_USER_SEEKED_PARTY": {
+        "message": "قام بالتغيير للوقت $duration$",
+        "placeholders": {
+            "duration": {
+                "content": "$1"
+            }
+        }
+    },
+    "TEMPLATE_ACTION_USER_REACTED_ON_PARTY": {
+        "message": "أرسل تاثرا للحفلة"
+    },
     "NAV_HOME": {
         "message": "الرئيسية"
     },

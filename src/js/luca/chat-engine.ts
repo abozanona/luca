@@ -1,4 +1,3 @@
-import { Settings } from '../../core/model/settings.model';
 import { UserInterface } from './interfaces/user.interface';
 import { LucaEngine } from './luca-engine';
 import { SocketEngine } from './socket-engine';
@@ -30,8 +29,8 @@ export class ChatEngine {
             text: messageText,
         });
 
-        UserEngine.getSettings().then((settings: Settings) => {
-            this.addMessageBubble(messageText, { username: settings.username, userAvatar: settings.userAvatar, userId: settings.userId });
+        UserEngine.getCurrentUser().then((user: UserInterface) => {
+            this.addMessageBubble(messageText, user);
         });
     }
 
@@ -50,7 +49,24 @@ export class ChatEngine {
         bubblesContainer.scrollTop = bubblesContainer.scrollHeight;
 
         UtilsEngine.playAudio('assets/audio/luca-message-send.mp3');
+    }
 
+    public async addActionBubble(actionText: string, user: UserInterface) {
+        if (!user) {
+            return;
+        }
+        const chatTemplateHTML = await UtilsEngine.loadTemplate("/templates/chat-action.template.html");
+        let divChatBubble = document.createElement('div');
+        divChatBubble.classList.add('luca-message-container');
+        divChatBubble.innerHTML = chatTemplateHTML
+            .replace('{userName}', user.username)
+            .replace('{messageTime}', new Date().toLocaleTimeString())
+            .replace('{messageText}', actionText)
+            .replace('{userAvatar}', chrome.runtime.getURL('assets/imgs/avatars/' + user.userAvatar));
+
+        let bubblesContainer = document.getElementsByClassName('luca-chat-messages-container')[0] as HTMLElement;
+        bubblesContainer.appendChild(divChatBubble);
+        bubblesContainer.scrollTop = bubblesContainer.scrollHeight;
     }
 
     public sendReactionToRoom(socketEngine: SocketEngine, reactionName: string) {
