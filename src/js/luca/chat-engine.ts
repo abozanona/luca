@@ -1,4 +1,3 @@
-import { Settings } from '../../core/model/settings.model';
 import { UserInterface } from './interfaces/user.interface';
 import { LucaEngine } from './luca-engine';
 import { SocketEngine } from './socket-engine';
@@ -6,7 +5,7 @@ import UserEngine from './user-engine';
 import UtilsEngine from './utils-engine';
 
 export class ChatEngine {
-    reactionScreenAnimation(elem: any, bounds: any, delay: any) {
+    private reactionScreenAnimation(elem: any, bounds: any, delay: any) {
         let bottom = 0;
         let opacity = 1;
         let startRight = false;
@@ -25,17 +24,17 @@ export class ChatEngine {
         let id = setInterval(frame, delay);
     }
 
-    sendMessageToRoom(socketEngine: SocketEngine, messageText: string) {
+    public sendMessageToRoom(socketEngine: SocketEngine, messageText: string) {
         socketEngine.sendPlayerOrder('message', {
             text: messageText,
         });
 
-        UserEngine.getSettings().then((settings: Settings) => {
-            this.addMessageBubble(messageText, { username: settings.username, userAvatar: settings.userAvatar, userId: settings.userId });
+        UserEngine.getCurrentUser().then((user: UserInterface) => {
+            this.addMessageBubble(messageText, user);
         });
     }
 
-    async addMessageBubble(messageText: string, user: UserInterface) {
+    public async addMessageBubble(messageText: string, user: UserInterface) {
         const chatTemplateHTML = await UtilsEngine.loadTemplate("/templates/chat-bubble.template.html");
         let divChatBubble = document.createElement('div');
         divChatBubble.classList.add('luca-message-container');
@@ -50,24 +49,45 @@ export class ChatEngine {
         bubblesContainer.scrollTop = bubblesContainer.scrollHeight;
 
         UtilsEngine.playAudio('assets/audio/luca-message-send.mp3');
-
     }
 
-    sendReactionToRoom(socketEngine: SocketEngine, reactionName: string) {
+    public async addActionBubble(actionText: string, user: UserInterface) {
+        if (!user) {
+            return;
+        }
+        let showActionsInChat: boolean = (await UserEngine.getSettings()).showActionsInChat;
+        if (!showActionsInChat) {
+            return;
+        }
+        const chatTemplateHTML = await UtilsEngine.loadTemplate("/templates/chat-action.template.html");
+        let divChatBubble = document.createElement('div');
+        divChatBubble.classList.add('luca-message-container');
+        divChatBubble.innerHTML = chatTemplateHTML
+            .replace('{userName}', user.username)
+            .replace('{messageTime}', new Date().toLocaleTimeString())
+            .replace('{messageText}', actionText)
+            .replace('{userAvatar}', chrome.runtime.getURL('assets/imgs/avatars/' + user.userAvatar));
+
+        let bubblesContainer = document.getElementsByClassName('luca-chat-messages-container')[0] as HTMLElement;
+        bubblesContainer.appendChild(divChatBubble);
+        bubblesContainer.scrollTop = bubblesContainer.scrollHeight;
+    }
+
+    public sendReactionToRoom(socketEngine: SocketEngine, reactionName: string) {
         socketEngine.sendPlayerOrder('reaction', {
             name: reactionName,
         });
     }
 
-    getRandomInteger = function (min: number, max: number): number {
+    private getRandomInteger = function (min: number, max: number): number {
         return Math.ceil(Math.random() * (max - min + 1)) + min;
     };
 
-    getRandomIntegerRanged = function (min: number, max: number): number {
+    private getRandomIntegerRanged = function (min: number, max: number): number {
         return Math.ceil(Math.random() * (max - min + 1)) + min * (Math.round(Math.random()) ? 1 : -1);
     };
 
-    showReactionOnScreen(reactionName: string) {
+    public showReactionOnScreen(reactionName: string) {
         let _this = this;
         var startScreenPercentage = 0.03;
         var endScreenPercentage = 0.97;

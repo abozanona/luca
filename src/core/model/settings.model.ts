@@ -6,4 +6,5 @@ export class Settings {
     userId?: string = UtilsEngine.uuid();
     darkTheme?: boolean = false;
     playSounds?: boolean = true;
+    showActionsInChat?: boolean = true;
 }

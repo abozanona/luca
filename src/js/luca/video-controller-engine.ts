@@ -26,7 +26,7 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
     abstract getCurrentVideoTime(): number;
     abstract initVideoListners(): void;
 
-    play() {
+    public play() {
         if (this.isVideoPlaying()) {
             return;
         }
@@ -34,7 +34,7 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
         this.playVideo();
     }
 
-    pause() {
+    public pause() {
         if (this.isVideoPaused()) {
             return;
         }
@@ -42,7 +42,7 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
         this.pauseVideo();
     }
 
-    seek(time: number) {
+    public seek(time: number) {
         if (this.getCurrentVideoTime() == time) {
             return;
         }
@@ -50,7 +50,7 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
         this.seekVideo(time);
     }
 
-    onVideoPlay() {
+    public onVideoPlay() {
         if (this.allowedActions.play < 0) {
             this.allowedActions.play = 0;
         }
@@ -64,7 +64,7 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
         }
     }
 
-    onVideoPause() {
+    public onVideoPause() {
         if (this.allowedActions.pause < 0) {
             this.allowedActions.pause = 0;
         }
@@ -78,7 +78,7 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
         }
     }
 
-    onVideoSeek() {
+    public onVideoSeek() {
         if (this.allowedActions.seek < 0) {
             this.allowedActions.seek = 0;
         }
@@ -92,7 +92,7 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
         }
     }
 
-    startStreamingOnVideo() {
+    public startStreamingOnVideo() {
         if (this.isVideoSelected) {
             alert(UtilsEngine.translate('ALERT_PARTY_ALREADY_RUNNING'));
             return;

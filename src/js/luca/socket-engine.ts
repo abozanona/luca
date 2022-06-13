@@ -11,9 +11,9 @@ export class SocketEngine {
 
     currentUsers: UserInterface[] = [];
 
-    constructor(private chatEngine: ChatEngine) {}
+    constructor(private chatEngine: ChatEngine) { }
 
-    initSocket(videoControllerEngine: VideoControllerEngine): void {
+    private initSocket(videoControllerEngine: VideoControllerEngine): void {
         if (this.isSocketStarted) {
             alert(UtilsEngine.translate('ALERT_PARTY_ALREADY_RUNNING'));
             return;
@@ -27,8 +27,18 @@ export class SocketEngine {
             path: '/socket.io',
         });
 
+        _this.socket.on('join', function (message: any) {
+            _this.addUserToChat(message.sender);
+            _this.chatEngine.addActionBubble(UtilsEngine.translate('TEMPLATE_ACTION_USER_JOINED_PARTY'), message.sender);
+            UtilsEngine.executeUnderDifferentTabId(message.pageId, function () {
+                videoControllerEngine.seek(message.time);
+                videoControllerEngine.play();
+            });
+        });
+
         _this.socket.on('play', function (message: any) {
             _this.addUserToChat(message.sender);
+            _this.chatEngine.addActionBubble(UtilsEngine.translate('TEMPLATE_ACTION_USER_PLAYED_PARTY'), message.sender);
             UtilsEngine.executeUnderDifferentTabId(message.pageId, function () {
                 videoControllerEngine.seek(message.time);
                 videoControllerEngine.play();
@@ -37,6 +47,7 @@ export class SocketEngine {
 
         _this.socket.on('pause', function (message: any) {
             _this.addUserToChat(message.sender);
+            _this.chatEngine.addActionBubble(UtilsEngine.translate('TEMPLATE_ACTION_USER_PAUSED_PARTY'), message.sender);
             UtilsEngine.executeUnderDifferentTabId(message.pageId, function () {
                 videoControllerEngine.seek(message.time);
                 videoControllerEngine.pause();
@@ -44,7 +55,19 @@ export class SocketEngine {
         });
 
         _this.socket.on('seek', function (message: any) {
+            let formatTime = function (sec_num: number) {
+                sec_num = Math.floor(sec_num);
+                let hours: any = Math.floor(sec_num / 3600);
+                let minutes: any = Math.floor((sec_num - (hours * 3600)) / 60);
+                let seconds: any = sec_num - (hours * 3600) - (minutes * 60);
+
+                if (hours < 10) { hours = "0" + hours; }
+                if (minutes < 10) { minutes = "0" + minutes; }
+                if (seconds < 10) { seconds = "0" + seconds; }
+                return hours + ':' + minutes + ':' + seconds;
+            }
             _this.addUserToChat(message.sender);
+            _this.chatEngine.addActionBubble(UtilsEngine.translate('TEMPLATE_ACTION_USER_SEEKED_PARTY', [formatTime(message.time).toString()]), message.sender);
             UtilsEngine.executeUnderDifferentTabId(message.pageId, function () {
                 videoControllerEngine.seek(message.time);
             });
@@ -59,13 +82,14 @@ export class SocketEngine {
 
         _this.socket.on('reaction', function (message: any) {
             _this.addUserToChat(message.sender);
+            _this.chatEngine.addActionBubble(UtilsEngine.translate('TEMPLATE_ACTION_USER_REACTED_ON_PARTY'), message.sender);
             UtilsEngine.executeUnderDifferentTabId(message.pageId, function () {
                 _this.chatEngine.showReactionOnScreen(message.name);
             });
         });
     }
 
-    addUserToChat(sender: UserInterface) {
+    private addUserToChat(sender: UserInterface) {
         if (!sender) {
             return;
         }
@@ -81,22 +105,25 @@ export class SocketEngine {
         }
     }
 
-    createRoom(videoControllerEngine: VideoControllerEngine, roomId: string) {
+    public createRoom(videoControllerEngine: VideoControllerEngine, roomId: string) {
         this.roomId = roomId;
         this.initSocket(videoControllerEngine);
         this.socket.emit('join', this.roomId);
     }
 
-    joinRoom(videoControllerEngine: VideoControllerEngine, roomId: string) {
+    public joinRoom(videoControllerEngine: VideoControllerEngine, roomId: string) {
         this.roomId = roomId;
         this.initSocket(videoControllerEngine);
         this.socket.emit('join', this.roomId);
+        UserEngine.getCurrentUser().then((user: UserInterface) => {
+            this.addUserToChat(user);
+        });
     }
 
-    sendPlayerOrder(order: string, data: any): Promise<void> {
+    public sendPlayerOrder(order: string, data: any): Promise<void> {
         let _this = this;
         return new Promise(async function (resolve, reject) {
-            let currentUser = (await UserEngine.getSettings()).username;
+            let currentUser: UserInterface = await UserEngine.getCurrentUser();
             let currentPageId = await UtilsEngine.getCurrentPageId();
             data.pageId = currentPageId;
             data.pageId = currentPageId;

@@ -22,7 +22,7 @@ export class LucaEngine {
         this.injectStyle();
     }
 
-    injectStyle() {
+    private injectStyle() {
         const linkStyleLucaGameplay = document.createElement('link');
         linkStyleLucaGameplay.href = chrome.runtime.getURL('style/page-style.css');
         linkStyleLucaGameplay.rel = 'stylesheet';
@@ -30,7 +30,7 @@ export class LucaEngine {
         document.head.appendChild(linkStyleLucaGameplay);
     }
 
-    async injectChat() {
+    public async injectChat() {
         let _this = this;
         //Add Luca chat container and bubbles
 
@@ -165,7 +165,7 @@ export class LucaEngine {
         });
     }
 
-    getCurrentPageStatus() {
+    public getCurrentPageStatus() {
         if (!this.socketEngine.isSocketStarted) {
             return 'WAITING_CREATE_ROOM';
         }
@@ -175,7 +175,7 @@ export class LucaEngine {
         return 'ROOM_SETUP_COMPLETED';
     }
 
-    toggleChatContainer() {
+    private toggleChatContainer() {
         let divChatListFrame: HTMLElement = document.getElementById('luca-chat-page-container');
         let lucaInput: HTMLInputElement = document.getElementById('luca-input-field') as HTMLInputElement;
         let bubblesContainer = document.getElementsByClassName('luca-chat-messages-container')[0] as HTMLElement;
