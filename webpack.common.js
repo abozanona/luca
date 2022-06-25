@@ -1,6 +1,14 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const dotenv = require('dotenv');
+const webpack = require('webpack');
+
+const env = dotenv.config({ path: 'environments/.env' }).parsed;
+const envKeys = Object.keys(env).reduce((prev, next) => {
+    prev[`process.env.${next}`] = JSON.stringify(env[next]);
+    return prev;
+}, {});
 
 module.exports = {
     entry: {
@@ -9,6 +17,7 @@ module.exports = {
         content: path.resolve('./src/js/content.ts'),
         'page-style': path.resolve('./src/style/page-style.scss'),
         'luca-website-style': path.resolve('./src/style/luca-website-style.scss'),
+        'video-call-style': path.resolve('./src/style/video-call-style.scss'),
     },
     output: {
         filename: 'js/[name].bundle.js',
@@ -76,5 +85,6 @@ module.exports = {
             patterns: [{ from: '.', to: '.', context: 'public' }],
         }),
         new MiniCssExtractPlugin({ filename: 'style/[name].css' }),
+        new webpack.DefinePlugin(envKeys),
     ],
 };

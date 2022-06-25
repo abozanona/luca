@@ -2,7 +2,7 @@
     "name": "__MSG_MANIFEST_APP_LONG_NAME__",
     "short_name": "__MSG_MANIFEST_APP_NAME__",
     "description": "__MSG_MANIFEST_APP_DESCRIPTION__",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "default_locale": "en",
     "action": {
         "default_popup": "index.html",
@@ -33,6 +33,7 @@
                 "style/main.css",
                 "style/page-style.css",
                 "style/luca-website-style.css",
+                "style/video-call-style.css",
                 "assets/imgs/*",
                 "assets/fonts/*",
                 "assets/audio/*",

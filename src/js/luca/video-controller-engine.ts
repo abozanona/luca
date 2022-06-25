@@ -4,6 +4,7 @@ import UtilsEngine from "./utils-engine";
 
 export abstract class VideoControllerEngine implements VideoControllerInterface {
     isVideoSelected: boolean;
+    pageUrl: string = null;
     videoXPath: string = null;
 
     allowedActions: {
@@ -55,7 +56,7 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
             this.allowedActions.play = 0;
         }
         if (this.allowedActions.play == 0) {
-            this.socketEngine.sendPlayerOrder('play', {
+            this.socketEngine.sendSocketOrder('play', {
                 time: this.getCurrentVideoTime(),
             });
         }
@@ -69,7 +70,7 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
             this.allowedActions.pause = 0;
         }
         if (this.allowedActions.pause == 0) {
-            this.socketEngine.sendPlayerOrder('pause', {
+            this.socketEngine.sendSocketOrder('pause', {
                 time: this.getCurrentVideoTime(),
             });
         }
@@ -83,7 +84,7 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
             this.allowedActions.seek = 0;
         }
         if (this.allowedActions.seek == 0) {
-            this.socketEngine.sendPlayerOrder('seek', {
+            this.socketEngine.sendSocketOrder('seek', {
                 time: this.getCurrentVideoTime(),
             });
         }

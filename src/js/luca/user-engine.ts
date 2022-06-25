@@ -15,7 +15,7 @@ export class UserEngine {
 
     public static async getSettings(): Promise<Settings> {
         let settings = await chrome.storage.sync.get('lucaSettings');
-        if (!settings) {
+        if (!settings.lucaSettings) {
             await this.setSettings(new Settings());
             return this.getSettings();
         }

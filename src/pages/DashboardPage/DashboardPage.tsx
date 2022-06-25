@@ -42,6 +42,18 @@ class DashboardPage extends React.Component<{ navigate: NavigateFunction }, { cr
         }
     };
 
+    handleOnKeyDown = (e: any) => {
+        if (e.key === 'Enter' && (e.target as HTMLInputElement).value) {
+            let popupEngine: PopUpEngine = new PopUpEngine();
+            if (this.state.createRoom) {
+                popupEngine.createRoom();
+            } else {
+                popupEngine.joinRoom(this.state.roomId);
+            }
+            this.props.navigate('/selectvideo');
+        }
+    };
+
     render() {
         return (
             <React.Fragment>
@@ -52,7 +64,12 @@ class DashboardPage extends React.Component<{ navigate: NavigateFunction }, { cr
                                 <label htmlFor="roomid">{UtilsEngine.translate('DASHBOARD_ROOM_ID')}</label>
                                 <div className="input__room">
                                     <img src={RoomId} alt="" />
-                                    <input onChange={this.handleOnChange} type="text" name="roomid" />
+                                    <input
+                                        onChange={this.handleOnChange}
+                                        onKeyDown={this.handleOnKeyDown}
+                                        type="text"
+                                        name="roomid"
+                                    />
                                 </div>
                             </div>
                             <div className="d-aic d-flex-col">

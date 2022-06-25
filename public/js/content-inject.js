@@ -18,22 +18,22 @@ Array.from(document.getElementsByClassName('luca-reaction')).forEach(function (e
     });
 });
 
-function selectedVideo() {
-    let api = window.netflix.appContext.state.playerApp.getAPI().videoPlayer;
-    let playerId = api.getAllPlayerSessionIds().find(((val) => val.includes("watch")));
-    let player = api.getVideoPlayerBySessionId(playerId)
-    return player;
-}
-
-function generateEventData() {
-    return {
-        isPlayed: selectedVideo().isPlaying(),
-        isPaused: selectedVideo().isPaused(),
-        currentTime: selectedVideo().getCurrentTime(),
-    };
-}
-
 if (document.location.origin.includes('netflix.com')) {
+    function selectedVideo() {
+        let api = window.netflix.appContext.state.playerApp.getAPI().videoPlayer;
+        let playerId = api.getAllPlayerSessionIds().find(((val) => val.includes("watch")));
+        let player = api.getVideoPlayerBySessionId(playerId)
+        return player;
+    }
+
+    function generateEventData() {
+        return {
+            isPlayed: selectedVideo().isPlaying(),
+            isPaused: selectedVideo().isPaused(),
+            currentTime: selectedVideo().getCurrentTime(),
+        };
+    }
+
     var lastCurrentTime = 0;
 
     selectedVideo().addEventListener('playingchanged', (event) => {
