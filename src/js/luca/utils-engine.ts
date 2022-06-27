@@ -137,6 +137,25 @@ export class UtilsEngine {
         );
     };
 
+    public static injectScript(path: string): Promise<void> {
+        return new Promise(function (resolve, reject) {
+            let s = document.createElement('script');
+            s.src = chrome.runtime.getURL(path);
+            s.onload = function () { resolve() };
+            (document.head || document.body || document.documentElement).appendChild(s);
+        });
+    }
+
+    public static injectStyle(path: string): Promise<void> {
+        return new Promise(function (resolve, reject) {
+            const s = document.createElement('link');
+            s.href = chrome.runtime.getURL(path);
+            s.rel = 'stylesheet';
+            s.type = 'text/css';
+            s.onload = function () { resolve() };
+            (document.head || document.body || document.documentElement).appendChild(s);
+        });
+    }
 }
 
 export default UtilsEngine;

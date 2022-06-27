@@ -25,7 +25,7 @@ export class ChatEngine {
     }
 
     public sendMessageToRoom(socketEngine: SocketEngine, messageText: string) {
-        socketEngine.sendPlayerOrder('message', {
+        socketEngine.sendSocketOrder('message', {
             text: messageText,
         });
 
@@ -74,7 +74,7 @@ export class ChatEngine {
     }
 
     public sendReactionToRoom(socketEngine: SocketEngine, reactionName: string) {
-        socketEngine.sendPlayerOrder('reaction', {
+        socketEngine.sendSocketOrder('reaction', {
             name: reactionName,
         });
     }

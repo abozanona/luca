@@ -1,11 +1,14 @@
 import { ChatEngine } from './chat-engine';
 import { SocketEngine } from './socket-engine';
+import UserEngine from './user-engine';
 import UtilsEngine from './utils-engine';
 import { VideoControllerEngine } from './video-controller-engine';
 
 export class LucaEngine {
+
     static isLucaInitted = false;
     static fullScreenElement: HTMLElement = document.body;
+    videoToken: string = null;
 
     constructor(
         private chatEngine: ChatEngine,
@@ -13,21 +16,24 @@ export class LucaEngine {
         private videoControllerEngine: VideoControllerEngine
     ) { }
 
-    initLuca() {
+    public initLuca() {
         if (LucaEngine.isLucaInitted) {
             return;
         }
         LucaEngine.isLucaInitted = true;
-
-        this.injectStyle();
+        UtilsEngine.injectStyle('style/page-style.css');
     }
 
-    private injectStyle() {
-        const linkStyleLucaGameplay = document.createElement('link');
-        linkStyleLucaGameplay.href = chrome.runtime.getURL('style/page-style.css');
-        linkStyleLucaGameplay.rel = 'stylesheet';
-        linkStyleLucaGameplay.type = 'text/css';
-        document.head.appendChild(linkStyleLucaGameplay);
+    public async startVideoCall() {
+        let userId: string = await (await UserEngine.getCurrentUser()).userId;
+        let isInitialised: boolean = document.body.dataset['lucaVideoToken'] != null;
+        document.body.dataset['lucaVideoAppId'] = process.env.AGORA_APP_ID;
+        document.body.dataset['lucaVideoChannel'] = this.socketEngine.roomId;
+        document.body.dataset['lucaVideoToken'] = this.videoToken;
+        document.body.dataset['lucaVideoUID'] = userId;
+        if (!isInitialised) {
+            UtilsEngine.injectScript('/js/agora-rtc-n.js').then(() => UtilsEngine.injectScript('/js/video-call.js'));
+        }
     }
 
     public async injectChat() {
@@ -123,10 +129,8 @@ export class LucaEngine {
             }
         });
 
-        let s = document.createElement('script');
-        s.src = chrome.runtime.getURL('/js/content-inject.js');
-        s.onload = function () { };
-        (document.body || document.documentElement).appendChild(s);
+        UtilsEngine.injectStyle('style/video-call-style.css');
+        UtilsEngine.injectScript('/js/content-inject.js');
 
         lucaChatInnerToggle.addEventListener('click', function (event) {
             event.preventDefault();
@@ -163,6 +167,8 @@ export class LucaEngine {
                 }
             );
         });
+
+        await this.startVideoCall();
     }
 
     public getCurrentPageStatus() {

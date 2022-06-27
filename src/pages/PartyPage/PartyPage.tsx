@@ -40,9 +40,9 @@ class PartyPage extends Component<
     }
 
     getRoomLink(): string {
-        return `https://abozanona-luca.herokuapp.com/party/join?roomId=${
-            this.state.roomId
-        }&roomLink=${encodeURIComponent(this.state.roomLink)}&videoXPath=${encodeURIComponent(this.state.videoXPath)}`;
+        return `https://lucaparty.herokuapp.com/party/join?roomId=${this.state.roomId}&roomLink=${encodeURIComponent(
+            this.state.roomLink
+        )}&videoXPath=${encodeURIComponent(this.state.videoXPath)}`;
     }
 
     copyPartyId = () => {
@@ -67,6 +67,7 @@ class PartyPage extends Component<
                         <div className="d-jcb d-aic">
                             <h1 className="page__header">Partiers ({this.state.partyUsers.length})</h1>
                             <div className="party__settings d-aic g-1">
+                                {this.state.roomId}
                                 <img
                                     src={Link}
                                     className="party__copy-link"
