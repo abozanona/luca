@@ -26,6 +26,8 @@
     <br />
     <a href="https://chrome.google.com/webstore/detail/obnoakbedffbolampagecgineggakiii">Start using Luca</a>
     ·
+    <a href="https://lucaparty.com/">Visit website</a>
+    ·
     <a href="https://github.com/abozanona/luca/issues">Report Bug</a>
     ·
     <a href="https://github.com/abozanona/luca/issues">Request Feature</a>
@@ -114,9 +116,9 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    npm install
    ```
-3. Run the `watch` command to keep tracking the changed files
+3. Run the `dev` command to keep tracking the changed files
    ```sh
-   npm run watch
+   npm run dev
    ```
 4. Load the `dist` folder in your browser.
 
@@ -137,7 +139,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Build a website for Luca. Buy a domain.
+- [x] Build a website for Luca. Buy a domain.
 
 See the [open issues](https://github.com/abozanona/luca/issues) for a full list of proposed features (and known issues).
 
@@ -187,14 +189,6 @@ Project Link: [https://github.com/abozanona/luca](https://github.com/abozanona/l
 
 Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
