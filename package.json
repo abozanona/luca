@@ -1,7 +1,7 @@
 {
     "name": "Luca",
     "version": "1.0.0",
-    "description": "A chrome extension to watch movies together",
+    "description": "A browser extension to watch movies together",
     "main": "index.js",
     "scripts": {
         "build": "webpack --config webpack.prod.js",

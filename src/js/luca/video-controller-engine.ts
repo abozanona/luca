@@ -17,7 +17,9 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
         seek: 0,
     };
 
-    constructor(public socketEngine: SocketEngine) {}
+    constructor(public socketEngine: SocketEngine) {
+        this.pageUrl = window.location.href;
+    }
 
     abstract playVideo(): void;
     abstract isVideoPlaying(): boolean;

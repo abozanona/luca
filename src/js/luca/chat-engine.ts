@@ -42,7 +42,7 @@ export class ChatEngine {
             .replace('{userName}', user.username)
             .replace('{messageTime}', new Date().toLocaleTimeString())
             .replace('{messageText}', messageText)
-            .replace('{userAvatar}', chrome.runtime.getURL('assets/imgs/avatars/' + user.userAvatar));
+            .replace('{userAvatar}', UtilsEngine.browser.runtime.getURL('assets/imgs/avatars/' + user.userAvatar));
 
         let bubblesContainer = document.getElementsByClassName('luca-chat-messages-container')[0] as HTMLElement;
         bubblesContainer.appendChild(divChatBubble);
@@ -66,7 +66,7 @@ export class ChatEngine {
             .replace('{userName}', user.username)
             .replace('{messageTime}', new Date().toLocaleTimeString())
             .replace('{messageText}', actionText)
-            .replace('{userAvatar}', chrome.runtime.getURL('assets/imgs/avatars/' + user.userAvatar));
+            .replace('{userAvatar}', UtilsEngine.browser.runtime.getURL('assets/imgs/avatars/' + user.userAvatar));
 
         let bubblesContainer = document.getElementsByClassName('luca-chat-messages-container')[0] as HTMLElement;
         bubblesContainer.appendChild(divChatBubble);
@@ -97,7 +97,7 @@ export class ChatEngine {
         interval = setInterval(function () {
             let imgReactionParticle = document.createElement('img');
             imgReactionParticle.classList.add('luca-reaction-particle');
-            imgReactionParticle.src = chrome.runtime.getURL('assets/imgs/' + reactionName + '.gif');
+            imgReactionParticle.src = UtilsEngine.browser.runtime.getURL('assets/imgs/' + reactionName + '.gif');
             imgReactionParticle.dataset.reactionName = reactionName;
 
             LucaEngine.fullScreenElement.appendChild(imgReactionParticle);

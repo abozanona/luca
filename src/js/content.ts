@@ -27,7 +27,7 @@ class ContentPageScript {
 
         this.lucaEngine.initLuca();
 
-        chrome.runtime.onMessage.addListener(this.gotMessage.bind(this));
+        UtilsEngine.browser.runtime.onMessage.addListener(this.gotMessage.bind(this));
 
         new SharePartyPage().initLucaJoinParty();
     }
@@ -114,7 +114,7 @@ class ContentPageScript {
                             roomId: _this.socketEngine.roomId,
                         },
                     };
-                    chrome.runtime.sendMessage(message);
+                    UtilsEngine.browser.runtime.sendMessage(message);
                 });
                 break;
             case 'Q_GET_VIDEO_XPATH':
@@ -126,7 +126,7 @@ class ContentPageScript {
                             videoXPath: _this.videoController.videoXPath,
                         },
                     };
-                    chrome.runtime.sendMessage(message);
+                    UtilsEngine.browser.runtime.sendMessage(message);
                 });
                 break;
             case 'Q_GET_PAGE_STATUS':
@@ -138,7 +138,7 @@ class ContentPageScript {
                             status: _this.lucaEngine.getCurrentPageStatus(),
                         },
                     };
-                    chrome.runtime.sendMessage(message);
+                    UtilsEngine.browser.runtime.sendMessage(message);
                 });
                 break;
             case 'Q_INIT_PAGE_WITH_PARTY':
@@ -168,7 +168,7 @@ class ContentPageScript {
                             users: _this.socketEngine.currentUsers,
                         },
                     };
-                    chrome.runtime.sendMessage(message);
+                    UtilsEngine.browser.runtime.sendMessage(message);
                 });
                 break;
         }
