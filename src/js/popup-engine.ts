@@ -1,4 +1,5 @@
 import { UserInterface } from './luca/interfaces/user.interface';
+import UtilsEngine from './luca/utils-engine';
 
 class PopUpEngine {
     actionsOrder = ['NOTHING', 'WAITING_CREATE_ROOM', 'WAITING_SELECT_VIDEO', 'ROOM_SETUP_COMPLETED'];
@@ -13,7 +14,7 @@ class PopUpEngine {
             const message = {
                 code: 'Q_CREATE_NEW_ROOM_ID',
             };
-            chrome.tabs.sendMessage(tabId, message);
+            UtilsEngine.browser.tabs.sendMessage(tabId, message);
         });
     }
 
@@ -23,7 +24,7 @@ class PopUpEngine {
                 code: 'Q_JOIN_ROOM_ID',
                 roomId,
             };
-            chrome.tabs.sendMessage(tabId, message);
+            UtilsEngine.browser.tabs.sendMessage(tabId, message);
         });
     }
 
@@ -32,13 +33,13 @@ class PopUpEngine {
             const message = {
                 code: 'Q_HIGHLIGHT_ALL_VIDEOS',
             };
-            chrome.tabs.sendMessage(tabId, message);
+            UtilsEngine.browser.tabs.sendMessage(tabId, message);
         });
     }
 
     private initEvents() {
         let _this = this;
-        chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+        UtilsEngine.browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             switch (request.code) {
                 case 'A_GET_PAGE_STATUS':
                     let status = request.body.status;
@@ -67,7 +68,7 @@ class PopUpEngine {
     }
 
     private getCurrentTabId(cb: any) {
-        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        UtilsEngine.browser.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             cb(tabs[0].id);
         });
     }
@@ -82,7 +83,7 @@ class PopUpEngine {
             const message = {
                 code: 'Q_GET_PAGE_STATUS',
             };
-            chrome.tabs.sendMessage(tabId, message);
+            UtilsEngine.browser.tabs.sendMessage(tabId, message);
         });
     }
 
@@ -94,7 +95,7 @@ class PopUpEngine {
             const message = {
                 code: 'Q_GET_ROOM_ID',
             };
-            chrome.tabs.sendMessage(tabId, message);
+            UtilsEngine.browser.tabs.sendMessage(tabId, message);
         });
     }
 
@@ -106,7 +107,7 @@ class PopUpEngine {
             const message = {
                 code: 'Q_GET_VIDEO_XPATH',
             };
-            chrome.tabs.sendMessage(tabId, message);
+            UtilsEngine.browser.tabs.sendMessage(tabId, message);
         });
     }
 
@@ -114,7 +115,7 @@ class PopUpEngine {
     public getCurrentRoomUrl(cb: (roomUrl: string) => void) {
         this.currentRoomUrlCallBack = cb;
         let _this = this;
-        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        UtilsEngine.browser.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             const url = tabs[0].url;
             _this.currentRoomUrlCallBack(url);
         });
@@ -128,7 +129,7 @@ class PopUpEngine {
             const message = {
                 code: 'Q_GET_PARTY_USERS',
             };
-            chrome.tabs.sendMessage(tabId, message);
+            UtilsEngine.browser.tabs.sendMessage(tabId, message);
         });
     }
 

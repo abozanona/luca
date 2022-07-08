@@ -46,9 +46,9 @@ export class LucaEngine {
         let divChatListFrame = document.createElement('div');
         divChatListFrame.id = 'luca-chat-page-container';
         divChatListFrame.innerHTML = chatTemplateHTML
-            .replace('{emojiIcon}', chrome.runtime.getURL('assets/imgs/reaction_emoji.svg'))
-            .replace('{arrowUp}', chrome.runtime.getURL('assets/imgs/arrow_up.svg'))
-            .replace('{exitIcon}', chrome.runtime.getURL('assets/imgs/exit.svg'));
+            .replace('{emojiIcon}', UtilsEngine.browser.runtime.getURL('assets/imgs/reaction_emoji.svg'))
+            .replace('{arrowUp}', UtilsEngine.browser.runtime.getURL('assets/imgs/arrow_up.svg'))
+            .replace('{exitIcon}', UtilsEngine.browser.runtime.getURL('assets/imgs/exit.svg'));
         document.body.appendChild(divChatListFrame);
         // luca-chat-exit-icon
         let lucaChatToggle = document.createElement('div');
@@ -79,7 +79,7 @@ export class LucaEngine {
         ['like', 'love', 'sad', 'laugh', 'wow', 'angry'].forEach(function (reactionImage) {
             let imgReaction = document.createElement('img');
             imgReaction.classList.add('luca-reaction');
-            imgReaction.src = chrome.runtime.getURL('assets/imgs/' + reactionImage + '.gif');
+            imgReaction.src = UtilsEngine.browser.runtime.getURL('assets/imgs/' + reactionImage + '.gif');
             imgReaction.dataset.reactionName = reactionImage;
             imgReaction.addEventListener('click', function (el) {
                 el.preventDefault();
@@ -98,7 +98,7 @@ export class LucaEngine {
         ['like', 'love', 'sad', 'laugh', 'wow', 'angry'].forEach(function (reactionImage) {
             let imgReaction = document.createElement('img');
             imgReaction.classList.add('luca-reaction');
-            imgReaction.src = chrome.runtime.getURL('assets/imgs/' + 'luca-' + reactionImage + '-reaction' + '.svg');
+            imgReaction.src = UtilsEngine.browser.runtime.getURL('assets/imgs/' + 'luca-' + reactionImage + '-reaction' + '.svg');
             imgReaction.dataset.reactionName = reactionImage;
             imgReaction.addEventListener('click', function (el) {
                 el.preventDefault();

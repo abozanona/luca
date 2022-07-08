@@ -6,21 +6,21 @@ export class UtilsEngine {
         if (!playSounds) {
             return;
         }
-        let audioUrl: string = chrome.runtime.getURL(mp3Filepath);
+        let audioUrl: string = UtilsEngine.browser.runtime.getURL(mp3Filepath);
         let audio: HTMLAudioElement = new Audio(audioUrl);
         audio.play();
     }
 
     public static refreshPage() {
         location.reload();
-        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            chrome.tabs.reload(tabs[0].id);
+        UtilsEngine.browser.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            UtilsEngine.browser.tabs.reload(tabs[0].id);
         });
     }
 
     public static getTabId(): Promise<string> {
         return new Promise(function (resolve, reject) {
-            chrome.runtime
+            UtilsEngine.browser.runtime
                 .sendMessage({ code: 'Q_TAB_ID' })
                 .then((res) => {
                     resolve(res.body.tabId);
@@ -79,11 +79,11 @@ export class UtilsEngine {
     }
 
     public static translate(message: string, parameters: string[] = []) {
-        return chrome.i18n.getMessage(message, parameters);
+        return UtilsEngine.browser.i18n.getMessage(message, parameters);
     }
 
     public static async loadTemplate(templatePath: string) {
-        const templateRes = await fetch(chrome.runtime.getURL(templatePath));
+        const templateRes = await fetch(UtilsEngine.browser.runtime.getURL(templatePath));
         let templateHTML = await templateRes.text();
         templateHTML = templateHTML.replace(/{__MSG_([a-zA-Z0-9_]+)__}/g, (m, o) => UtilsEngine.translate(o));
         return templateHTML;
@@ -140,7 +140,7 @@ export class UtilsEngine {
     public static injectScript(path: string): Promise<void> {
         return new Promise(function (resolve, reject) {
             let s = document.createElement('script');
-            s.src = chrome.runtime.getURL(path);
+            s.src = UtilsEngine.browser.runtime.getURL(path);
             s.onload = function () { resolve() };
             (document.head || document.body || document.documentElement).appendChild(s);
         });
@@ -149,13 +149,27 @@ export class UtilsEngine {
     public static injectStyle(path: string): Promise<void> {
         return new Promise(function (resolve, reject) {
             const s = document.createElement('link');
-            s.href = chrome.runtime.getURL(path);
+            s.href = UtilsEngine.browser.runtime.getURL(path);
             s.rel = 'stylesheet';
             s.type = 'text/css';
             s.onload = function () { resolve() };
             (document.head || document.body || document.documentElement).appendChild(s);
         });
     }
+
+
+    public static browser: typeof chrome = (function () {
+        if (typeof msBrowser !== "undefined") {
+            return msBrowser;
+        }
+        if (typeof browser !== "undefined") {
+            return browser;
+        }
+        if (typeof chrome !== "undefined") {
+            return chrome;
+        }
+        return null;
+    })();
 }
 
 export default UtilsEngine;

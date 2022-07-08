@@ -1,5 +1,6 @@
 import { Settings } from '../../core/model/settings.model';
 import { UserInterface } from './interfaces/user.interface';
+import UtilsEngine from './utils-engine';
 
 export class UserEngine {
 
@@ -10,11 +11,11 @@ export class UserEngine {
     }
 
     public static async setSettings(settings: Settings): Promise<void> {
-        await chrome.storage.sync.set({ lucaSettings: settings });
+        await UtilsEngine.browser.storage.sync.set({ lucaSettings: settings });
     }
 
     public static async getSettings(): Promise<Settings> {
-        let settings = await chrome.storage.sync.get('lucaSettings');
+        let settings = await UtilsEngine.browser.storage.sync.get('lucaSettings');
         if (!settings.lucaSettings) {
             await this.setSettings(new Settings());
             return this.getSettings();
