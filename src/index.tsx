@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { UserEngine } from './js/luca/user-engine';
 import { SettingsService } from './core/services/SettingsService';
+import PartyDisconnectedPage from './pages/PartyDisconnectedPage/PartyDisconnectedPage';
 
 function PopupApp() {
     const navigate = useNavigate();
@@ -50,9 +51,10 @@ function PopupApp() {
                         <Route path="/login" element={<LoginPage />} />
                         <Route path="/selectvideo" element={<SelectVideoPage />} />
                         <Route path="/notrecognised" element={<NotRecognisedPage />} />
+                        <Route path="/partydisconnected" element={<PartyDisconnectedPage />} />
                         <Route path="/friends" element={<FriendsPage />} />
                         <Route path="/settings" element={<SettingsPage />} />
-                        <Route path="/party" element={<PartyPage />} />
+                        <Route path="/party" element={<PartyPage navigate={navigate} />} />
                     </Routes>
                 </div>
                 <Footer />

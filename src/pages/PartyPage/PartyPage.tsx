@@ -5,6 +5,7 @@ import PopUpEngine from '../../js/popup-engine';
 import { toast } from 'react-toastify';
 import { UserInterface } from '../../js/luca/interfaces/user.interface';
 import UtilsEngine from '../../js/luca/utils-engine';
+import { NavigateFunction } from 'react-router-dom';
 
 const Copy = require('../../assets/imgs/copy.svg');
 const Link = require('../../assets/imgs/link.svg');
@@ -12,7 +13,7 @@ const Setting = require('../../assets/imgs/setting.svg');
 const Scan = require('../../assets/imgs/scan.svg');
 const Leave = require('../../assets/imgs/leave.svg');
 class PartyPage extends Component<
-    {},
+    { navigate: NavigateFunction },
     { roomId: string; roomLink: string; partyUsers: UserInterface[]; videoXPath: string }
 > {
     constructor(props: any) {
@@ -59,6 +60,17 @@ class PartyPage extends Component<
         navigator.clipboard.writeText(this.getRoomLink());
     };
 
+    handleOnLeaveParty = () => {
+        let popupEngine: PopUpEngine = new PopUpEngine();
+        popupEngine.leaveParty();
+        this.props.navigate('/partydisconnected');
+    };
+
+    handleOnScanVideos = () => {
+        let popupEngine: PopUpEngine = new PopUpEngine();
+        popupEngine.scanVideos();
+    };
+
     render() {
         return (
             <React.Fragment>
@@ -97,8 +109,13 @@ class PartyPage extends Component<
                             </div>
                         </div>
                         <div className="page__actions d-aic g-1">
-                            <GeneralButton name="Scan" icon={Scan}></GeneralButton>
-                            <GeneralButton class="btn--danger" name="Leave" icon={Leave}></GeneralButton>
+                            <GeneralButton click={this.handleOnScanVideos} name="Scan" icon={Scan}></GeneralButton>
+                            <GeneralButton
+                                click={this.handleOnLeaveParty}
+                                class="btn--danger"
+                                name="Leave"
+                                icon={Leave}
+                            ></GeneralButton>
                         </div>
                     </div>
                 </div>

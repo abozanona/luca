@@ -9,66 +9,85 @@ export class NetflixVideoController extends VideoControllerEngine {
         isPaused: boolean;
         isPlayed: boolean;
     } = {
-        currentTime: 0,
-        isPaused: false,
-        isPlayed: true,
-    };
+            currentTime: 0,
+            isPaused: false,
+            isPlayed: true,
+        };
 
     constructor(socketEngine: SocketEngine) {
         super(socketEngine);
     }
 
-    playVideo(): void {
+    public playVideo(): void {
         document.body.dispatchEvent(new CustomEvent('playVideo', {}));
     }
 
-    isVideoPlaying(): boolean {
+    public isVideoPlaying(): boolean {
         return this.currentPlayerStatus.isPlayed;
     }
 
-    isVideoPaused(): boolean {
+    public isVideoPaused(): boolean {
         return this.currentPlayerStatus.isPaused;
     }
 
-    pauseVideo(): void {
+    public pauseVideo(): void {
         document.body.dispatchEvent(new CustomEvent('pauseVideo', {}));
     }
 
-    seekVideo(time: number): void {
+    public seekVideo(time: number): void {
         document.body.dispatchEvent(new CustomEvent('seekVideo', { detail: { time: time } }));
     }
 
-    getCurrentVideoTime(): number {
+    public getCurrentVideoTime(): number {
         return this.currentPlayerStatus.currentTime;
     }
 
-    initVideoListners(): void {
+    private playEventListner: (event: Event) => void;
+
+    private pauseEventListner: (event: Event) => void;
+
+    private seekedEventListner: (event: Event) => void;
+
+    public initVideoListners(): void {
+        this.playEventListner = (event: Event) => {
+            this.currentPlayerStatus = (<any>event).detail;
+            this.onVideoPlay();
+        }
+
+        this.pauseEventListner = (event: Event) => {
+            this.currentPlayerStatus = (<any>event).detail;
+            this.onVideoPause();
+        }
+
+        this.seekedEventListner = (event: Event) => {
+            this.currentPlayerStatus = (<any>event).detail;
+            this.onVideoSeek();
+        }
+
         let _this = this;
         document.body.addEventListener(
             'videoplay',
-            function (e) {
-                _this.currentPlayerStatus = (<any>e).detail;
-                _this.onVideoPlay();
-            },
+            _this.playEventListner,
             false
         );
         document.body.addEventListener(
             'videopause',
-            function (e) {
-                _this.currentPlayerStatus = (<any>e).detail;
-                _this.onVideoPause();
-            },
+            _this.pauseEventListner,
             false
         );
         document.body.addEventListener(
             'videotimechange',
-            function (e) {
-                _this.currentPlayerStatus = (<any>e).detail;
-                _this.onVideoSeek();
-            },
+            _this.seekedEventListner,
             false
         );
     }
+
+    public destroyVideoListners(): void {
+        document.body.removeEventListener('videoplay', this.playEventListner, false);
+        document.body.removeEventListener('videopause', this.pauseEventListner, false);
+        document.body.removeEventListener('videotimechange', this.seekedEventListner, false);
+    }
+
 }
 
 export default NetflixVideoController;

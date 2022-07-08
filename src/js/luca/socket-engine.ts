@@ -7,6 +7,7 @@ import { VideoControllerEngine } from './video-controller-engine';
 
 export class SocketEngine {
     isSocketStarted = false;
+    isSocketDisconnected = false;
     socket: any = null;
     roomId: string = null;
 
@@ -94,6 +95,15 @@ export class SocketEngine {
         });
     }
 
+    public disconnectSocket() {
+        this.socket.disconnect();
+        this.isSocketStarted = false;
+        this.isSocketDisconnected = true;
+        this.socket = null;
+        this.roomId = null;
+        this.currentUsers = [];
+    }
+
     private addUserToChat(sender: UserInterface) {
         if (!sender) {
             return;
@@ -138,6 +148,10 @@ export class SocketEngine {
     public sendSocketOrder(order: string, data: any): Promise<void> {
         let _this = this;
         return new Promise(async function (resolve, reject) {
+            if (!_this.socket) {
+                resolve();
+                return;
+            }
             let currentUser: UserInterface = await UserEngine.getCurrentUser();
             let currentPageId = await UtilsEngine.getCurrentPageId();
             data.pageId = currentPageId;
