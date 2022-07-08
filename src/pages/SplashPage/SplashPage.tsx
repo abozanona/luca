@@ -22,6 +22,9 @@ function SplashPage() {
                 case 'ROOM_SETUP_COMPLETED':
                     navigate('/party', { replace: true });
                     break;
+                case 'PARTY_DISCONNECTED':
+                    navigate('/partydisconnected', { replace: true });
+                    break;
             }
         });
     });

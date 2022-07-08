@@ -42,6 +42,16 @@ class ContentPageScript {
         this.videoController.videoXPath = UtilsEngine.getXPathTo(videoElement);
     }
 
+    updatePartyVideo(videoElement: HTMLVideoElement) {
+        this.videoController.destroyVideoListners();
+        if (document.location.origin.includes('netflix.com')) {
+        } else {
+            (this.videoController as GeneralVideoController).setVideo(videoElement);
+        }
+        this.videoController.startStreamingOnVideo();
+        this.videoController.videoXPath = UtilsEngine.getXPathTo(videoElement);
+    }
+
     gotMessage(message: any, sender: any, sendResponse: any) {
         let _this = this;
         switch (message.code) {
@@ -54,31 +64,63 @@ class ContentPageScript {
                     el.remove();
                 });
                 document.querySelectorAll('video').forEach((elVideo) => {
-                    let divVideoHiighlight = document.createElement('div');
-                    divVideoHiighlight.classList.add('luca-video-highlight');
+                    let divVideoHighlight = document.createElement('div');
+                    divVideoHighlight.classList.add('luca-video-highlight');
 
-                    document.body.appendChild(divVideoHiighlight);
+                    document.body.appendChild(divVideoHighlight);
 
                     let coordinates = UtilsEngine.getOffset(elVideo);
-                    divVideoHiighlight.style.top = coordinates.top + 'px';
-                    divVideoHiighlight.style.left = coordinates.left + 'px';
-                    divVideoHiighlight.style.width = coordinates.width - 10 + 'px';
-                    divVideoHiighlight.style.height = coordinates.height - 10 + 'px';
+                    divVideoHighlight.style.top = coordinates.top + 'px';
+                    divVideoHighlight.style.left = coordinates.left + 'px';
+                    divVideoHighlight.style.width = coordinates.width - 10 + 'px';
+                    divVideoHighlight.style.height = coordinates.height - 10 + 'px';
 
                     let spanHiighlightClose = document.createElement('div');
                     spanHiighlightClose.classList.add('luca-video-highlight-close');
                     spanHiighlightClose.addEventListener('click', function (e) {
                         ((e.target as HTMLElement).parentNode as HTMLElement).remove();
                     });
-                    divVideoHiighlight.appendChild(spanHiighlightClose);
+                    divVideoHighlight.appendChild(spanHiighlightClose);
 
-                    let spanHiighlightPlay = document.createElement('button');
-                    spanHiighlightPlay.classList.add('luca-video-highlight-play');
-                    spanHiighlightPlay.addEventListener('click', function (e) {
+                    let spanHighlightPlay = document.createElement('button');
+                    spanHighlightPlay.classList.add('luca-video-highlight-play');
+                    spanHighlightPlay.addEventListener('click', function (e) {
                         _this.startPartyOnVideo(elVideo);
                         ((e.target as HTMLElement).parentNode as HTMLElement).remove();
                     });
-                    divVideoHiighlight.appendChild(spanHiighlightPlay);
+                    divVideoHighlight.appendChild(spanHighlightPlay);
+                });
+                break;
+            case 'Q_HIGHLIGHT_NEW_VIDEOS':
+                document.querySelectorAll('.luca-video-highlight').forEach((el) => {
+                    el.remove();
+                });
+                document.querySelectorAll('video').forEach((elVideo) => {
+                    let divVideoHighlight = document.createElement('div');
+                    divVideoHighlight.classList.add('luca-video-highlight');
+
+                    document.body.appendChild(divVideoHighlight);
+
+                    let coordinates = UtilsEngine.getOffset(elVideo);
+                    divVideoHighlight.style.top = coordinates.top + 'px';
+                    divVideoHighlight.style.left = coordinates.left + 'px';
+                    divVideoHighlight.style.width = coordinates.width - 10 + 'px';
+                    divVideoHighlight.style.height = coordinates.height - 10 + 'px';
+
+                    let spanHiighlightClose = document.createElement('div');
+                    spanHiighlightClose.classList.add('luca-video-highlight-close');
+                    spanHiighlightClose.addEventListener('click', function (e) {
+                        ((e.target as HTMLElement).parentNode as HTMLElement).remove();
+                    });
+                    divVideoHighlight.appendChild(spanHiighlightClose);
+
+                    let spanHighlightPlay = document.createElement('button');
+                    spanHighlightPlay.classList.add('luca-video-highlight-play');
+                    spanHighlightPlay.addEventListener('click', function (e) {
+                        _this.updatePartyVideo(elVideo);
+                        ((e.target as HTMLElement).parentNode as HTMLElement).remove();
+                    });
+                    divVideoHighlight.appendChild(spanHighlightPlay);
                 });
                 break;
             case 'Q_CLOSE_POPUP':
@@ -170,6 +212,9 @@ class ContentPageScript {
                     };
                     chrome.runtime.sendMessage(message);
                 });
+                break;
+            case 'Q_LEAVE_PARTY':
+                this.lucaEngine.leaveParty();
                 break;
         }
     }

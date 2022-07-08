@@ -171,7 +171,24 @@ export class LucaEngine {
         await this.startVideoCall();
     }
 
+    public leaveParty() {
+        if (document.getElementById('luca-chat-page-container')) {
+            document.getElementById('luca-chat-page-container').remove();
+        }
+        if (document.getElementById('luca-chat-outer-toggle')) {
+            document.getElementById('luca-chat-outer-toggle').remove();
+        }
+        if (document.getElementById('luca-reactions-container')) {
+            document.getElementById('luca-reactions-container').remove();
+        }
+        this.socketEngine.disconnectSocket();
+        this.videoControllerEngine.destroyVideoListners();
+    }
+
     public getCurrentPageStatus() {
+        if (this.socketEngine.isSocketDisconnected) {
+            return 'PARTY_DISCONNECTED';
+        }
         if (!this.socketEngine.isSocketStarted) {
             return 'WAITING_CREATE_ROOM';
         }

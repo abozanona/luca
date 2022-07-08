@@ -1,7 +1,7 @@
 import { UserInterface } from './luca/interfaces/user.interface';
 
 class PopUpEngine {
-    actionsOrder = ['NOTHING', 'WAITING_CREATE_ROOM', 'WAITING_SELECT_VIDEO', 'ROOM_SETUP_COMPLETED'];
+    actionsOrder = ['NOTHING', 'WAITING_CREATE_ROOM', 'WAITING_SELECT_VIDEO', 'ROOM_SETUP_COMPLETED', 'PARTY_DISCONNECTED'];
     currentAction = 'NOTHING';
 
     constructor() {
@@ -137,6 +137,25 @@ class PopUpEngine {
             this.currentPageCallBack(state);
         }
     }
+
+    public leaveParty() {
+        this.getCurrentTabId(function (tabId: any) {
+            const message = {
+                code: 'Q_LEAVE_PARTY',
+            };
+            chrome.tabs.sendMessage(tabId, message);
+        });
+    }
+
+    public scanVideos() {
+        this.getCurrentTabId(function (tabId: any) {
+            const message = {
+                code: 'Q_HIGHLIGHT_NEW_VIDEOS',
+            };
+            chrome.tabs.sendMessage(tabId, message);
+        });
+    }
+
 }
 
 export default PopUpEngine;

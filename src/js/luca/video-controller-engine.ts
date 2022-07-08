@@ -1,6 +1,5 @@
 import VideoControllerInterface from '../luca/interfaces/video-controller-interface';
 import SocketEngine from './socket-engine';
-import UtilsEngine from "./utils-engine";
 
 export abstract class VideoControllerEngine implements VideoControllerInterface {
     isVideoSelected: boolean;
@@ -19,13 +18,14 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
 
     constructor(public socketEngine: SocketEngine) {}
 
-    abstract playVideo(): void;
-    abstract isVideoPlaying(): boolean;
-    abstract isVideoPaused(): boolean;
-    abstract pauseVideo(): void;
-    abstract seekVideo(time: number): void;
-    abstract getCurrentVideoTime(): number;
-    abstract initVideoListners(): void;
+    public abstract playVideo(): void;
+    public abstract isVideoPlaying(): boolean;
+    public abstract isVideoPaused(): boolean;
+    public abstract pauseVideo(): void;
+    public abstract seekVideo(time: number): void;
+    public abstract getCurrentVideoTime(): number;
+    public abstract initVideoListners(): void;
+    public abstract destroyVideoListners(): void;
 
     public play() {
         if (this.isVideoPlaying()) {
@@ -94,10 +94,6 @@ export abstract class VideoControllerEngine implements VideoControllerInterface 
     }
 
     public startStreamingOnVideo() {
-        if (this.isVideoSelected) {
-            alert(UtilsEngine.translate('ALERT_PARTY_ALREADY_RUNNING'));
-            return;
-        }
         this.isVideoSelected = true;
         document.querySelectorAll('.luca-video-highlight').forEach((el) => {
             el.remove();

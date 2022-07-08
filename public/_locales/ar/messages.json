@@ -156,6 +156,15 @@
     "NOT_RECOGNISED_TRY_AGAIN": {
         "message": "حاول مجدداً"
     },
+    "PARTY_DISCONNECTED_PARTY_DISCONNECTED": {
+        "message": "أغلقت الحفلة"
+    },
+    "PARTY_DISCONNECTED_PAGE_NOT_SUPPORTED_NOTICE": {
+        "message": "تم إنهاء الحفلة في هذه الصفحة. بإمكانك إعادة تحميل الصفحة والإنضمام للحفلة من جديد."
+    },
+    "PARTY_DISCONNECTED_TRY_AGAIN": {
+        "message": "إعادة التحميل"
+    },
     "FRIENDS_FRIENDS_COMING_SOON": {
         "message": "ميزة الأصدقاء قريباً"
     },

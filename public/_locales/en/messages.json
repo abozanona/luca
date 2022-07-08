@@ -156,6 +156,15 @@
     "NOT_RECOGNISED_TRY_AGAIN": {
         "message": "Try Again"
     },
+    "PARTY_DISCONNECTED_PARTY_DISCONNECTED": {
+        "message": "Party is closed"
+    },
+    "PARTY_DISCONNECTED_PAGE_NOT_SUPPORTED_NOTICE": {
+        "message": "Party is closed on this page. You can reload this page and join the party again."
+    },
+    "PARTY_DISCONNECTED_TRY_AGAIN": {
+        "message": "Reload"
+    },
     "FRIENDS_FRIENDS_COMING_SOON": {
         "message": "Friends is coming soon!"
     },
