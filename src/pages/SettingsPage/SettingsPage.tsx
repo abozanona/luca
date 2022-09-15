@@ -1,8 +1,8 @@
 import React, { ChangeEvent, Component, useState } from 'react';
 import UserEngine from '../../js/luca/user-engine';
 import { toast } from 'react-toastify';
-import { SettingsService } from '../../core/services/SettingsService';
-import { Settings } from '../../core/model/settings.model';
+import { SettingsService } from '../../js/luca/services/SettingsService';
+import { Settings } from '../../js/luca/model/settings.model';
 import UtilsEngine from '../../js/luca/utils-engine';
 
 class SettingsPage extends Component<{}, Settings> {

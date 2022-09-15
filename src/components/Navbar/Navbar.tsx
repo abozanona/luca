@@ -3,7 +3,7 @@ import navConfig from '../../constant/nav.config';
 import { Link } from 'react-router-dom';
 import Avatar from '../Avatar/Avatar';
 import UserEngine from '../../js/luca/user-engine';
-import { SettingsService } from '../../core/services/SettingsService';
+import { SettingsService } from '../../js/luca/services/SettingsService';
 import { Subscription } from 'rxjs';
 const CopyCode = require('../../assets/imgs/copy-code.svg');
 const Options = require('../../assets/imgs/options.svg');
@@ -13,7 +13,7 @@ const Website = require('../../assets/imgs/website.svg');
 const SupportUs = require('../../assets/imgs/support_us.svg');
 const RateUs = require('../../assets/imgs/rate_us.svg');
 import { toast } from 'react-toastify';
-import { Settings } from '../../core/model/settings.model';
+import { Settings } from '../../js/luca/model/settings.model';
 import UtilsEngine from '../../js/luca/utils-engine';
 class Navbar extends Component<{}, { username?: string; userAvatar?: string; userId?: string }> {
     userEngine: UserEngine = new UserEngine();
@@ -26,7 +26,7 @@ class Navbar extends Component<{}, { username?: string; userAvatar?: string; use
             this.setState(settings);
         });
     }
-    
+
     componentDidMount() {
         this.settingsSubscription = SettingsService.getSettingsChange().subscribe((settings: Settings) => {
             this.setState(settings);
