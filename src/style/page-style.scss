@@ -132,29 +132,6 @@
     }
 }
 
-#luca-chat-new-message {
-    position: fixed;
-    left: 50%;
-    bottom: 0px;
-    z-index: 2147483647;
-    transform: translateX(-50%);
-    opacity: 0.5;
-    border: solid 1px brown;
-}
-
-#luca-chat-new-message input {
-    width: 300px;
-    padding: 5px;
-    font-size: 20px;
-}
-
-.luca-chat-bubble {
-    padding: 10px;
-    border-radius: 12px;
-    background-color: cyan;
-    margin: 6px;
-}
-
 #luca-reactions-container {
     position: fixed;
     z-index: 2147483647;

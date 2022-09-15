@@ -18,6 +18,7 @@ import { ToastContainer } from 'react-toastify';
 import { UserEngine } from './js/luca/user-engine';
 import { SettingsService } from './core/services/SettingsService';
 import PartyDisconnectedPage from './pages/PartyDisconnectedPage/PartyDisconnectedPage';
+import ChatPage from './pages/ChatPage/ChatPage';
 
 function PopupApp() {
     const navigate = useNavigate();
@@ -62,10 +63,43 @@ function PopupApp() {
         </React.Fragment>
     );
 }
-const container = document.getElementById('react-target');
-const root = createRoot(container);
-root.render(
-    <Router>
-        <PopupApp />
-    </Router>
-);
+
+function ChatApp() {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        UserEngine.getSettings().then((settings) => {
+            SettingsService.setTheme(settings);
+        });
+    });
+
+    return (
+        <React.Fragment>
+            <div id="luca-chat-page-container" className="luca-chat--active-effect">
+                <Routes>
+                    <Route path="/" element={<ChatPage />} />
+                </Routes>
+            </div>
+        </React.Fragment>
+    );
+}
+
+if (document.getElementById('react-target')) {
+    const container = document.getElementById('react-target');
+    const root = createRoot(container);
+    root.render(
+        <Router>
+            <PopupApp />
+        </Router>
+    );
+}
+
+if (document.getElementById('react-chat-target')) {
+    const containerChat = document.getElementById('react-chat-target');
+    const rootChat = createRoot(containerChat);
+    rootChat.render(
+        <Router>
+            <ChatApp />
+        </Router>
+    );
+}
