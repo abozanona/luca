@@ -13,6 +13,12 @@ module.exports = merge(common, {
             inject: 'body',
             title: 'Development',
         }),
+        new HtmlWebpackPlugin({
+            template: './src/template-chat.html',
+            filename: 'chat.html',
+            inject: 'body',
+            title: 'Development',
+        }),
     ],
     optimization: {
         minimize: false,

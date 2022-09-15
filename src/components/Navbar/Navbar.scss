@@ -86,7 +86,7 @@
     max-height: 0rem;
     visibility: hidden;
     opacity: 0;
-    transition: $transition-300;
+    transition: $transition-100;
     z-index: 10000;
     &::after {
         content: '';

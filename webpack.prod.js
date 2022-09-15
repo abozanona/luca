@@ -21,6 +21,17 @@ module.exports = merge(common, {
                     removeComments: true,
                 },
             }),
+            new HtmlWebpackPlugin({
+                template: './src/template-chat.html',
+                filename: 'chat.html',
+                inject: 'body',
+                title: 'Production',
+                minify: {
+                    removeAttributeQuotes: true,
+                    collapseWhitespace: true,
+                    removeComments: true,
+                },
+            }),
         ],
         removeAvailableModules: false,
         removeEmptyChunks: false,

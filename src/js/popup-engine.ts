@@ -144,7 +144,7 @@ class PopUpEngine {
             const message = {
                 code: 'Q_LEAVE_PARTY',
             };
-            chrome.tabs.sendMessage(tabId, message);
+            UtilsEngine.browser.tabs.sendMessage(tabId, message);
         });
     }
 
@@ -153,7 +153,7 @@ class PopUpEngine {
             const message = {
                 code: 'Q_HIGHLIGHT_NEW_VIDEOS',
             };
-            chrome.tabs.sendMessage(tabId, message);
+            UtilsEngine.browser.tabs.sendMessage(tabId, message);
         });
     }
 

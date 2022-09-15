@@ -18,14 +18,20 @@ UtilsEngine.browser.runtime.onMessage.addListener(function (msg, sender, sendRes
                 videoXPath: msg.body.videoXPath,
             };
         });
+    } else if (msg.code == 'Q_OPEN_PAGE_IN_POPUP') {
+        // chrome.windows.create({ tabId: tab.id, type: "popup" });
+        chrome.windows.create({
+            focused: true,
+            // tabId: tab.id,
+            type: "popup",
+            top: 0,
+            height: 500,
+            width: 100,
+            left: 0,
+            // url: 'https://google.com/',
+            url: 'chrome-extension://malijbikcpkgkmkmememddinnklhekcj/chat.html',
+        });
     }
-});
-
-UtilsEngine.browser.runtime.onMessage.addListener(function (rq, sender, sendResponse) {
-    setTimeout(function () {
-        sendResponse({ status: true });
-    }, 1);
-    return true;
 });
 
 UtilsEngine.browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
