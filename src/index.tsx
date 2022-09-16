@@ -16,7 +16,7 @@ import SplashPage from './pages/SplashPage/SplashPage';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { UserEngine } from './js/luca/user-engine';
-import { SettingsService } from './core/services/SettingsService';
+import { SettingsService } from './js/luca/services/SettingsService';
 import PartyDisconnectedPage from './pages/PartyDisconnectedPage/PartyDisconnectedPage';
 import ChatPage from './pages/ChatPage/ChatPage';
 

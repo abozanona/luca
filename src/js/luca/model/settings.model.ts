@@ -1,4 +1,4 @@
-import UtilsEngine from "../../js/luca/utils-engine";
+import UtilsEngine from "../utils-engine";
 
 export class Settings {
     username?: string = UtilsEngine.randomNames();

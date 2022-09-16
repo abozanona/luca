@@ -87,7 +87,7 @@
     height: 1.5em;
     width: 1.5em;
     top: 1em;
-    left: 1em;
+    CHROME_CSS_START: 1em;
     background-color: var(--bg-secondary-color);
     border-radius: $radius;
     transition: $transition-300;
@@ -113,7 +113,7 @@
 
 .luca-video-highlight-play {
     position: absolute;
-    left: 50%;
+    CHROME_CSS_START: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     border: 0;
@@ -136,7 +136,7 @@
     position: fixed;
     z-index: 2147483647;
     display: flex;
-    left: 50%;
+    CHROME_CSS_START: 50%;
     transform: translateX(-50%);
     top: 0px;
     height: 50px;
@@ -149,8 +149,8 @@
     height: 80px;
     display: inline-flex;
     position: absolute;
-    left: 0;
-    right: 0;
+    CHROME_CSS_START: 0;
+    CHROME_CSS_END: 0;
     bottom: -200px;
     transition: $transition-300;
     margin: auto;
@@ -164,7 +164,7 @@
     align-items: center;
     flex-direction: column;
     position: fixed;
-    right: 0;
+    CHROME_CSS_END: 0;
     top: 50%;
     transform: translate(0%, -50%);
     background-color: $black;
@@ -190,7 +190,7 @@
     flex-direction: column;
     gap: 1em;
     position: fixed;
-    right: 0;
+    CHROME_CSS_END: 0;
     top: 50%;
     transform: translate(0%, -50%);
     background-color: var(--bg-secondary-color);
@@ -210,7 +210,7 @@
         width: 0.35em;
         border-radius: 4px;
         height: 20%;
-        left: 0.3rem;
+        CHROME_CSS_START: 0.3rem;
         top: 50%;
         background-color: var(--text-primary-color);
         transform: translate(0%, -50%);
@@ -367,7 +367,7 @@
     position: absolute;
     bottom: 3.5em;
     padding: 0.5em;
-    right: 0;
+    CHROME_CSS_END: 0;
     visibility: hidden;
     opacity: 0;
     transition: $transition-300;

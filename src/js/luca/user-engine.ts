@@ -1,4 +1,4 @@
-import { Settings } from '../../core/model/settings.model';
+import { Settings } from '../luca/model/settings.model';
 import { UserInterface } from './interfaces/user.interface';
 import UtilsEngine from './utils-engine';
 
