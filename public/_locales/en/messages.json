@@ -20,6 +20,15 @@
     "TEMPLATE_CHAT_WRITE_SOMETHING_HERE": {
         "message": "Write Something here"
     },
+    "TEMPLATE_CHAT_DISCONNECTED_FROM_SERVER": {
+        "message": "Disconnected from server."
+    },
+    "TEMPLATE_CHAT_CANT_CONNECT_TO_SERVER": {
+        "message": "Can't connect to server."
+    },
+    "TEMPLATE_CHAT_RECONNECTING": {
+        "message": "Reconnecting..."
+    },
     "TEMPLATE_ACTION_USER_JOINED_PARTY": {
         "message": "Joined the party"
     },

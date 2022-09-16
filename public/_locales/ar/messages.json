@@ -20,6 +20,15 @@
     "TEMPLATE_CHAT_WRITE_SOMETHING_HERE": {
         "message": "اكتب شيء هنا"
     },
+    "TEMPLATE_CHAT_DISCONNECTED_FROM_SERVER": {
+        "message": "منفصل عن الخادم."
+    },
+    "TEMPLATE_CHAT_CANT_CONNECT_TO_SERVER": {
+        "message": "لا يمكن الاتصال بالخادم."
+    },
+    "TEMPLATE_CHAT_RECONNECTING": {
+        "message": "جار إعادة الاتصال..."
+    },
     "TEMPLATE_ACTION_USER_JOINED_PARTY": {
         "message": "انضم للحفلة"
     },
