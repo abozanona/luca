@@ -49,6 +49,33 @@ export class ChatEngine {
         bubblesContainer.scrollTop = bubblesContainer.scrollHeight;
 
         UtilsEngine.playAudio('assets/audio/luca-message-send.mp3');
+
+        let divChatListFrame: HTMLElement = document.getElementById('luca-chat-page-container');
+        if (!divChatListFrame.classList.contains('luca-chat--active-effect')) {
+            await this.addFloatingMessageBubble(messageText, user);
+        }
+    }
+
+    public async addFloatingMessageBubble(messageText: string, user: UserInterface) {
+        const floatingChatTemplateHTML = await UtilsEngine.loadTemplate("/templates/floating-chat-bubble.template.html");
+        let divFloatingChatBubble = document.createElement('div');
+        divFloatingChatBubble.classList.add('luca-floating-message-container');
+        divFloatingChatBubble.innerHTML = floatingChatTemplateHTML
+            .replace('{userName}', user.username)
+            .replace('{messageText}', messageText)
+            .replace('{userAvatar}', UtilsEngine.browser.runtime.getURL('assets/imgs/avatars/' + user.userAvatar));
+        divFloatingChatBubble.addEventListener('click', (el) => {
+            divFloatingChatBubble.remove();
+        });
+        setTimeout(() => {
+            if (divFloatingChatBubble) {
+                divFloatingChatBubble.remove();
+            }
+        }, 5000);
+
+        let bubblesContainer = document.getElementById('luca-floating-chat-page-container') as HTMLElement;
+        bubblesContainer.appendChild(divFloatingChatBubble);
+        bubblesContainer.scrollTop = bubblesContainer.scrollHeight;
     }
 
     public async addActionBubble(actionText: string, user: UserInterface) {

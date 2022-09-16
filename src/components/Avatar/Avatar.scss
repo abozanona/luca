@@ -19,21 +19,21 @@
             object-position: top;
         }
         .avatar__status {
-            content: '';
+            content: "";
             position: absolute;
             width: 0.8rem;
             height: 0.8rem;
             background-color: $success;
             border-radius: $radius * 100;
             bottom: 0rem;
-            CHROME_CSS_END: 0rem;
+            chrome_css_end: 0rem;
         }
         .avatar__crown {
-            content: '';
+            content: "";
             position: absolute;
             transform: rotate(45deg);
             top: -6px;
-            CHROME_CSS_END: -6px;
+            chrome_css_end: -6px;
         }
     }
 

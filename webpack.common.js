@@ -56,9 +56,9 @@ module.exports = {
                         loader: 'string-replace-loader',
                         options: {
                             multiple: [
-                                { search: /CHROME_CSS_START/g, replace: '__MSG_@@bidi_start_edge__' },
-                                { search: /CHROME_CSS_END/g, replace: '__MSG_@@bidi_end_edge__' },
-                                { search: /CHROME_CSS_DIR/g, replace: '__MSG_@@bidi_dir__' },
+                                { search: /CHROME_CSS_START/ig, replace: '__MSG_@@bidi_start_edge__' },
+                                { search: /CHROME_CSS_END/ig, replace: '__MSG_@@bidi_end_edge__' },
+                                { search: /CHROME_CSS_DIR/ig, replace: '__MSG_@@bidi_dir__' },
                                 { search: /CHROME_CSS_DIR_REVERSE/g, replace: '__MSG_@@bidi_reversed_dir__' },
                             ]
                         }

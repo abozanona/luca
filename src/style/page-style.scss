@@ -87,7 +87,7 @@
     height: 1.5em;
     width: 1.5em;
     top: 1em;
-    CHROME_CSS_START: 1em;
+    chrome_css_start: 1em;
     background-color: var(--bg-secondary-color);
     border-radius: $radius;
     transition: $transition-300;
@@ -113,7 +113,7 @@
 
 .luca-video-highlight-play {
     position: absolute;
-    CHROME_CSS_START: 50%;
+    chrome_css_start: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     border: 0;
@@ -136,7 +136,7 @@
     position: fixed;
     z-index: 2147483647;
     display: flex;
-    CHROME_CSS_START: 50%;
+    chrome_css_start: 50%;
     transform: translateX(-50%);
     top: 0px;
     height: 50px;
@@ -149,8 +149,8 @@
     height: 80px;
     display: inline-flex;
     position: absolute;
-    CHROME_CSS_START: 0;
-    CHROME_CSS_END: 0;
+    chrome_css_start: 0;
+    chrome_css_end: 0;
     bottom: -200px;
     transition: $transition-300;
     margin: auto;
@@ -164,7 +164,7 @@
     align-items: center;
     flex-direction: column;
     position: fixed;
-    CHROME_CSS_END: 0;
+    chrome_css_end: 0;
     top: 50%;
     transform: translate(0%, -50%);
     background-color: $black;
@@ -190,7 +190,7 @@
     flex-direction: column;
     gap: 1em;
     position: fixed;
-    CHROME_CSS_END: 0;
+    chrome_css_end: 0;
     top: 50%;
     transform: translate(0%, -50%);
     background-color: var(--bg-secondary-color);
@@ -210,7 +210,7 @@
         width: 0.35em;
         border-radius: 4px;
         height: 20%;
-        CHROME_CSS_START: 0.3rem;
+        chrome_css_start: 0.3rem;
         top: 50%;
         background-color: var(--text-primary-color);
         transform: translate(0%, -50%);
@@ -348,6 +348,61 @@
         }
     }
 }
+#luca-floating-chat-page-container {
+    position: fixed;
+    right: 0px;
+    top: 100px;
+    z-index: 2147483647;
+    .luca-floating-message-container {
+        background-color: var(--text-primary-color);
+        margin: 4px;
+        border-radius: 20px;
+        padding: 4px;
+        opacity: 0.3;
+        &:hover {
+            opacity: 1;
+        }
+        .luca-floating-message-information {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            p {
+                font-size: 14em;
+                font-weight: 300;
+                color: var(--text-primary-color);
+            }
+            .luca-floating-message-avatar {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                img {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 25px;
+                    object-fit: cover;
+                    object-position: top;
+                    box-shadow: $shadow-z200;
+                }
+                h1 {
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: var(--secondary-color);
+                }
+            }
+        }
+        .luca-floating-message {
+            padding-inline-start: 2.5em;
+            p {
+                word-break: break-all;
+                font-size: 0.8em;
+                font-weight: 400;
+                color: var(--secondary-color);
+                padding-inline-start: 3em;
+            }
+        }
+    }
+}
 
 .luca-chat--active-effect {
     min-width: 22em !important;
@@ -367,7 +422,7 @@
     position: absolute;
     bottom: 3.5em;
     padding: 0.5em;
-    CHROME_CSS_END: 0;
+    chrome_css_end: 0;
     visibility: hidden;
     opacity: 0;
     transition: $transition-300;

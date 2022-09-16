@@ -82,17 +82,17 @@
     border-radius: $radius;
     box-shadow: $shadow-z200;
     top: 3rem;
-    CHROME_CSS_END: -1rem;
+    chrome_css_end: -1rem;
     max-height: 0rem;
     visibility: hidden;
     opacity: 0;
     transition: $transition-100;
     z-index: 10000;
     &::after {
-        content: '';
+        content: "";
         position: absolute;
         top: -31px;
-        CHROME_CSS_START: 77%;
+        chrome_css_start: 77%;
         transform: translate(-50%, 0rem);
         width: 2rem;
         height: 2rem;

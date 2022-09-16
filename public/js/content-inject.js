@@ -4,6 +4,9 @@ document.getElementById('luca-chat-outer-toggle').addEventListener('click', func
 document.getElementById('luca-chat-send-message-button').addEventListener('click', function (e) {
     e.stopPropagation();
 });
+document.getElementById('luca-floating-message-container').addEventListener('click', function (e) {
+    e.stopPropagation();
+});
 Array.from(document.getElementsByClassName('luca-reaction')).forEach(function (el) {
     el.addEventListener('click', function (e) {
         e.stopPropagation();
