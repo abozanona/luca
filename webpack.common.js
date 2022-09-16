@@ -51,9 +51,20 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
-                    MiniCssExtractPlugin.loader, //3. Extract css into files
-                    'css-loader', //2. Turns css into commonjs
-                    'sass-loader', //1. Turns sass into css
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'string-replace-loader',
+                        options: {
+                            multiple: [
+                                { search: /CHROME_CSS_START/g, replace: '__MSG_@@bidi_start_edge__' },
+                                { search: /CHROME_CSS_END/g, replace: '__MSG_@@bidi_end_edge__' },
+                                { search: /CHROME_CSS_DIR/g, replace: '__MSG_@@bidi_dir__' },
+                                { search: /CHROME_CSS_DIR_REVERSE/g, replace: '__MSG_@@bidi_reversed_dir__' },
+                            ]
+                        }
+                    },
+                    'css-loader',
+                    'sass-loader',
                 ],
             },
             {

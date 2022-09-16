@@ -82,7 +82,7 @@
     border-radius: $radius;
     box-shadow: $shadow-z200;
     top: 3rem;
-    right: -1rem;
+    CHROME_CSS_END: -1rem;
     max-height: 0rem;
     visibility: hidden;
     opacity: 0;
@@ -92,7 +92,7 @@
         content: '';
         position: absolute;
         top: -31px;
-        left: 77%;
+        CHROME_CSS_START: 77%;
         transform: translate(-50%, 0rem);
         width: 2rem;
         height: 2rem;

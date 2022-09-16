@@ -2,7 +2,7 @@
     position: absolute;
     z-index: 100;
     //avatar hover state style
-    left: 50%;
+    CHROME_CSS_START: 50%;
     top: 8rem;
     transform: translate(-50%, -4rem);
 }
@@ -44,7 +44,7 @@
         content: '';
         position: absolute;
         top: -23px;
-        left: 50%;
+        CHROME_CSS_START: 50%;
         transform: translate(-50%, 0rem);
         width: 0rem;
         height: 0rem;
