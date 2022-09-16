@@ -182,6 +182,12 @@
     &:hover {
         opacity: 1;
     }
+    &.luca-chat-outer-toggle-disconnected {
+        background-color: $error !important;
+    }
+    &.luca-chat-outer-toggle-reconnecting {
+        background-color: $warning !important;
+    }
 }
 #luca-chat-page-container {
     @extend .luca--default-value;
@@ -435,4 +441,9 @@
             transform: scale(1.5);
         }
     }
+}
+
+#luca-connection-status {
+    font-size: 0.8em;
+    color: black;
 }
