@@ -50,11 +50,15 @@ export class LucaEngine {
             .replace('{arrowUp}', UtilsEngine.browser.runtime.getURL('assets/imgs/arrow_up.svg'))
             .replace('{exitIcon}', UtilsEngine.browser.runtime.getURL('assets/imgs/exit.svg'));
         document.body.appendChild(divChatListFrame);
-        // luca-chat-exit-icon
+
         let lucaChatToggle = document.createElement('div');
         lucaChatToggle.id = 'luca-chat-outer-toggle';
         lucaChatToggle.innerHTML = chatToggleTemplateHTML;
         document.body.appendChild(lucaChatToggle);
+
+        let divFloatingChatListFrame = document.createElement('div');
+        divFloatingChatListFrame.id = 'luca-floating-chat-page-container';
+        document.body.appendChild(divFloatingChatListFrame);
 
         let lucaInput: HTMLInputElement = document.getElementById('luca-input-field') as HTMLInputElement;
         let lucaChatInnerToggle: HTMLElement = document.getElementById('luca-chat-inner-toggle') as HTMLElement;
@@ -141,6 +145,9 @@ export class LucaEngine {
             divChatListFrame.classList.toggle('luca-chat--active-effect');
         });
         lucaChatOuterToggle.addEventListener('click', function (event) {
+            Array.prototype.forEach.call(document.getElementsByClassName('luca-floating-message-container'), function (el: HTMLElement) {
+                el.remove();
+            });
             event.preventDefault();
             _this.toggleChatContainer();
         });
@@ -163,6 +170,7 @@ export class LucaEngine {
                         LucaEngine.fullScreenElement.appendChild(divReactionsFrame);
                         LucaEngine.fullScreenElement.appendChild(divChatListFrame);
                         LucaEngine.fullScreenElement.appendChild(lucaChatToggle);
+                        LucaEngine.fullScreenElement.appendChild(divFloatingChatListFrame);
                     });
                 }
             );
