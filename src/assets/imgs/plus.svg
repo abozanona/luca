@@ -1,0 +1,8 @@
+
+<svg viewBox="0 0 60 60" width="60" height="60" stroke="#A4A4A4" stroke-width="5"
+    stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+    <line x1="30" y1="5" x2="30" y2="55">
+    </line>
+    <line x1="5" y1="30" x2="55" y2="30">
+    </line>
+</svg>

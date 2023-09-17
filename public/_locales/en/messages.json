@@ -183,16 +183,25 @@
     "DASHBOARD_ROOM_ID": {
         "message": "Room ID"
     },
-    "DASHBOARD_CREATE": {
-        "message": "Create"
-    },
     "DASHBOARD_JOIN": {
         "message": "Join"
     },
-    "DASHBOARD_GET_STARTED_CREATE_OR_JOIN": {
-        "message": "Get Started, by Create/Join Room!"
+    "DASHBOARD_CREATE_ROOM_HEADER": {
+        "message": "It only takes one click to create a new party"
     },
-    "DASHBOARD_GET_STARTED_CREATE_OR_JOIN_NOTICE": {
-        "message": "Click on create to start a new party or enter a room id to join an already existing party."
+    "DASHBOARD_CREATE_ROOM": {
+        "message": "Create Room"
+    },
+    "DASHBOARD_JOIN_ROOM_LINK": {
+        "message": "Click here to join an existing party"
+    },
+    "DASHBOARD_JOIN_ROOM_HEADER": {
+        "message": "Join an existing Luca room"
+    },
+    "DASHBOARD_JOIN_ROOM_DESCRIPTION": {
+        "message": "Enter a room id to join an already existing party"
+    },
+    "DASHBOARD_CREATE_ROOM_LINK": {
+        "message": "Click here to create a new party"
     }
 }

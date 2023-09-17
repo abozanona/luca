@@ -3,6 +3,8 @@ import { NavigateFunction } from 'react-router-dom';
 import GeneralButton from '../../components/GeneralButton/GeneralButton';
 import UtilsEngine from '../../js/luca/utils-engine';
 import PopUpEngine from '../../js/popup-engine';
+import { toast } from 'react-toastify';
+const Plus = require('../../assets/imgs/plus.svg');
 const RoomId = require('../../assets/imgs/room-id.svg');
 const Arrow = require('../../assets/imgs/arrow.svg');
 class DashboardPage extends React.Component<{ navigate: NavigateFunction }, { createRoom: boolean; roomId: string }> {
@@ -23,49 +25,69 @@ class DashboardPage extends React.Component<{ navigate: NavigateFunction }, { cr
         });
     }
 
-    handleOnClick = () => {
+    createRoom = () => {
         let popupEngine: PopUpEngine = new PopUpEngine();
-        if (this.state.createRoom) {
-            popupEngine.createRoom();
-        } else {
-            popupEngine.joinRoom(this.state.roomId);
-        }
+        popupEngine.createRoom();
         this.props.navigate('/selectvideo');
     };
 
-    handleOnChange = (e: ChangeEvent) => {
-        this.setState({ roomId: (e.target as HTMLInputElement).value });
-        if ((e.target as HTMLInputElement).value) {
-            this.setState({ createRoom: false });
-        } else {
-            this.setState({ createRoom: true });
+    joinRoom = () => {
+        if (!this.state.roomId) {
+            toast.error('Room name can\'t be empty', {
+                toastId: 'error:joinRoom:emptyRommId',
+            });
+            return;
         }
+        let popupEngine: PopUpEngine = new PopUpEngine();
+        popupEngine.joinRoom(this.state.roomId);
+        this.props.navigate('/selectvideo');
     };
 
     handleOnKeyDown = (e: any) => {
-        if (e.key === 'Enter' && (e.target as HTMLInputElement).value) {
-            let popupEngine: PopUpEngine = new PopUpEngine();
-            if (this.state.createRoom) {
-                popupEngine.createRoom();
-            } else {
-                popupEngine.joinRoom(this.state.roomId);
-            }
-            this.props.navigate('/selectvideo');
+        this.setState({ roomId: (e.target as HTMLInputElement).value });
+        if (e.key === 'Enter') {
+            this.joinRoom();
         }
     };
 
+    toggleCreateParty = () => {
+        this.setState({ createRoom: !this.state.createRoom });
+    }
+
     render() {
-        return (
+        return this.state.createRoom ? (
             <React.Fragment>
                 <div className="page__container">
                     <div className="dashboard__container d-flex-col">
+                        <div className="dashboard__info d-flex-col d-jcc d-aic">
+                            <h1>{UtilsEngine.translate('DASHBOARD_CREATE_ROOM_HEADER')}</h1>
+                        </div>
+                        <div className="room__action">
+                            <div onClick={this.createRoom} className="create__room__container d-flex-col d-aic">
+                                <img src={Plus} alt="" />
+                                {UtilsEngine.translate('DASHBOARD_CREATE_ROOM')}
+                            </div>
+                        </div>
+                        <div className="dashboard__notice d-flex-col d-jcc d-aic">
+                            <p onClick={this.toggleCreateParty}>{UtilsEngine.translate('DASHBOARD_JOIN_ROOM_LINK')}</p>
+                        </div>
+                    </div>
+                </div>
+            </React.Fragment>
+        ) : (
+            <React.Fragment>
+                <div className="page__container">
+                    <div className="dashboard__container d-flex-col">
+                        <div className="dashboard__info d-flex-col d-jcc d-aic">
+                            <h1>{UtilsEngine.translate('DASHBOARD_JOIN_ROOM_HEADER')}</h1>
+                            <p>{UtilsEngine.translate('DASHBOARD_JOIN_ROOM_DESCRIPTION')}</p>
+                        </div>
                         <div className="room__action">
                             <div className="input__container">
                                 <label htmlFor="roomid">{UtilsEngine.translate('DASHBOARD_ROOM_ID')}</label>
                                 <div className="input__room">
                                     <img src={RoomId} alt="" />
                                     <input
-                                        onChange={this.handleOnChange}
                                         onKeyDown={this.handleOnKeyDown}
                                         type="text"
                                         name="roomid"
@@ -75,19 +97,14 @@ class DashboardPage extends React.Component<{ navigate: NavigateFunction }, { cr
                             <div className="d-aic d-flex-col">
                                 <label htmlFor="">‎‎&nbsp;</label>
                                 <GeneralButton
-                                    name={
-                                        this.state.createRoom
-                                            ? UtilsEngine.translate('DASHBOARD_CREATE')
-                                            : UtilsEngine.translate('DASHBOARD_JOIN')
-                                    }
+                                    name={UtilsEngine.translate('DASHBOARD_JOIN')}
                                     icon={Arrow}
-                                    click={this.handleOnClick}
+                                    click={this.joinRoom}
                                 />
                             </div>
                         </div>
-                        <div className="dashboard__info d-flex-col d-jcc d-aic">
-                            <h1>{UtilsEngine.translate('DASHBOARD_GET_STARTED_CREATE_OR_JOIN')}</h1>
-                            <p>{UtilsEngine.translate('DASHBOARD_GET_STARTED_CREATE_OR_JOIN_NOTICE')}</p>
+                        <div className="dashboard__notice d-flex-col d-jcc d-aic">
+                            <p onClick={this.toggleCreateParty}>{UtilsEngine.translate('DASHBOARD_CREATE_ROOM_LINK')}</p>
                         </div>
                     </div>
                 </div>
