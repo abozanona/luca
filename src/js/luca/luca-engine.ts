@@ -80,10 +80,10 @@ export class LucaEngine {
         divReactionsFrame.id = 'luca-reactions-container';
         document.body.appendChild(divReactionsFrame);
 
-        ['like', 'love', 'sad', 'laugh', 'wow', 'angry'].forEach(function (reactionImage) {
+        ['love', 'angry', 'cry', 'laugh', 'surprise', 'fire'].forEach(function (reactionImage) {
             let imgReaction = document.createElement('img');
             imgReaction.classList.add('luca-reaction');
-            imgReaction.src = UtilsEngine.browser.runtime.getURL('assets/imgs/' + reactionImage + '.gif');
+            imgReaction.src = UtilsEngine.browser.runtime.getURL('assets/imgs/reactions/' + reactionImage + '.gif');
             imgReaction.dataset.reactionName = reactionImage;
             imgReaction.addEventListener('click', function (el) {
                 el.preventDefault();
@@ -99,10 +99,10 @@ export class LucaEngine {
         let emojiReactionContainer: HTMLElement = document.getElementsByClassName(
             'luca-chat-emoji-reaction-container'
         )[0] as HTMLElement;
-        ['like', 'love', 'sad', 'laugh', 'wow', 'angry'].forEach(function (reactionImage) {
+        ['love', 'angry', 'cry', 'laugh', 'surprise', 'fire'].forEach(function (reactionImage) {
             let imgReaction = document.createElement('img');
             imgReaction.classList.add('luca-reaction');
-            imgReaction.src = UtilsEngine.browser.runtime.getURL('assets/imgs/' + 'luca-' + reactionImage + '-reaction' + '.svg');
+            imgReaction.src = UtilsEngine.browser.runtime.getURL('assets/imgs/reactions/' + reactionImage + '.gif');
             imgReaction.dataset.reactionName = reactionImage;
             imgReaction.addEventListener('click', function (el) {
                 el.preventDefault();
