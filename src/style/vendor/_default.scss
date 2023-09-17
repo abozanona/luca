@@ -117,18 +117,6 @@
         }
     }
 }
-.room__action {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    label {
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: var(--secondary-color);
-        margin-bottom: 0.5rem;
-    }
-}
 
 .page__container {
     flex: 1;

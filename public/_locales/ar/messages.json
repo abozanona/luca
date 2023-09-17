@@ -183,16 +183,25 @@
     "DASHBOARD_ROOM_ID": {
         "message": "معرف الغرفة"
     },
-    "DASHBOARD_CREATE": {
-        "message": "إنشاء"
-    },
     "DASHBOARD_JOIN": {
         "message": "انضمام"
     },
-    "DASHBOARD_GET_STARTED_CREATE_OR_JOIN": {
-        "message": "ابدأ ، من خلال إنشاء / الانضمام إلى غرفة!"
+    "DASHBOARD_CREATE_ROOM_HEADER": {
+        "message": "كل ما تتطلبه لإنشاء غرفة جديدة هو نقرة واحدة"
     },
-    "DASHBOARD_GET_STARTED_CREATE_OR_JOIN_NOTICE": {
-        "message": "انقر فوق إنشاء لبدء حفلة جديدة أو أدخل معرف الغرفة للانضمام إلى حفلة موجودة بالفعل."
+    "DASHBOARD_CREATE_ROOM": {
+        "message": "إنشاء غرفة"
+    },
+    "DASHBOARD_JOIN_ROOM_LINK": {
+        "message": "انقر هلا للإنضمام لغرفة موجودة"
+    },
+    "DASHBOARD_JOIN_ROOM_HEADER": {
+        "message": "الانضمام لغرفة موجودة"
+    },
+    "DASHBOARD_JOIN_ROOM_DESCRIPTION": {
+        "message": "أدخل معرف الغرفة للإنضمام لغرفة موجودة بالفعل"
+    },
+    "DASHBOARD_CREATE_ROOM_LINK": {
+        "message": "انقر هنا لإنشاء غرفة جديدة"
     }
 }

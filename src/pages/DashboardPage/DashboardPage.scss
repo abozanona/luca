@@ -1,7 +1,7 @@
 .dashboard__container {
     height: fit-content;
     margin-top: 2rem;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .dashboard__info {
@@ -15,5 +15,38 @@
         font-size: 0.6rem;
         font-weight: 400;
         color: var(--text-primary-color);
+    }
+}
+
+.room__action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: auto;
+    label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--secondary-color);
+        margin-bottom: 0.5rem;
+    }
+    .create__room__container {
+        padding: 30px 50px;
+        background-color: $gray-700;
+        border-radius: $radius;
+        color: $text-primary-clr;
+        gap: 0.5rem;
+        cursor: pointer;
+    }
+}
+
+
+.dashboard__notice {
+    gap: 0.5rem;
+    p {
+        font-size: 0.6rem;
+        font-weight: 400;
+        color: var(--primary-color);
+        cursor: pointer;
     }
 }
