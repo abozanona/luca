@@ -124,7 +124,7 @@ export class ChatEngine {
         interval = setInterval(function () {
             let imgReactionParticle = document.createElement('img');
             imgReactionParticle.classList.add('luca-reaction-particle');
-            imgReactionParticle.src = UtilsEngine.browser.runtime.getURL('assets/imgs/' + reactionName + '.gif');
+            imgReactionParticle.src = UtilsEngine.browser.runtime.getURL('assets/imgs/reactions/' + reactionName + '.gif');
             imgReactionParticle.dataset.reactionName = reactionName;
 
             LucaEngine.fullScreenElement.appendChild(imgReactionParticle);
